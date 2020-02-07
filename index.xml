@@ -1,0 +1,38 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>La sécurité à la française | La sécurité à la française</title>
+        <link>/</link>
+        <description>La sécurité à la française | La sécurité à la française</description>
+        <generator>Hugo -- gohugo.io</generator><language>fr</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 06 Feb 2020 12:07:30 +0100</lastBuildDate><atom:link href="/" rel="self" type="application/rss+xml" /><item>
+                <title>Posts</title>
+                <link>/posts/</link>
+                <pubDate>Thu, 06 Feb 2020 12:07:30 +0100</pubDate><guid>/posts/</guid>
+                <description></description>
+            </item><item>
+                <title>Qui suis-je ?</title>
+                <link>/about/</link>
+                <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid>
+                <description>&lt;h1 id=&#34;à-propos-de-moi&#34;&gt;À propos de moi&lt;/h1&gt;
+&lt;p&gt;Je suis un Ingénieur en Cybersécurité, actuellement en Blue Team.&lt;/p&gt;
+&lt;p&gt;Bien sûr, je suis passionné par la sécurité informatique et l&amp;rsquo;administration système GNU/Linux (même si je ne suis pas un professionnel du sujet).
+Je suis aussi un fier utilisateur d&amp;rsquo;ArchLinux, un amateur éclairé de bière et bien d&amp;rsquo;autre.&lt;/p&gt;
+&lt;h1 id=&#34;pourquoi-ce-site-&#34;&gt;Pourquoi ce site ?&lt;/h1&gt;
+&lt;p&gt;On trouve de tout sur internet, il y a donc énormement de tutoriels, d&amp;rsquo;articles ou de blogs sur la sécurité informatique. Malheureusement, la majorité d&amp;rsquo;entre eux ne sont pas en français&amp;hellip; Ce qui bloque certaines personnes.
+Je voulais donc faire un site où les articles en français seraient privilégiés et où je pourrais partager ce que je veux.&lt;/p&gt;
+&lt;p&gt;Ainsi vous pourrez retrouver :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Des Write-Ups de CTF&lt;/li&gt;
+&lt;li&gt;Des Articles sur des sujets de sécurité&lt;/li&gt;
+&lt;li&gt;Des Articles sur de l&amp;rsquo;administration système&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Aussi, je suis toujours preneur de retours et de critiques, donc n&amp;rsquo;hésitez pas à me contacter !&lt;/p&gt;
+&lt;h1 id=&#34;les-copains&#34;&gt;Les copains&lt;/h1&gt;
+&lt;p&gt;Je tiens aussi à partager les sites des copains :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://haax.fr&#34; target=&#34;_blank&#34;&gt;Le blog de Haax&lt;/a&gt; - Des articles infosec et des CTF&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://tomtombinary.xyz/&#34; target=&#34;_blank&#34;&gt;Le blog de tomtombinary&lt;/a&gt; - Beaucoup d&amp;rsquo;ASM et des CTF&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://bitsdeep.com/&#34; target=&#34;_blank&#34;&gt;Le blog de ENOENT&lt;/a&gt; - De la cryptographie pour les non-mathématiciens&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+            </item></channel>
+</rss>

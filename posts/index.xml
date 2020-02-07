@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on La sécurité à la française</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on La sécurité à la française</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 06 Feb 2020 12:07:30 +0100</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Norzh CTF 2020 - Extranet Norzh Nuclea</title>
+      <link>/2020/02/nuclea-web-extranet/</link>
+      <pubDate>Thu, 06 Feb 2020 12:07:30 +0100</pubDate>
+      
+      <guid>/2020/02/nuclea-web-extranet/</guid>
+      <description>En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l&amp;rsquo;ENSIBS. Cette année je ne faisais pas partie des &amp;ldquo;créateurs de challenges&amp;rdquo; mais bien des participants avec mes amis Haax, Razaborg et L0n3w0lf.
+Durant ce CTF, je me suis tout particulièrement occupé d&amp;rsquo;un scénario : Extranet Norzh Nuclea que vous pouvez retrouver sur le git du NorzhCTF.
+Énoncé On commence par lire l&#39;énoncé
+ Vous avez trouvé l&amp;rsquo;extranet de l&amp;rsquo;entreprise.</description>
+    </item>
+    
+  </channel>
+</rss>

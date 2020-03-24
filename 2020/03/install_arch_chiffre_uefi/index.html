@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -32,7 +32,7 @@ J&rsquo;apprécie dans un premier temps la philosophie de cette distribution :
                 "url": "\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","wordcount":  1885 ,
+            },"genre": "posts","wordcount":  1888 ,
         "url": "\/2020\/03\/install_arch_chiffre_uefi\/","datePublished": "2020-03-24T13:07:41\x2b01:00","dateModified": "2020-03-24T13:07:41\x2b01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "Driikolu",
@@ -75,7 +75,7 @@ J&rsquo;apprécie dans un premier temps la philosophie de cette distribution :
                     <i class="fas fa-user-circle fa-fw"></i>Driikolu
                 </a>&nbsp;<span class="post-category">included in&nbsp;<i class="far fa-folder fa-fw"></i><a href="/categories/articles/">Articles</a>&nbsp;</span></div>
             <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-24>2020-03-24</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 1885 words&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1888 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>9 min&nbsp;</div>
         </div><div class="post-content"><h1 id="introduction">Introduction</h1>
 <p>Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.</p>
@@ -204,7 +204,7 @@ cryptsetup open /dev/sda4 maison
 </code></pre></td></tr></table>
 </div>
 </div><p>On créé ensuite les systèmes des fichiers sur nos partitions. Il faut que la partition EFI soit en fat32, pour le reste j&rsquo;utilise le format ext4.</p>
-<p>Pour faire appel à nos disques déchiffrés, nous devons utiliser <strong>/dev/mapper/<NOM DU DISQUE></strong></p>
+<p>Pour faire appel à nos disques déchiffrés, nous devons utiliser <strong>/dev/mapper/&lt;NOM DU DISQUE&gt;</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -338,7 +338,7 @@ locale-gen
 </div><p>Pour gérer le déchiffrement de notre partie <em>racine</em>, il nous faut l&rsquo;UUID de sa partition chiffrée (/dev/sda3). On va donc le récupérer avec la commande <strong>lsblk -f /dev/sda3</strong>.</p>
 <p>Il faut bien lire la ligne correspondant à notre partition chiffrée (/dev/sda3) et non déchiffrée (/dev/mapper/racine).</p>
 <p>On va ensuite utiliser cet UUID pour modifier la ligne <strong>GRUB_CMDLINE_LINUX</strong> du fichier <strong>/etc/default/grub</strong> afin quelle soit sous la forme</p>
-<p><strong>GRUB_CMDLINE_LINUX=&quot;cryptdevice=UUID=<em><VOTRE UUID></em>:racine root=/dev/mapper/racine&rdquo;</strong></p>
+<p>__GRUB_CMDLINE_LINUX=&quot;cryptdevice=UUID=*&lt;VOTRE UUID&gt;*:racine root=/dev/mapper/racine&rdquo;__</p>
 <p>Il faut aussi dé-commenter la ligne <strong>GRUB_ENABLE_CRYPTODISK=y</strong></p>
 <p>Astuce : vous pouvez rediriger la sortie de lsblk avec <em>&raquo;</em> vers votre fichier afin de n&rsquo;avoir qu'à copier l&rsquo;UUID via votre éditeur.</p>
 <div class="highlight"><div class="chroma">

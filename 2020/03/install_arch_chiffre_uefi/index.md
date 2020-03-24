@@ -128,7 +128,7 @@ cryptsetup open /dev/sda4 maison
 
 On créé ensuite les systèmes des fichiers sur nos partitions. Il faut que la partition EFI soit en fat32, pour le reste j'utilise le format ext4.
 
-Pour faire appel à nos disques déchiffrés, nous devons utiliser **/dev/mapper/<NOM DU DISQUE>**
+Pour faire appel à nos disques déchiffrés, nous devons utiliser **/dev/mapper/\<NOM DU DISQUE>**
 
 ```bash
 mkfs.fat -F32 /dev/sda1
@@ -233,7 +233,7 @@ Il faut bien lire la ligne correspondant à notre partition chiffrée (/dev/sda3
 
 On va ensuite utiliser cet UUID pour modifier la ligne **GRUB_CMDLINE_LINUX** du fichier **/etc/default/grub** afin quelle soit sous la forme
 
-__GRUB_CMDLINE_LINUX="cryptdevice=UUID=*<VOTRE UUID>*:racine root=/dev/mapper/racine"__
+__GRUB_CMDLINE_LINUX="cryptdevice=UUID=*\<VOTRE UUID>*:racine root=/dev/mapper/racine"__
 
 Il faut aussi dé-commenter la ligne **GRUB_ENABLE_CRYPTODISK=y**
 

@@ -251,7 +251,7 @@ zip -r ../modified-client.jar *
 
 On relance le client, se connecte et va dans *File Browser > Configs* et là... Le contenu affiché diffère de la dernière fois.
 
-![Contenu /opt/fatty](/img/fatty_opt_/img/fatty_content.png)
+![Contenu /opt/fatty](/img/fatty_opt_fatty_content.png)
 
 Visiblement *logs*, *tar* et *files* sont des dossiers. On va alors lire *start.sh*.
 

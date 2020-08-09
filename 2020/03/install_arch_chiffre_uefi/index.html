@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Installation d&#39;Archlinux en UEFI &amp; chiffré | La sécurité à la française</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noodp" />
-<meta name="Description" content="Driikolu, la sécurité à la française"><link rel="prev" href="/2020/02/nuclea-web-extranet/" /><link rel="canonical" href="/2020/03/install_arch_chiffre_uefi/" />
+<meta name="Description" content="Driikolu, la sécurité à la française"><link rel="prev" href="/2020/02/nuclea-web-extranet/" /><link rel="next" href="/2020/08/fatty-wu/" /><link rel="canonical" href="/2020/03/install_arch_chiffre_uefi/" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -23,7 +23,7 @@ J&rsquo;apprécie dans un premier temps la philosophie de cette distribution :
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Installation d\x27Archlinux en UEFI \x26 chiffré",
+        "headline": "Installation d\u0027Archlinux en UEFI \u0026 chiffré",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "\/2020\/03\/install_arch_chiffre_uefi\/"
@@ -33,7 +33,7 @@ J&rsquo;apprécie dans un premier temps la philosophie de cette distribution :
                 "width":  800 ,
                 "height":  600 
             },"genre": "posts","wordcount":  1888 ,
-        "url": "\/2020\/03\/install_arch_chiffre_uefi\/","datePublished": "2020-03-24T13:07:41\x2b01:00","dateModified": "2020-03-24T13:07:41\x2b01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "\/2020\/03\/install_arch_chiffre_uefi\/","datePublished": "2020-03-24T13:07:41\u002b01:00","dateModified": "2020-03-24T13:07:41\u002b01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "Driikolu",
                 "logo": {
@@ -99,7 +99,7 @@ J&rsquo;apprécie dans un premier temps la philosophie de cette distribution :
 <p>Chiffrer les partitions permet à ce moment de ne pas avoir à gérer les fichiers à l&rsquo;unité tout en apportant le minimum en terme de protection des données.</p>
 <p>Dans le contexte privé, tout le monde a son propre rapport à la vie privée. Lorsque l&rsquo;on veut la protéger au maximum il est normal de vouloir chiffrer ses données. En comparaison au chiffrement fichier par fichier, le chiffrement des partitions permet de ne pas limiter son confort d&rsquo;utilisation en déchiffrant celles-ci uniquement au démarrage du PC.</p>
 <h1 id="linstallation">L&rsquo;installation</h1>
-<p>Vous pourrez voir quelques captures d'écrans faites durant une installation. Pour l&rsquo;exemple j&rsquo;ai utilisé une machine virtuelle de 30Go, j&rsquo;adapterais donc les valeurs des espaces disques pour coller mieux à des disque durs plus grands.</p>
+<p>Vous pourrez voir quelques captures d&rsquo;écrans faites durant une installation. Pour l&rsquo;exemple j&rsquo;ai utilisé une machine virtuelle de 30Go, j&rsquo;adapterais donc les valeurs des espaces disques pour coller mieux à des disque durs plus grands.</p>
 <a class="post-dummy-target" id="préparation"></a><h2>Préparation</h2>
 <p>Dans un premier temps, vous devez <a href="https://www.archlinux.org/download/" target="_blank">télécharger un liveboot</a> et le mettre sur le support de votre choix (USB ou CD).</p>
 <p>Avant de vous lancer dans l&rsquo;installation, vérifiez bien que vous avez votre BIOS en UEFI et non en Legacy.</p>
@@ -326,7 +326,7 @@ locale-gen
 </div><p>On va ensuite passer à la partie la plus &ldquo;délicate&rdquo;, qui est généralement celle qui rate lors des installations : Le bootloader !</p>
 <a class="post-dummy-target" id="gestion-boot--chiffrement"></a><h2>Gestion boot &amp; chiffrement</h2>
 <p>Pour commencer il faut installer un bootloader, dans mon cas j&rsquo;utilise <strong>grub</strong>. On installe aussi <strong>efibootmgr</strong> afin de gérer l&rsquo;UEFI.</p>
-<p>Pour ma part j&rsquo;en ai profiter pour installer <em>vim</em> afin de configurer les fichiers par la suite, je vous invite à installer l'éditeur de texte de votre choix.</p>
+<p>Pour ma part j&rsquo;en ai profiter pour installer <em>vim</em> afin de configurer les fichiers par la suite, je vous invite à installer l&rsquo;éditeur de texte de votre choix.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -340,7 +340,7 @@ locale-gen
 <p>On va ensuite utiliser cet UUID pour modifier la ligne <strong>GRUB_CMDLINE_LINUX</strong> du fichier <strong>/etc/default/grub</strong> afin quelle soit sous la forme</p>
 <p>__GRUB_CMDLINE_LINUX=&quot;cryptdevice=UUID=*&lt;VOTRE UUID&gt;*:racine root=/dev/mapper/racine&rdquo;__</p>
 <p>Il faut aussi dé-commenter la ligne <strong>GRUB_ENABLE_CRYPTODISK=y</strong></p>
-<p>Astuce : vous pouvez rediriger la sortie de lsblk avec <em>&raquo;</em> vers votre fichier afin de n&rsquo;avoir qu'à copier l&rsquo;UUID via votre éditeur.</p>
+<p>Astuce : vous pouvez rediriger la sortie de lsblk avec <em>&raquo;</em> vers votre fichier afin de n&rsquo;avoir qu&rsquo;à copier l&rsquo;UUID via votre éditeur.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -376,7 +376,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 <h1 id="aller-plus-loin">Aller plus loin</h1>
 <p>Par défaut, vous n&rsquo;aurez quasiment aucun paquet sur votre ArchLinux, même pour la connexion réseau. Vous pouvez très bien relancer le liveboot et répeter les phases de déchiffrement &amp; montage des partitions afin d&rsquo;installer des nouveaux paquets.</p>
 <p>Je vous conseille aussi, pour profiter un maximum de la distribution, d&rsquo;utiliser un <em>AUR helper</em> qui permettra d&rsquo;installer faciement les paquets utilisateur.</p>
-<p>Pour cela, regardez dans <a href="https://wiki.archlinux.org/index.php/AUR_helpers" target="_blank">la liste fournie sur le wiki</a>, vous trouverez probablement votre bonheur. Pour ma part à l&rsquo;heure où j'écris cet article j&rsquo;utilise <em>pikaur</em>.</p>
+<p>Pour cela, regardez dans <a href="https://wiki.archlinux.org/index.php/AUR_helpers" target="_blank">la liste fournie sur le wiki</a>, vous trouverez probablement votre bonheur. Pour ma part à l&rsquo;heure où j&rsquo;écris cet article j&rsquo;utilise <em>pikaur</em>.</p>
 <p>Attention cepandant, les <em>AUR helpers</em> sont développés et maintenus par la communauté. Il se peut au fil du temps que le projet soit abandonné et donc plus mis à jour. Certains grands projets comme <em>aurman</em> et <em>yaourt</em> on ainsi été dépréciés.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -407,7 +407,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
         </section>
     </div>
 
-    <div class="post-nav"><a href="/2020/02/nuclea-web-extranet/" class="prev" rel="prev" title="Norzh CTF 2020 - Extranet Norzh Nuclea"><i class="fas fa-angle-left fa-fw"></i>Norzh CTF 2020 - Extranet Norzh Nuclea</a></div>
+    <div class="post-nav"><a href="/2020/02/nuclea-web-extranet/" class="prev" rel="prev" title="Norzh CTF 2020 - Extranet Norzh Nuclea"><i class="fas fa-angle-left fa-fw"></i>Norzh CTF 2020 - Extranet Norzh Nuclea</a>
+            <a href="/2020/08/fatty-wu/" class="next" rel="next" title="HackTheBox - Fatty Write-Up">HackTheBox - Fatty Write-Up<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div><div class="post-comment"></div>
     </article></div>
             </main><footer class="footer">

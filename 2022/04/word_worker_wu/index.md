@@ -1,4 +1,4 @@
-# BreizhCTF 2022 - Extranet Word Worker
+# BreizhCTF 2022 - Word Worker
 
 
 # Introduction

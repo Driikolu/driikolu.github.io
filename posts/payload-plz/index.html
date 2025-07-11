@@ -16,7 +16,7 @@ One Payload to rule them all Le challenge, affectueusement nommé &ldquo;Payload
 Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d’être décortiquer.
 One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz” (Ou comme nos amis Québécois diraient “Charge utile Svp”), a un principe simple : Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, …) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible. Notre payload nous donnera un score calculé ainsi :">
   <meta itemprop="datePublished" content="2025-07-06T15:51:41+00:00">
-  <meta itemprop="dateModified" content="2025-07-11T13:26:05+02:00">
+  <meta itemprop="dateModified" content="2025-07-11T13:28:26+02:00">
   <meta itemprop="wordCount" content="5270"><meta property="og:url" content="https://driikolu.fr/posts/payload-plz/">
   <meta property="og:site_name" content="La sécurité à la française">
   <meta property="og:title" content="Payload Plz - Analyse du challenge Yes We Hack">
@@ -27,7 +27,7 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-07-06T15:51:41+00:00">
-    <meta property="article:modified_time" content="2025-07-11T13:26:05+02:00">
+    <meta property="article:modified_time" content="2025-07-11T13:28:26+02:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Payload Plz - Analyse du challenge Yes We Hack">
@@ -50,7 +50,7 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
       "@type": "WebPage",
       "@id": "https:\/\/driikolu.fr\/posts\/payload-plz\/"
     },"genre": "posts","wordcount":  5270 ,
-    "url": "https:\/\/driikolu.fr\/posts\/payload-plz\/","datePublished": "2025-07-06T15:51:41+00:00","dateModified": "2025-07-11T13:26:05+02:00","publisher": {
+    "url": "https:\/\/driikolu.fr\/posts\/payload-plz\/","datePublished": "2025-07-06T15:51:41+00:00","dateModified": "2025-07-11T13:28:26+02:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -123,7 +123,7 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Payload Plz - Analyse Du Challenge Yes We Hack</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2025-07-06 15:51:41"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-06">2025-07-06</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 13:26:05"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="5270 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 5300 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>25 minutes</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2025-07-06 15:51:41"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-06">2025-07-06</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 13:28:26"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="5270 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 5300 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>25 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contenus</span>
@@ -149,10 +149,7 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
         <li><a href="#path-traversal">Path Traversal</a></li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li>
+    <li><a href="#créer-une-payload-commune">Créer une payload commune</a>
       <ul>
         <li><a href="#le-début-du-commencement">Le début du commencement</a></li>
         <li><a href="#la-ssti-jinja2">La SSTI Jinja2</a></li>
@@ -1131,7 +1128,7 @@ Je pense qu&rsquo;essayer de jouer sur plusieurs DBMS et rajouter du LDAP serait
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="Mis à jour le 2025-07-11 13:26:05">Mis à jour le 2025-07-11&nbsp;</span>
+        <span title="Mis à jour le 2025-07-11 13:28:26">Mis à jour le 2025-07-11&nbsp;</span>
       </div><div class="post-info-license">
             <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
           </div></div><div class="post-info-line">

@@ -360,7 +360,7 @@ On se rend rapidement compte que nous ne sommes pas à la racine du serveur, mai
 Et nous avons résolu de manière indépendante les 13 challenges. Quel délivrance !
 
 
-# Créer une payload commune
+## Créer une payload commune
 
 Maintenant que nous avons compris toutes les vulnérabilités, il nous faut "fusionner" les payloads.
 Je ne pense pas qu'il y ai de méthodologie parfaite pour cela, mais je pense tout de même avoir fait comme la majorité des gens : on essaie de les imbriquer 1 par 1, puis on corrige ce qui créé des erreurs.

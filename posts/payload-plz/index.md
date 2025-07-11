@@ -8,7 +8,7 @@ Pour l'occasion, des centaines de professionnels de la sécurité, d'étudiants 
 
 Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d'être décortiquer.
 
-# One Payload to rule them all 
+## One Payload to rule them all 
 
 Le challenge, affectueusement nommé "[Payload Plz](https://payload-plz.com/)" (Ou comme nos amis Québécois diraient "Charge utile Svp"), a un principe simple :
 Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, ...) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible.
@@ -26,7 +26,7 @@ L'objectif de ce blogpost sera donc de voir comment je suis arrivé à cette pay
 *Nota bene* : Les payloads que j'ai utilisé ne sont clairement pas les plus courtes, mais par soucis de transparence je les présenterais telles quelles.
 
 
-# Les 13 challenges individuellement
+## Les 13 challenges individuellement
 
 La première étape, pour bien commencer, est de résoudre tous les challenges individuellement. Cela nous permettra d'avoir une base sur laquelle travailler notre payload.
 
@@ -34,7 +34,7 @@ La première étape, pour bien commencer, est de résoudre tous les challenges i
 
 
 
-## XSS 1
+### XSS 1
 
 Pour ce challenge, il fallait déclencher un appel à `alert(flag)` par un bot chromium à jour.
 Aucune protection n'était appliquée et notre payload était injectée dans le code suivant (à la place de `$INPUT`):
@@ -49,7 +49,7 @@ La manière la plus simple pour celle-ci étant de simplement ajouter une balise
 
 On test. Le challenge est résolu. On passe au suivant.
 
-## XSS 2
+### XSS 2
 
 Seconde XSS où l'objectif est le même : `alert(flag)`. Cependant le code est différent :
 ```HTML
@@ -64,7 +64,7 @@ Voici une solution :
 
 Le commentaire à la fin de la payload permet d'ignorer totalement la *quote* et donc de rendre le code valide.
 
-## SQL Injection 1
+### SQL Injection 1
 
 On change de type de vulnérabilité avec les injections SQL.
 On nous fourni cette fois le schéma de base de données avec l'instruction de lire la colonne `flag` de la table `flag` :
@@ -90,7 +90,7 @@ Mais pas besoin de savoir tout cela pour trouver une payload directement :
 
 Et on termine par un point virgule `;` afin de terminer la requête et d'éviter les erreurs, la quote d'après étant ignorée.
 
-## SQL Injection 2
+### SQL Injection 2
 
 Globalement ce challenge est exactement le même que le précédent à une seule différence : notre input n'est pas entrée en *string* (Elle n'est pas entre *quotes*) :
 ```SQL
@@ -104,7 +104,7 @@ Nous sommes ici aussi sur une solution relativement simple :
 
 Et cette fois, pas besoin de commentaire ou de point virgule, la requête sera valide telle quelle.
 
-## XPath Injection
+### XPath Injection
 
 Pour ce challenge, un petit XML nous est présenté :
 ```XML
@@ -138,7 +138,7 @@ Voici la payload que j'ai utilisé :
 
 On peut voir que l'on sort de la requête initiale `"]` que l'on rajoute une requête qui récupère tous les *password* `| //user[ 1=1 ]/password/text()` puis que l'on rend la requête valide `| //user[ 1="`
 
-## Jinja SSTI 
+### Jinja SSTI 
 
 Nous avons là un code python utilisa jinja2 sur notre payload :
 ```python
@@ -164,7 +164,7 @@ Petite explication : `lipsum` est un builtins de jinja2. En tant que builtins il
 Dans notre cas, `os` est importé dans le code fourni, mais il se trouve aussi dans le code importé de jinja2 `Environment`. Donc même sans cela nous pouvions y avoir accès.
 
 
-## Brainfuck
+### Brainfuck
 
 Nous arrivons sur un challenge un peu moins "banal", qui a peut-être fait peur à beaucoup au premier abord.
 L'objectif est de lire, en brainfuck (un langage ésothérique), le flag séparé en 2 partie.
@@ -191,7 +191,7 @@ Ensuite nous avons une première virgule `,` pour mettre le 1ère octet de stdin
 Tout ça pour dire que le langage peut faire peur mais que l'exercice en lui même était plutôt simple.
 
 
-## ERB SSTI
+### ERB SSTI
 
 On a une seconde SSTI, ici en Ruby avec ERB.
 Comme la précédente, il nous faut lire la variable d'environnement `FLAG` et on nous donne le code
@@ -211,7 +211,7 @@ ERB intègre directement un moyen de lire les variables d'environnement, on va f
 <%= ENV['FLAG'] %>
 ```
 
-## Twig SSTI
+### Twig SSTI
 
 Encore une SSTI (et c'est pas fini !), cette fois basée en PHP avec Twig, et encore une fois il faut lire la variable d'environnement.
 
@@ -246,7 +246,7 @@ Celle-ci nous permettra d'exécuter la commande `env` qui va afficher toutes les
 
 Super, ça fonctionne tout seul.
 
-## Smarty SSTI 
+### Smarty SSTI 
 
 Et la dernière SSTI !
 Elle est en Smarty, donc aussi PHP.
@@ -274,7 +274,7 @@ Twig intègre les fonctions PHP de bases, donc `system`, on va encore une fois e
 Le challenge est passé !
 
 
-## Bash
+### Bash
 
 On sort encore une fois du web pour une injection de commande en bash.
 Notre payload est injectée dans la commande suivante :
@@ -291,7 +291,7 @@ Il faut cependant faire attention à ce que la ligne de commande complète soit 
 
 Avec ça, pas d'erreur et une payload qui passe
 
-## XXE
+### XXE
 
 Pour le 12ème challenge on nous propose une vulnérabilité XXE.
 Nous devons lire le fichier `/dev/shm/flag.txt` en profitant d'un parsing XML de notre payload.
@@ -329,7 +329,7 @@ On défini ensuite un noeud dans lequel affiché notre entité, ici `<a>&x;</a>`
 Une attaque connue et "simple" mais qui nous posera problème plus tard...
 
 
-## Path Traversal
+### Path Traversal
 
 Pour finir la liste des challenges, nous avons une Path Traversal ! Celle-ci doit être effectuée à travers un code PHP :
 ```PHP
@@ -365,7 +365,7 @@ Et nous avons résolu de manière indépendante les 13 challenges. Quel délivra
 Maintenant que nous avons compris toutes les vulnérabilités, il nous faut "fusionner" les payloads.
 Je ne pense pas qu'il y ai de méthodologie parfaite pour cela, mais je pense tout de même avoir fait comme la majorité des gens : on essaie de les imbriquer 1 par 1, puis on corrige ce qui créé des erreurs.
 
-## Le début du commencement
+### Le début du commencement
 
 Mon objectif étant de montrer ce que j'ai fait durant ce challenge, l'ordre des payloads ne sera pas forcément le plus intelligent. En effet, je n'avais pas forcément regardé tous les challenge individuellement lorsque j'ai commencé, j'étais surtout curieux.
 Vous pourrez d'ailleurs voir que certaines payload vont changer au fur et à mesure. Une idée bonne lorsque l'on fait 5 vulnérabilités à la fois peut avoir des conséquences désastreuses pour implémenter la 12ème, et l'on devra alors tout retravailler.
@@ -373,7 +373,7 @@ Vous pourrez d'ailleurs voir que certaines payload vont changer au fur et à mes
 Je suis parti du premier challenge que j'ai réussi : **l'injection bash**
 Puis j'ai ajouté l'une des attaques que je connaissais le mieux pour aller petit à petit vers ce qui me semblait plus compliquer à implémenter.
 
-## La SSTI Jinja2
+### La SSTI Jinja2
 
 Ma réflexion ici était la suivante :
 Jinja n'interpretera pas du tout le bash, il est donc possible d'allier facilement l'un puis l'autre, notamment avec les 2 payloads que j'ai présenté plus tôt.
@@ -385,7 +385,7 @@ Jinja n'interpretera pas du tout le bash, il est donc possible d'allier facileme
 Ici aucune, entre autre grâce au commentaire.
 On peut passer à l'étape suivante
 
-## La 1ère Injection SQL
+### La 1ère Injection SQL
 
 On continue avec ce que je connais le mieux et la première injection SQL.
 On va profiter du fait que les 2 payloads (notre actuelle et celle de la SQLi) commencent par une simple quote.
@@ -405,7 +405,7 @@ ping: flag: Name or service not known
 La syntaxe est donc valide. Et l'erreur ne gêne pas pour la suite. L'utilisation de point virgule `;` permet d'enchaîner les commandes, avec ou sans erreur.
 
 
-## Et la 2nde Injection SQL
+### Et la 2nde Injection SQL
 
 Puisqu'on a fait une injection SQL, autant faire la suivante.
 Ici, je vais profiter de la quote ajoutée pour la 1ère injection SQL. Je vais considérer toute ma payload actuelle comme une string et finir mon injection SQL ensuite.
@@ -417,7 +417,7 @@ Ici, je vais profiter de la quote ajoutée pour la 1ère injection SQL. Je vais 
 Cela fonctionne car on peut comparer 2 valeurs ayant un type différent en SQL, notamment INTEGER & TEXT.
 
 
-## La Path Traversal
+### La Path Traversal
 
 Si j'avais été plus intelligent, j'aurais du commencer par la **Path Traversal**.
 En effet, dû à son fonctionnement, cette payload doit être à la toute fin, car il n'y a pas de moyen d'ignorer les caractères qui viendront après notre chemin de fichier.
@@ -431,7 +431,7 @@ Je vais juste prendre soin de commenter la fin de l'injection SQL pour éviter l
 ' UNION SELECT 1,2,flag FROM flag--;env;#{{lipsum.__globals__.os.environ.FLAG}}' UNION SELECT 1,2,flag FROM flag-- /../../proc/self/environ
 ```
 
-## ERB
+### ERB
 
 On profite pour l'instant de n'avoir aucune payload qui créé des erreurs avec une autre. Les SSTI de ERB vont bien dans ce sens avec leurs syntaxes qui ne provoquent pas d'erreur chez les autre SSTI.
 Le tout étant de placer la payload au bon endroit : dans notre cas entre la 2ème SQLi et la path traversal.
@@ -440,7 +440,7 @@ Le tout étant de placer la payload au bon endroit : dans notre cas entre la 2è
 ' UNION SELECT 1,2,flag FROM flag--;env;#{{lipsum.__globals__.os.environ.FLAG}}' UNION SELECT 1,2,flag FROM flag-- <%= ENV['FLAG'] %>/../../proc/self/environ
 ```
 
-## Smarty 
+### Smarty 
 
 Et voilà notre premier problème.
 Smarty utilise 1 seule pair de brackets (`{}`) pour sa syntaxe, donc lorsqu'il croise la syntaxe de Jinja2 cela va provoquer une erreur.
@@ -452,7 +452,7 @@ Smarty intègre les commentaires avec sa propre syntaxe `{* COMMENTAIRE *}`, en 
 ' UNION SELECT 1,2,flag FROM flag;env;#{*{{lipsum.__globals__.os.environ.FLAG}}*}' UNION SELECT 1,2,flag FROM flag-- {system('env')} <%= ENV['FLAG'] %>/../../proc/self/environ
 ```
 
-## Twig
+### Twig
 
 Encore une difficulté, encore à cause de Jinja2.
 Twig et Jinja2 utilise une syntaxe similaire en quasi tout point (en tout cas pour notre challenge). On ne peut donc même pas utiliser l'astuce des commentaires.
@@ -478,7 +478,7 @@ En effet, j'ai rajouté des quote dans la payload juste avant la SQLi, et elle v
 
 Parfait cela fonctionne bien !
 
-## Xpath
+### Xpath
 
 Jusqu'ici je n'ai donc utilisé que des simples quotes, une aubaine pour notre Xpah qui est le seul challenge où les doubles quotes sont absolument nécessaires !
 Et donc, il ne nous posera aucun problème de l'ajouter un peu où l'on veut. Dans mon cas je l'ajoute juste après les injections SQL, il est important que la payload vienne après la 2ème injection sinon les doubles quotes seront interprétées dans celle-ci.
@@ -489,13 +489,13 @@ Et donc, il ne nous posera aucun problème de l'ajouter un peu où l'on veut. Da
 
 Notre payload résoud un challenge de plus.
 
-## Ajouter les XSS ?
+### Ajouter les XSS ?
 
 À ce stade, j'ai déjà plus de la moitié des challenges qui passent et pourtant je n'ai pas intégré les 2 premiers : les XSS. Mais il y a une bonne raison à cela, c'est que ça m'a pris un peu de temps à trouver ce que je pouvait faire.
 
 Dans un premier temps il faut trouver une payload qui fasse fonctionner les 2 XSS ensemble (pas très compliqué), mais ensuite il faut trouver comment les intégrer avec les SQLi, et ça, ça pose problème. Mais pour mieux montrer pourquoi, on va commencer par la 1ère étape.
 
-### D'une payload, deux XSS
+#### D'une payload, deux XSS
 
 Comme dit plus haut, l'assemblage des 2 XSS n'est pas des plus compliqués. On peut par exemple faire ceci 🎃
 ```javascript
@@ -509,7 +509,7 @@ Cependant cette payload utilise plusieurs `/` (donc + 6 caractères dans la Path
 
 En espérant que cela ne me bloque pas
 
-### Les SQLi
+#### Les SQLi
 
 Mince, me voilà bloqué !
 
@@ -554,7 +554,7 @@ Revenons à ce que j'ai écrit plus haut à propos des challenges SQL.
 
 Que veux dire cette dernière ligne ?
 
-### Le NFKC
+#### Le NFKC
 
 Généralement, lorsqu'une information nous est donnée dans un CTF/un challenge, c'est quelle est importante. Ici on nous parle de NFKC, qui est une Normalisation Unicode. Ces Normalisation servent à rendre un texte "standard" en évitant les homoglyphes (caractères qui se ressemblent visuellement mais sont en réalité différents).
 .
@@ -575,7 +575,7 @@ for i in range(1000000):
 
 J'obtiens 2 caractères : **＂** et **＇**.
 
-### XSS + SQLi
+#### XSS + SQLi
 
 Grâce aux caractères obtenus je peux fermer la string de la SQLi sans que cela ferme celle de la XSS 2. La quote unicode ne sera en effet pas interprété par la XSS.
 
@@ -598,7 +598,7 @@ Il ne nous reste qu'à fusionner avec notre payload totale :
 ＇ UNION SELECT 1,2,flag FROM flag--;env;# UNION SELECT 1,2,flag FROM flag--;<img src=x onerror=alert(flag)>';alert(flag)/* "]|//user[1=1]/password/text()|//user[1="{system('env')}{*{% if '1'==1 %}{{['env']|filter('system')}}{% endif %}{{lipsum.__globals__.os.environ.FLAG}}*} <%= ENV['FLAG'] %>/../../../../../../../proc/self/environ
 ```
 
-## Le Brainfuck
+### Le Brainfuck
 
 À ce stade il ne me reste plus que 2 étapes : Le Brainfuck et la XXE. On commence par la payload la plus courte : Le Brainfuck.
 Pour être sûr qu'il n'y ai aucun problème de syntaxe, mon idée est de mettre la payload brainfuck au tout début. En effet tant que le code du début est executé, la suite le sera aussi.
@@ -624,7 +624,7 @@ On va donc chercher à corriger tout cela en ouvrant une bracket juste après no
 
 Tout fonctionne, c'est super.
 
-## La XXE
+### La XXE
 
 Hélas, je n'ai pas réussi dans le temps imparti à intégrer la XXE.
 Pour que la XXE passe il fallait que dès le début la payload soit acceptée comme du XML recevable et donc commencer par une balise sans aucune quote. 
@@ -640,7 +640,7 @@ Cependant, ma payload finale (n'étant pas celle que l'on a construit à tête r
 On peut voir qu'elle est légèrement plus longue et laisse beaucoup de place à l'optimisation…
 Mais est-ce que l'on peut voir ça ?
 
-# La payload gagnante !
+## La payload gagnante !
 
 Je ne l'ai pas dit jusqu'ici mais le challenge a été remporté par **Ruulian** suivi de près (1 caractère) par **Mizu**. Et en plus de nous présenter le scoreboard, une fois le challenge terminé les payloads ont été rendues publiques.
 
@@ -721,7 +721,7 @@ On commence par aller une adresse plus loin et on décrémente 2 fois sa valeur,
 
 
 
-# Conclusion
+## Conclusion
 
 J'ai trouvé ce challenge intéréssant mais aussi amusant, c'est purement ce que j'aime dans des challenges : Avoir un puzzle à résoudre plus qu'un concours de connaissance.
 Bien sûr, ici, il me manquait des infos, notamment le `?` qui donne `NULL` en SQLi ou alors le fonctionnement de la Xpath ultra réduite. Mais j'ose croire qu'avec plus de temps (et de la doc), je serai venu à bout de ce challenge, même sans avoir la payload la plus courte.

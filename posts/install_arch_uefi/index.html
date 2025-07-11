@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="fr">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Installation D&#39;Archlinux en UEFI &amp; Chiffré - La sécurité à la française</title><meta name="author" content="Driikolu">
+<meta name="description" content="Introduction Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.
+Pourquoi ArchLinux Il y a 3 grandes raisons qui me poussent à utiliser ArchLinux depuis maintenant plusieurs années.
+"><meta name="keywords" content='Hugo, FixIt'>
+  <meta itemprop="name" content="Installation d&#39;Archlinux en UEFI & chiffré">
+  <meta itemprop="description" content="Introduction Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.
+Pourquoi ArchLinux Il y a 3 grandes raisons qui me poussent à utiliser ArchLinux depuis maintenant plusieurs années.">
+  <meta itemprop="datePublished" content="2020-03-24T12:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-07-11T11:49:04+02:00">
+  <meta itemprop="wordCount" content="1877"><meta property="og:url" content="https://driikolu.fr/posts/install_arch_uefi/">
+  <meta property="og:site_name" content="La sécurité à la française">
+  <meta property="og:title" content="Installation d&#39;Archlinux en UEFI & chiffré">
+  <meta property="og:description" content="Introduction Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.
+Pourquoi ArchLinux Il y a 3 grandes raisons qui me poussent à utiliser ArchLinux depuis maintenant plusieurs années.">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-03-24T12:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-11T11:49:04+02:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Installation d&#39;Archlinux en UEFI & chiffré">
+  <meta name="twitter:description" content="Introduction Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.
+Pourquoi ArchLinux Il y a 3 grandes raisons qui me poussent à utiliser ArchLinux depuis maintenant plusieurs années.">
+      <meta name="twitter:site" content="@driikolu">
+<meta name="twitter:creator" content="@driikolu" /><meta name="application-name" content="Hugo FixIt Blog">
+<meta name="apple-mobile-web-app-title" content="Hugo FixIt Blog"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://driikolu.fr/posts/install_arch_uefi/" title="Installation d&#39;Archlinux en UEFI &amp; chiffré - La sécurité à la française" /><link rel="prev" type="text/html" href="https://driikolu.fr/posts/nuclea-web-extranet/" title="Norzh CTF 2020 - Extranet Norzh Nuclea" /><link rel="next" type="text/html" href="https://driikolu.fr/posts/fatty-wu/" title="HackTheBox - Fatty Write-Up" /><link rel="alternate" type="text/markdown" href="https://driikolu.fr/posts/install_arch_uefi/index.md" title="Installation d'Archlinux en UEFI & chiffré - La sécurité à la française"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Installation d'Archlinux en UEFI \u0026 chiffré",
+    "inLanguage": "fr",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/driikolu.fr\/posts\/install_arch_uefi\/"
+    },"genre": "posts","wordcount":  1877 ,
+    "url": "https:\/\/driikolu.fr\/posts\/install_arch_uefi\/","datePublished": "2020-03-24T12:00:00+00:00","dateModified": "2025-07-11T11:49:04+02:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Driikolu"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="32" width="32"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Chercher">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Effacer">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Changer de Thème">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="26" width="26"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Chercher">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Effacer">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Annuler
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Changer de Thème"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Installation D&#39;Archlinux en UEFI &amp; Chiffré</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2020-03-24 12:00:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2020-03-24">2020-03-24</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 11:49:04"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="1877 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 1900 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>9 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contenus</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#pourquoi-archlinux">Pourquoi ArchLinux</a></li>
+    <li><a href="#pourquoi-chiffrer-les-partitions-">Pourquoi chiffrer les partitions ?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#préparation">Préparation</a></li>
+    <li><a href="#le-partionnement">Le partionnement</a></li>
+    <li><a href="#préparation-de-linux">Préparation de Linux</a></li>
+    <li><a href="#configuration-de-linux">Configuration de Linux</a></li>
+    <li><a href="#gestion-boot--chiffrement">Gestion boot &amp; chiffrement</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 class="heading-element" id="introduction"><span>Introduction</span>
+  <a href="#introduction" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.</p>
+<h2 class="heading-element" id="pourquoi-archlinux"><span>Pourquoi ArchLinux</span>
+  <a href="#pourquoi-archlinux" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Il y a 3 grandes raisons qui me poussent à utiliser ArchLinux depuis maintenant plusieurs années.</p>
+<p>J&rsquo;apprécie dans un premier temps la philosophie de cette distribution :</p>
+<ul>
+<li>Elle est développée pour être légère et &ldquo;simple&rdquo; (sans superflu).</li>
+<li>Elle se base sur l&rsquo;idée que l&rsquo;utilisateur comprend ce qu&rsquo;il fait, elle laisse donc une totale liberté dans sa configuration.</li>
+<li>Elle est basée sur le libre &amp; communautaire, tout le monde peut donc participer à l&rsquo;amélioration de la distribution et des paquets</li>
+</ul>
+<p>Ensuite, en lien avec le dernier point, il existe sur ArchLinux le AUR (ArchLinux User Repository) : Des depots utilisateurs moins vérifiés mais permettant à n&rsquo;importe qui de créer un paquet. On trouve facilement la majorité des outils disponible sous linux via l&rsquo;AUR, ce qui est un plus dans la sécurité.</p>
+<p>Pour finir, le wiki ArchLinux est l&rsquo;un des plus complets (si ce n&rsquo;est le plus complet). On peut facilement s&rsquo;y référer en cas de problèmes et pour en apprendre un peu plus sur nos outils ou sur le fonctionnement de Linux.</p>
+<h2 class="heading-element" id="pourquoi-chiffrer-les-partitions-"><span>Pourquoi chiffrer les partitions ?</span>
+  <a href="#pourquoi-chiffrer-les-partitions-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On peut considérer 2 contextes :</p>
+<ul>
+<li>Le contexte professionnel</li>
+<li>Le contexte privé</li>
+</ul>
+<p>Dans le contexte professionnel, on est souvent ammené à chiffrer nos données. En général ce travail est fait automatiquement par des services informatiques et des outils. On doit parfois configurer et utiliser un PC sous Linux, notamment pour les pentesteurs, et dans ce cas il faut chiffrer nous même nos données.</p>
+<p>Chiffrer les partitions permet à ce moment de ne pas avoir à gérer les fichiers à l&rsquo;unité tout en apportant le minimum en terme de protection des données.</p>
+<p>Dans le contexte privé, tout le monde a son propre rapport à la vie privée. Lorsque l&rsquo;on veut la protéger au maximum il est normal de vouloir chiffrer ses données. En comparaison au chiffrement fichier par fichier, le chiffrement des partitions permet de ne pas limiter son confort d&rsquo;utilisation en déchiffrant celles-ci uniquement au démarrage du PC.</p>
+<h2 class="heading-element" id="linstallation"><span>L&rsquo;installation</span>
+  <a href="#linstallation" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Vous pourrez voir quelques captures d&rsquo;écrans faites durant une installation. Pour l&rsquo;exemple j&rsquo;ai utilisé une machine virtuelle de 30Go, j&rsquo;adapterais donc les valeurs des espaces disques pour coller mieux à des disque durs plus grands.</p>
+<h2 class="heading-element" id="préparation"><span>Préparation</span>
+  <a href="#pr%c3%a9paration" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Dans un premier temps, vous devez <a href="https://www.archlinux.org/download/"target="_blank" rel="external nofollow noopener noreferrer">télécharger un liveboot</a> et le mettre sur le support de votre choix (USB ou CD).</p>
+<p>Avant de vous lancer dans l&rsquo;installation, vérifiez bien que vous avez votre BIOS en UEFI et non en Legacy.</p>
+<p>Je vais aussi considérer que vous êtes en filaire. Si vous voulez vous connecter en wifi, vous pouvez utiliser <strong>wifi-menu</strong>.</p>
+<p>Une fois le liveboot ArchLinux lancé, on va passer notre clavier en AZERTY. Si vous avez une autre disposition de clavier  je vous invite à <a href="https://www.archlinux.org/download/"target="_blank" rel="external nofollow noopener noreferrer">regarder sur le wiki spécifique</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">loadkeys fr</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On va ensuite régler notre horloge. Ce n&rsquo;est pas toujours nécessaire mais cela peut parfois poser problème pour la vérification de paquets. Ici, je considère que vous utilisez l&rsquo;heure française.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">timedatectl set-timezone Europe/Paris
+</span></span><span class="line"><span class="cl">timedatectl set-ntp true</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="le-partionnement"><span>Le partionnement</span>
+  <a href="#le-partionnement" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Dans un tout premier temps, nous allons lister nos disques</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fdisk -l</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img loading="lazy" src='/img/fdisk_install.png' alt="Retour fdisk -l"></p>
+<p>Ici, on peut voir que le disque que nous voulons utiliser est <strong>/dev/sda</strong>. Le disque /dev/loop0 correspondant à mon liveboot Arch.</p>
+<p>Pour le partitionnement j&rsquo;ai décider de faire 4 partitions :</p>
+<ul>
+<li>Une partition EFI (pour l&rsquo;UEFI)</li>
+<li>Une partition boot (pour le bootloader)</li>
+<li>Une partition root ( / )</li>
+<li>Une partition home ( /home )</li>
+</ul>
+<p>Dans le cadre de partitions chiffrées, il faut obligatoirement au moins une partition EFI en dehors. Pour des raisons de confort et de facilité j&rsquo;ai décidé de garder un /boot non chiffré aussi (Il est selon moi, moins important de le chiffrer).</p>
+<p>Les partitions root et home seront chiffrées. Vous pouvez cependant ne faire que 3 partitions en ne faisant pas de partition home.</p>
+<p>Pour commencer le partitionnement, on ouvre notre disque avec <em>gparted</em>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">parted /dev/sda</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Respectez les valeurs pour les 2 premières partitions qui feront respectivement 100Mib et 250Mib.</p>
+<p>Pour la partition <em>root</em> je vous conseille au moins 20GiB, mais au vu de la taille des disques durs actuel vous pouvez facilement pousser à 50GiB voir plus.</p>
+<p>Le reste ira dans le <em>home</em> qui acceuille généralement les gros fichiers &amp; les jeux.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mklabel gpt
+</span></span><span class="line"><span class="cl">mkpart primary fat32 1MiB 101MiB  #La partition EFI
+</span></span><span class="line"><span class="cl">set 1 esp on
+</span></span><span class="line"><span class="cl">mkpart primary ext4 101MiB 361MiB #La parition boot
+</span></span><span class="line"><span class="cl">set 2 boot on
+</span></span><span class="line"><span class="cl">mkpart primary ext4 361MiB 20.5GiB #La partition root d&#39;environ 20GiB
+</span></span><span class="line"><span class="cl">mkpart primary ext4 20.5GiB 100% #La partition home prenant le reste de place
+</span></span><span class="line"><span class="cl">q</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Une fois nos partitions créées, nous allons chiffrer nos 2 partitions <em>root</em> et <em>home</em>. J&rsquo;ai choisi d&rsquo;utiliser de l&rsquo;AES avec une clef de 512 bits. Nous allons utiliser un temps d&rsquo;itération de 5000 millisecondes ce qui permet un peu plus de sécurité que la configuration par défaut (2000) sans prendre trop de temps.</p>
+<p>On nous demandera ensuite pour chaque chiffrement une <strong>passphrase</strong> c&rsquo;est à dire un mot de passe assez long. Une bonne clef de chiffrement, dans notre cas, sera une clef longue (et non une clef avec des caractères spéciaux).</p>
+<p>Ici, nous avons 2 disques donc 2 <strong>passphrases</strong> différentes.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cryptsetup -v --type luks -c aes-xts-plain64 -s <span class="m">512</span> -h sha512 -i <span class="m">5000</span> -y luksFormat /dev/sda3
+</span></span><span class="line"><span class="cl">cryptsetup -v --type luks -c aes-xts-plain64 -s <span class="m">512</span> -h sha512 -i <span class="m">5000</span> -y luksFormat /dev/sda4</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Une fois les disques chiffrés, nous allons les déchiffrer en leur donnant un nom qui nous servira ensuite pour faire appel à eux. En tant que fan de <a href="https://bitoduc.fr/"target="_blank" rel="external nofollow noopener noreferrer">bitoduc</a>, j&rsquo;ai décidé d&rsquo;appeler mon disque root <em>racine</em> et mon disque home <em>maison</em>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cryptsetup open /dev/sda3 racine
+</span></span><span class="line"><span class="cl">cryptsetup open /dev/sda4 maison</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On créé ensuite les systèmes des fichiers sur nos partitions. Il faut que la partition EFI soit en fat32, pour le reste j&rsquo;utilise le format ext4.</p>
+<p>Pour faire appel à nos disques déchiffrés, nous devons utiliser <strong>/dev/mapper/&lt;NOM DU DISQUE&gt;</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkfs.fat -F32 /dev/sda1
+</span></span><span class="line"><span class="cl">mkfs.ext4 /dev/sda2
+</span></span><span class="line"><span class="cl">mkfs.ext4 /dev/mapper/racine
+</span></span><span class="line"><span class="cl">mkfs.ext4 /dev/mapper/maison</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Nos partitions sont enfin prêtes, on va commencer à vraiment installer Linux.</p>
+<h2 class="heading-element" id="préparation-de-linux"><span>Préparation de Linux</span>
+  <a href="#pr%c3%a9paration-de-linux" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Pour commencer, il faut monter nos partitions afin qu&rsquo;elles forment dans <strong>/mnt</strong> notre système de fichier pour Linux. Pour les partitions home, boot et EFI, il faudra créer nous-même les points de montage à l&rsquo;intérieur du root.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mount /dev/mapper/racine /mnt
+</span></span><span class="line"><span class="cl">mkdir /mnt/home <span class="o">&amp;&amp;</span> mount /dev/mapper/maison /mnt/home
+</span></span><span class="line"><span class="cl">mkdir /mnt/boot <span class="o">&amp;&amp;</span> mount /dev/sda2 /mnt/boot
+</span></span><span class="line"><span class="cl">mkdir /mnt/boot/efi <span class="o">&amp;&amp;</span> mount /dev/sda1 /mnt/boot/efi</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Une fois notre système de fichier en place, on y installe les paquets de base ainsi que linux et des firmwares. (Depuis Octobre 2019, le paquet <em>linux</em> n&rsquo;est plus compris dans l&rsquo;ensemble de paquet <em>base</em>)</p>
+<p>Pour plus de vitesse à l&rsquo;installation vous pouvez ordonner les miroirs de <strong>/etc/pacman.d/mirrorlist</strong> afin de mettre ceux de votre pays et des pays voisins en premier.</p>
+<p>Il y a beaucoup de paquets à installer, ça peut prendre quelques minutes.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacstrap /mnt base base-devel linux linux-firmware</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Une fois tous les paquets installés, on va générer le fstab, c&rsquo;est à dire le fichier qui indique les points de montage des partitions.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Notre ArchLinux est installé, mais pas fonctionnel. On va donc le configurer !</p>
+<h2 class="heading-element" id="configuration-de-linux"><span>Configuration de Linux</span>
+  <a href="#configuration-de-linux" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Dans un premier temps on va <em>chrooter</em>, c&rsquo;est à dire utiliser nos partitions montées comme la racine de notre système.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">arch-chroot /mnt</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On va ensuite définir un nom pour notre machine. Remplacez dans les commandes suivantes <strong>NomMachine</strong> par celui voulu en évitant les caractères spéciaux et les espaces</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> NomMachine &gt; /etc/hostname
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;127.0.0.1 NomMachine.localdomain NomMachine&#39;</span> &gt;&gt; /etc/hosts</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On va configurer l&rsquo;horloge de notre nouveau système, là encore pour éviter les problèmes de NTP et de vérifications de paquets. Que ça soit à l&rsquo;installation ou lors de l&rsquo;utilisation futur de notre Linux.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+</span></span><span class="line"><span class="cl">hwclock --systohc</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Nous allons ensuite générer nos locales. Elles vont définir la langue du système (et non pas le clavier).</p>
+<p>J&rsquo;aime avoir mon système en français, même si c&rsquo;est parfois plus compliqué pour les erreurs, je génère donc ma locale française.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/#fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/&#39;</span> /etc/locale.gen
+</span></span><span class="line"><span class="cl">locale-gen
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">LANG</span><span class="o">=</span><span class="s2">&#34;fr_FR.UTF-8&#34;</span> &gt; /etc/locale.conf
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>fr_FR.UTF-8</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On configure ensuite notre clavier en AZERTY.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">KEYMAP</span><span class="o">=</span>fr &gt; /etc/vconsole.conf</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Puis on met un mot de passe au compte root.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">passwd</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On va ensuite passer à la partie la plus &ldquo;délicate&rdquo;, qui est généralement celle qui rate lors des installations : Le bootloader !</p>
+<h2 class="heading-element" id="gestion-boot--chiffrement"><span>Gestion boot &amp; chiffrement</span>
+  <a href="#gestion-boot--chiffrement" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Pour commencer il faut installer un bootloader, dans mon cas j&rsquo;utilise <strong>grub</strong>. On installe aussi <strong>efibootmgr</strong> afin de gérer l&rsquo;UEFI.</p>
+<p>Pour ma part j&rsquo;en ai profiter pour installer <em>vim</em> afin de configurer les fichiers par la suite, je vous invite à installer l&rsquo;éditeur de texte de votre choix.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman -S grub efibootmgr &lt;EDITEUR DE TEXTE&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Pour gérer le déchiffrement de notre partie <em>racine</em>, il nous faut l&rsquo;UUID de sa partition chiffrée (/dev/sda3). On va donc le récupérer avec la commande <strong>lsblk -f /dev/sda3</strong>.</p>
+<p>Il faut bien lire la ligne correspondant à notre partition chiffrée (/dev/sda3) et non déchiffrée (/dev/mapper/racine).</p>
+<p>On va ensuite utiliser cet UUID pour modifier la ligne <strong>GRUB_CMDLINE_LINUX</strong> du fichier <strong>/etc/default/grub</strong> afin quelle soit sous la forme</p>
+<p><strong>GRUB_CMDLINE_LINUX=&ldquo;cryptdevice=UUID=<em>&lt;VOTRE UUID&gt;</em>:racine root=/dev/mapper/racine&rdquo;</strong></p>
+<p>Il faut aussi dé-commenter la ligne <strong>GRUB_ENABLE_CRYPTODISK=y</strong></p>
+<p>Astuce : vous pouvez rediriger la sortie de lsblk avec <em>&raquo;</em> vers votre fichier afin de n&rsquo;avoir qu&rsquo;à copier l&rsquo;UUID via votre éditeur.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">lsblk -f /dev/sda3 &gt;&gt; /etc/default/grub</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img loading="lazy" src='/img/grub_install.png' alt="contenu /etc/default/grub"></p>
+<p>Ensuite, on va modifier le fichier <strong>/etc/mkinitcpio.conf</strong> afin d&rsquo;ajouter les hooks <em>keymap</em> et <em>encrypt</em> (dans cet ordre). Ils nous permettront d&rsquo;avoir la bonne configuration de clavier et de déchiffer nos disques au démarrage de la machine.</p>
+<p><img loading="lazy" src='/img/mkinitcpio_install.png' alt="Contenu /etc/mkinitcpio.conf"></p>
+<p>On modifie le fichier <strong>/etc/fstab</strong> afin de ne pas utiliser l&rsquo;UUID de <em>/dev/mapper/maison</em> pour le monter. On commente donc la ligne correpondante et on rajoute une dernière ligne contenant</p>
+<p><strong>/dev/mapper/maison /home ext4 rw,relatime,data=ordered 0 2</strong></p>
+<p><img loading="lazy" src='/img/fstab_install.png' alt="Contenu /etc/fstab"></p>
+<p>Contenu /etc/crypttabPuis on modifier le fichier <strong>/etc/crypttab</strong> pour déchiffrer notre partition <em>maison</em> au démarrage.</p>
+<p>Pour cela il suffit de rajouter le nom de la partition et sa parittion chiffrée correspondante.</p>
+<p><strong>maison /dev/sda4</strong></p>
+<p><img loading="lazy" src='/img/crypttab_install.png' alt="Contenu /etc/crypttab"></p>
+<p>Pour finir, on va générer ce qui nous permettra de charger les modules kernels au démarrage et on va finaliser l&rsquo;installation de grub.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkinitcpio -p linux
+</span></span><span class="line"><span class="cl">grub-install --target<span class="o">=</span>x86_64-efi --efi-directory<span class="o">=</span>/boot/efi --recheck /dev/sda
+</span></span><span class="line"><span class="cl">grub-mkconfig -o /boot/grub/grub.cfg</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Vous pouvez en théorie démarrer et vous aurez un ArchLinux en UEFI avec des partitions chiffrées !</p>
+<h2 class="heading-element" id="aller-plus-loin"><span>Aller plus loin</span>
+  <a href="#aller-plus-loin" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Par défaut, vous n&rsquo;aurez quasiment aucun paquet sur votre ArchLinux, même pour la connexion réseau. Vous pouvez très bien relancer le liveboot et répeter les phases de déchiffrement &amp; montage des partitions afin d&rsquo;installer des nouveaux paquets.</p>
+<p>Je vous conseille aussi, pour profiter un maximum de la distribution, d&rsquo;utiliser un <em>AUR helper</em> qui permettra d&rsquo;installer faciement les paquets utilisateur.</p>
+<p>Pour cela, regardez dans <a href="https://wiki.archlinux.org/index.php/AUR_helpers"target="_blank" rel="external nofollow noopener noreferrer">la liste fournie sur le wiki</a>, vous trouverez probablement votre bonheur. Pour ma part à l&rsquo;heure où j&rsquo;écris cet article j&rsquo;utilise <em>pikaur</em>.</p>
+<p>Attention cepandant, les <em>AUR helpers</em> sont développés et maintenus par la communauté. Il se peut au fil du temps que le projet soit abandonné et donc plus mis à jour. Certains grands projets comme <em>aurman</em> et <em>yaourt</em> on ainsi été dépréciés.</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Mis à jour le 2025-07-11 11:49:04">Mis à jour le 2025-07-11&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/install_arch_uefi/index.md" title="Ouvrir le Markdown" class="link-to-markdown">Ouvrir le Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Partager via X" data-sharer="twitter" data-url="https://driikolu.fr/posts/install_arch_uefi/" data-title="Installation D&#39;Archlinux en UEFI &amp; Chiffré" data-via="driikolu"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via Facebook" data-sharer="facebook" data-url="https://driikolu.fr/posts/install_arch_uefi/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via 微博" data-sharer="weibo" data-url="https://driikolu.fr/posts/install_arch_uefi/" data-title="Installation D&#39;Archlinux en UEFI &amp; Chiffré"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Retour</a></span>&nbsp;|&nbsp;<span><a href="/">Accueil</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/nuclea-web-extranet/" class="post-nav-item" rel="prev" title="Norzh CTF 2020 - Extranet Norzh Nuclea"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Norzh CTF 2020 - Extranet Norzh Nuclea</a><a href="/posts/fatty-wu/" class="post-nav-item" rel="next" title="HackTheBox - Fatty Write-Up">HackTheBox - Fatty Write-Up<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contenus"><h2 class="toc-title">Contenus&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Propulsé par <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.147.9"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Thème - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.20"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://x.com/driikolu"target="_blank" rel="external nofollow noopener noreferrer">Driikolu</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Retour en Haut"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Ce site Web fonctionne mieux quand JavaScript est activé.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copier dans le presse-papiers","editLockTitle":"Verrouiller le bloc de code modifiable","editUnLockTitle":"Déverrouiller le bloc de code modifiable","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"J'ai compris !","link":"En apprendre plus","message":"Ce site Web utilise des Cookies pour améliorer votre expérience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"Aucun résultat trouvé","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.20"};</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

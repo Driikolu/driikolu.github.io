@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="fr">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>BreizhCTF 2022 - Word Worker - La sécurité à la française</title><meta name="author" content="Driikolu">
+<meta name="description" content="Introduction Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition. Bien sûr, j&rsquo;ai voulu y participer. Et comme d&rsquo;habitude il y a eu plein de challenges intéréssant.
+Mais je n&rsquo;ai pas spécialement envie de parler d&rsquo;une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées&hellip; Ou tout autre truc du genre. Aujourd&rsquo;hui, on va parler de programmation ! Et je vais essayer de bien tout détailler
+"><meta name="keywords" content='Hugo, FixIt'>
+  <meta itemprop="name" content="BreizhCTF 2022 - Word Worker">
+  <meta itemprop="description" content="Introduction Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition. Bien sûr, j’ai voulu y participer. Et comme d’habitude il y a eu plein de challenges intéréssant.
+Mais je n’ai pas spécialement envie de parler d’une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées… Ou tout autre truc du genre. Aujourd’hui, on va parler de programmation ! Et je vais essayer de bien tout détailler">
+  <meta itemprop="datePublished" content="2022-04-07T12:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-07-11T11:49:04+02:00">
+  <meta itemprop="wordCount" content="1895"><meta property="og:url" content="https://driikolu.fr/posts/word_worker_wu/">
+  <meta property="og:site_name" content="La sécurité à la française">
+  <meta property="og:title" content="BreizhCTF 2022 - Word Worker">
+  <meta property="og:description" content="Introduction Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition. Bien sûr, j’ai voulu y participer. Et comme d’habitude il y a eu plein de challenges intéréssant.
+Mais je n’ai pas spécialement envie de parler d’une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées… Ou tout autre truc du genre. Aujourd’hui, on va parler de programmation ! Et je vais essayer de bien tout détailler">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-04-07T12:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-11T11:49:04+02:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BreizhCTF 2022 - Word Worker">
+  <meta name="twitter:description" content="Introduction Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition. Bien sûr, j’ai voulu y participer. Et comme d’habitude il y a eu plein de challenges intéréssant.
+Mais je n’ai pas spécialement envie de parler d’une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées… Ou tout autre truc du genre. Aujourd’hui, on va parler de programmation ! Et je vais essayer de bien tout détailler">
+      <meta name="twitter:site" content="@driikolu">
+<meta name="twitter:creator" content="@driikolu" /><meta name="application-name" content="Hugo FixIt Blog">
+<meta name="apple-mobile-web-app-title" content="Hugo FixIt Blog"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://driikolu.fr/posts/word_worker_wu/" title="BreizhCTF 2022 - Word Worker - La sécurité à la française" /><link rel="prev" type="text/html" href="https://driikolu.fr/posts/fatty-wu/" title="HackTheBox - Fatty Write-Up" /><link rel="next" type="text/html" href="https://driikolu.fr/posts/payload-plz/" title="Payload Plz - Analyse du challenge Yes We Hack" /><link rel="alternate" type="text/markdown" href="https://driikolu.fr/posts/word_worker_wu/index.md" title="BreizhCTF 2022 - Word Worker - La sécurité à la française"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "BreizhCTF 2022 - Word Worker",
+    "inLanguage": "fr",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/driikolu.fr\/posts\/word_worker_wu\/"
+    },"genre": "posts","wordcount":  1895 ,
+    "url": "https:\/\/driikolu.fr\/posts\/word_worker_wu\/","datePublished": "2022-04-07T12:00:00+00:00","dateModified": "2025-07-11T11:49:04+02:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Driikolu"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="32" width="32"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Chercher">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Effacer">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Changer de Thème">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="26" width="26"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Chercher">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Effacer">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Annuler
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Changer de Thème"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>BreizhCTF 2022 - Word Worker</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2022-04-07 12:00:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2022-04-07">2022-04-07</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 11:49:04"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="1895 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 1900 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>9 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contenus</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#se-connecter-au-serveur">Se connecter au serveur</a></li>
+    <li><a href="#trouver-lanagramme">Trouver l&rsquo;anagramme</a>
+      <ul>
+        <li><a href="#itertools-">Itertools ?</a></li>
+        <li><a href="#un-dictionnaire-">Un dictionnaire !</a></li>
+        <li><a href="#on-lajoute-à-notre-boucle">On l&rsquo;ajoute à notre boucle</a></li>
+      </ul>
+    </li>
+    <li><a href="#de-nouveaux-challenges">De nouveaux challenges</a>
+      <ul>
+        <li><a href="#a-lenvers">A l&rsquo;envers</a></li>
+        <li><a href="#en-majuscule-">En majuscule !</a></li>
+        <li><a href="#les-consonnes">Les consonnes</a></li>
+        <li><a href="#rot15">ROT15</a></li>
+        <li><a href="#une-bière-">Une bière ?</a></li>
+      </ul>
+    </li>
+    <li><a href="#et-le-flag-">Et le flag ?</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 class="heading-element" id="introduction"><span>Introduction</span>
+  <a href="#introduction" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition.
+Bien sûr, j&rsquo;ai voulu y participer. Et comme d&rsquo;habitude il y a eu plein de challenges intéréssant.</p>
+<p>Mais je n&rsquo;ai pas spécialement envie de parler d&rsquo;une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées&hellip; Ou tout autre truc du genre.
+Aujourd&rsquo;hui, on va parler de programmation !
+Et je vais essayer de bien tout détailler</p>
+<h2 class="heading-element" id="le-challenge"><span>Le challenge</span>
+  <a href="#le-challenge" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Il y avait en tout 3 challenges de programmation, je n&rsquo;ai touché qu&rsquo;à celui dont je vais vous parler : Word Worker.</p>
+<p>Le but est simple : se connecter à un serveur et résoudre les petits challenges qu&rsquo;il nous propose. En boucle.</p>
+<p>Pas de problème, je suis coutumier de ce genre de puzzle, je dégaine mon python et c&rsquo;est partie pour un petit moment de code.</p>
+<h2 class="heading-element" id="se-connecter-au-serveur"><span>Se connecter au serveur</span>
+  <a href="#se-connecter-au-serveur" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On oublie souvent d&rsquo;en parler de cette étape, probablement parce qu&rsquo;elle n&rsquo;est pas très intéréssante, mais j&rsquo;ai tout de même un petit point à apporter.</p>
+<p>Dans ce genre de Challenge, je vois beaucoup de gens habitués aux CTF en tout genre utiliser <a href="http://docs.pwntools.com/en/stable/"target="_blank" rel="external nofollow noopener noreferrer"><em>pwntools</em></a>. L&rsquo;outil est très puissant et embarque directement une gestion des socket. Mais en soit il n&rsquo;est pas vraiment adapté à ce genre de challenge&hellip; C&rsquo;est l&rsquo;équivalent d&rsquo;utiliser un bazooka pour tuer une mouche : Ça fonctionne, mais était-ce vraiment nécessaire, et est-ce qu&rsquo;on se serait pas un peu compliqué la vie ?</p>
+<p>Pour ma part, j&rsquo;opte pour une solution simple : <em>socket</em>, que je couple avec <em>time</em> pour ne pas répondre trop vite.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span> <span class="c1">#On créé notre socket</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;challenges.ctf.bzh&#39;</span><span class="p">,</span> <span class="mi">27001</span><span class="p">))</span> <span class="c1">#On se connecte au serveur</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#On laisse le temps de se connecter au serveur</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1">#Pour laisser le temps de recevoir le message</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">2048</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="c1">#On récupère le message et on le passe de Byte-string à string</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="c1">#Pour avoir la visibilité sur ce qu&#39;il se passe</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="o">=</span><span class="s2">&#34;Ma réponse&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span><span class="o">+</span><span class="sa">b</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span> <span class="c1">#On envoie notre réponse (en Byte-String et on oublie le \n pour qu&#39;elle soit envoyée)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Parfait, tout est en place, on va pouvoir commencer vraiment le challenge.</p>
+<h2 class="heading-element" id="trouver-lanagramme"><span>Trouver l&rsquo;anagramme</span>
+  <a href="#trouver-lanagramme" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Dès notre connexion, on se retrouve avec un message plutôt simple :</p>
+<blockquote>
+<p>Which word is mixed up ? XXXXXXX</p></blockquote>
+<p>On retrouve alors un ensemble de lettre avec seulement 1 lettre majuscule. Avec la phrase en plus, on comprend qu&rsquo;il s&rsquo;agit d&rsquo;un anagramme dont il faut retrouver le mot d&rsquo;origine. La lettre majuscule étant la première lettre du mot.</p>
+<h3 class="heading-element" id="itertools-"><span>Itertools ?</span>
+  <a href="#itertools-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Une première idée était d&rsquo;utiliser itertools.
+Mais, au moment de sa sortie, ce challenge proposait des mots de toute taille, parfois de plus de 10 lettres.</p>
+<p>Par exemple, s&rsquo;il fallait trouvé <strong>Zygomatiques</strong> depuis un de ses anagrammes, on aurait un total de 11! (soit 39.916.800) possibilités.
+Il y a de forte probabilités pour que le mot soit trouvé avant toutes les itérations. Mais même en trouvant au bout de 1.000.000 itérations, le temps passer pour 1 seul mot est plutôt conséquent.</p>
+<p>Après une petite maintenance le challenge est revenu en ne proposant que des mots de 5/6 lettres, mais ma solution était déjà écrite.</p>
+<h3 class="heading-element" id="un-dictionnaire-"><span>Un dictionnaire !</span>
+  <a href="#un-dictionnaire-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Heureusement, ce sont les anagramme de mots français.
+Et par chance, il existe un dictionnaire plutôt complet pour les mots en français : <a href="http://www.3zsoftware.com/listes/ods6.zip"target="_blank" rel="external nofollow noopener noreferrer">ods6.txt, le dictionnaire officiel du scrabble</a>.</p>
+<p>Et on s&rsquo;empresse de coder une fonction retrouvant l&rsquo;anagramme.</p>
+<p>Tout d&rsquo;abord, il faut avoir la liste de tous les mots présents dans notre dictionnaire.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dico_words</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;ods6.txt&#34;</span><span class="p">,</span><span class="s2">&#34;r&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Maintenant, comment peut-on retrouver notre mot ?</p>
+<p>Tout d&rsquo;abord il faut repérer les critères qu&rsquo;on peut utiliser :</p>
+<ul>
+<li>La première lettre du mot</li>
+<li>L&rsquo;ensemble des lettres</li>
+</ul>
+<p>Ça fait peut, et le tout doit être formatté comme il faut. Notre dictionnaire a tous ses mots en majuscule, on fait de même avec notre anagramme.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#On récupère la seule lettre en majuscule, première lettre du mot</span>
+</span></span><span class="line"><span class="cl"><span class="n">first_letter</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">anagramme</span> <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">isupper</span><span class="p">()][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#On met l&#39;anagramme en majuscule</span>
+</span></span><span class="line"><span class="cl"><span class="n">anagramme</span> <span class="o">=</span> <span class="n">anagramme</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Pour vérifier notre premier critère, c&rsquo;est plutôt simple : On compare les premières lettres.</p>
+<p>Mais comment vérifier que le contenu total soit bien le même ?
+On va juste vérifier qu&rsquo;il y ai exactement les même lettres, et ce, en triant nos mots avec <strong>sorted()</strong>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">possibilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">dico_words</span> <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">first_letter</span> <span class="ow">and</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">==</span><span class="nb">sorted</span><span class="p">(</span><span class="n">anagramme</span><span class="p">)]</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ici on a un dictionnaire avec toutes les possibilités. On va juste considérer qu&rsquo;il faut sortir la première. Donc on va juste renvoyer le premier mot possible.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">word</span> <span class="o">=</span> <span class="n">possibilities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#On récupère le premier mot</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="c1">#On le formatte pour le serveur</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Malheureusement, certains mots ont exactement les même lettres. Par exemple Signe et Singe.
+Le challenge a prévu ces éventualité et n&rsquo;est pas trop punitif. En cas d&rsquo;erreur, on peut faire d&rsquo;autre propositions (c&rsquo;est d&rsquo;ailleurs pour ça qu&rsquo;une solution avec itertools est possible).</p>
+<p>On va donc rajouter la possibilité de récupérer la possibilité suivante dans notre fonction.
+Ce qui une fois entière donne le code qui suit</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_word</span><span class="p">(</span><span class="n">anagramme</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">first_letter</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">anagramme</span> <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">isupper</span><span class="p">()][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">anagramme</span> <span class="o">=</span> <span class="n">anagramme</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">possibilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">dico_words</span> <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">first_letter</span> <span class="ow">and</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">==</span><span class="nb">sorted</span><span class="p">(</span><span class="n">anagramme</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">word</span> <span class="o">=</span> <span class="n">possibilities</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 class="heading-element" id="on-lajoute-à-notre-boucle"><span>On l&rsquo;ajoute à notre boucle</span>
+  <a href="#on-lajoute-%c3%a0-notre-boucle" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Bon, on peut trouver un mot à partir de son anagramme, maintenant il faut le faire à partir de ceux qu&rsquo;on nous envoie.
+On va tout simplement faire du parsing sur les messages du serveur dans notre boucle.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">2048</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="s2">&#34;mixed up&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span> <span class="c1">#Si c&#39;est un nouvel anagramme</span>
+</span></span><span class="line"><span class="cl">        <span class="n">try_nb</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#Premier essaie sur cet anagramme</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#On récupère le mot un peu salement</span>
+</span></span><span class="line"><span class="cl">        <span class="n">anagramme</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;mixed up ? &#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">get_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">try_nb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span> <span class="c1">#Si on n&#39;a pas fourni le bon mot précédemment</span>
+</span></span><span class="line"><span class="cl">        <span class="n">try_nb</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1">#On incrémente notre index</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="c1">#Pour avoir une vision sur ce que j&#39;envoie</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span><span class="o">+</span><span class="sa">b</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Super, tout passe parfaitement.</p>
+<h2 class="heading-element" id="de-nouveaux-challenges"><span>De nouveaux challenges</span>
+  <a href="#de-nouveaux-challenges" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Malheureusement, ça n&rsquo;était pas suffisant.
+En effet, après quelques dizaines de mots retrouvés, de nouveaux exercices fleurissaient petit à petit.</p>
+<p>Cela dit, il était bien plus simple de les résoudre, donc on va faire ça en vitesse. Et pour être un peu plus propre que pendant le CTF, je ferai une fonction pour chaque exercice.</p>
+<h3 class="heading-element" id="a-lenvers"><span>A l&rsquo;envers</span>
+  <a href="#a-lenvers" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>On nous demande de mettre à l&rsquo;envers un mot.</p>
+<blockquote>
+<p>Put it backwards : &lsquo;XXXXXXX&rsquo;</p></blockquote>
+<p>Rien de plus simple :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">mot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mot</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 class="heading-element" id="en-majuscule-"><span>En majuscule !</span>
+  <a href="#en-majuscule-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Au final, il y a plus simple que de mettre à l&rsquo;envers. Il faut renvoyer le mot tout en majuscule.</p>
+<blockquote>
+<p>Oops, &lsquo;XXXXXX&rsquo; must be given in UPPERCASE</p></blockquote>
+<p>Une méthode en python le fait tout seul.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">majuscule</span><span class="p">(</span><span class="n">mot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mot</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 class="heading-element" id="les-consonnes"><span>Les consonnes</span>
+  <a href="#les-consonnes" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Un peu plus intéréssant, il faut renvoyer le nombre de consonne dans le mot donné.</p>
+<blockquote>
+<p>How many consonants in the word &lsquo;XXXXXX&rsquo; ?</p></blockquote>
+<p>Mais le tout se fait encore en une seule ligne.
+J&rsquo;ai tout de même considéré qu&rsquo;il n&rsquo;y aurais pas de mots composés (présents dans la 1ère version du challenge).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">consonnes</span><span class="p">(</span><span class="n">mot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">([</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">mot</span> <span class="k">if</span> <span class="n">l</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;aeiouy&#39;</span><span class="p">]))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 class="heading-element" id="rot15"><span>ROT15</span>
+  <a href="#rot15" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Ici, quelque chose qui peut être intéréssant.</p>
+<blockquote>
+<p>What is the ROT15 of the word &lsquo;XXXXXXX&rsquo; ?</p></blockquote>
+<p>Mais honnêtement, l&rsquo;objectif durant le challenge était la rapidité. Je ne me suis pas embêté et j&rsquo;ai juste cherché sur StackOverflow <a href="https://stackoverflow.com/questions/3269686/short-rot13-function-python"target="_blank" rel="external nofollow noopener noreferrer">un code de rot13</a> !</p>
+<p>Et je l&rsquo;ai un peu modifié pour qu&rsquo;il soit en rot15.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rot15</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chars</span> <span class="o">=</span> <span class="s2">&#34;abcdefghijklmnopqrstuvwxyz&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">trans</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="mi">15</span><span class="p">:]</span><span class="o">+</span><span class="n">chars</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span> <span class="c1">#La ligne à modifier</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rot_char</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">trans</span><span class="p">[</span><span class="n">chars</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span> <span class="k">if</span> <span class="n">chars</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">&gt;-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">rot_char</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span> <span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Je suis enfin un vrai développeur, je copie du code sur StackOverflow !</p>
+<h3 class="heading-element" id="une-bière-"><span>Une bière ?</span>
+  <a href="#une-bi%c3%a8re-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Pour finir, on nous demande si on paierais une bière au créateur du challenge.</p>
+<blockquote>
+<p>Would you offer me a beer ?</p></blockquote>
+<p>Étant extrêmement radin, mon premier reflexe aurait été d&rsquo;envoyer un grand <strong>NON</strong>. Mais j&rsquo;imagine qu&rsquo;il faut être gentil tout plein pour ce challenge et je vais envoyer un petit <em>oui</em>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">beer</span><span class="p">():</span> <span class="c1">#Clairement la fonction la plus utile, j&#39;aurais pas pu faire sans.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;Yes&#34;</span> </span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="et-le-flag-"><span>Et le flag ?</span>
+  <a href="#et-le-flag-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Petit piège ici, le flag s&rsquo;affiche mais le challenge continue. J&rsquo;ai donc faire un test dans ma boucle While pour tout couper en urgence.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="s2">&#34;BZHCTF{&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">break</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et il ne me reste plus qu&rsquo;à le lire.</p>
+<blockquote>
+<p>BZHCTF{D4mn_Th4t_sCR1pt_w0rked_1_Gu3sS}</p></blockquote>
+<h2 class="heading-element" id="le-code-complet"><span>Le code complet</span>
+  <a href="#le-code-complet" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Je ne suis pas un monstre, je vous propose mon code complet.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#Le dictionnaire</span>
+</span></span><span class="line"><span class="cl"><span class="n">dico_words</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;ods6.txt&#34;</span><span class="p">,</span><span class="s2">&#34;r&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#Les fonctions</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_word</span><span class="p">(</span><span class="n">anagramme</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">first_letter</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">anagramme</span> <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">isupper</span><span class="p">()][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">anagramme</span> <span class="o">=</span> <span class="n">anagramme</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">possibilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">dico_words</span> <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">first_letter</span> <span class="ow">and</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">==</span><span class="nb">sorted</span><span class="p">(</span><span class="n">anagramme</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">word</span> <span class="o">=</span> <span class="n">possibilities</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">mot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mot</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">majuscule</span><span class="p">(</span><span class="n">mot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mot</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">consonnes</span><span class="p">(</span><span class="n">mot</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">([</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">mot</span> <span class="k">if</span> <span class="n">l</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;aeiouy&#39;</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rot15</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chars</span> <span class="o">=</span> <span class="s2">&#34;abcdefghijklmnopqrstuvwxyz&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">trans</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[</span><span class="mi">15</span><span class="p">:]</span><span class="o">+</span><span class="n">chars</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span> <span class="c1">#La ligne à modifier</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rot_char</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">trans</span><span class="p">[</span><span class="n">chars</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span> <span class="k">if</span> <span class="n">chars</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">&gt;-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">rot_char</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">beer</span><span class="p">():</span> <span class="c1">#OMG HARDCORE CODE</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;Yes&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;challenges.ctf.bzh&#39;</span><span class="p">,</span> <span class="mi">27001</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">2048</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="s2">&#34;BZHCTF{&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s2">&#34;beer?&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">beer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s2">&#34;ROT15&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">word</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;of the word &#39;&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">rot15</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s2">&#34;consonants&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">word</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;in the word &#39;&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">consonnes</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s2">&#34;UPPERCASE&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">word</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;Oops, &#39;&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">majuscule</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s2">&#34;backwards&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">word</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;backwards : &#39;&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">backward</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="s2">&#34;mixed up&#34;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">try_nb</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">anagramme</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;mixed up ? &#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">get_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">try_nb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">try_nb</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span><span class="o">+</span><span class="sa">b</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;FLAGGED&#34;</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="mon-avis"><span>Mon avis</span>
+  <a href="#mon-avis" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Au final, je n&rsquo;ai pas trouvé le challenge vraiment compliqué.
+J&rsquo;ai parlé de temps en temps dans ce WU de la première version du challenge. Elle a avait ce petit truc en plus qui la rendait plus complexe sur la première partie : Avoir le bon dictionnaire.</p>
+<p>Sur la table d&rsquo;à côté il y avait <a href="https://twitter.com/Zeecka_"target="_blank" rel="external nofollow noopener noreferrer">Zeecka</a> qui s&rsquo;amusait à faire le challenge en même temps que moi. Nous n&rsquo;avions pas spécialement le même dictionnaire et nous bloquions sur des mots différents tous les deux.</p>
+<p>De mot côté il manquait les noms propres (Italie, Lucifer, Hollywood, &hellip;) et les mots composés, puisqu&rsquo;ils sont interdits au Scrabble. C&rsquo;est vraiment ce qui m&rsquo;a empêché de le flag dans la première version.
+Mais la seconde version l&rsquo;a vraiment énormement simplifié, laissant la porte ouvertes aux solutions avec itertools, qui seraient vraiment inadaptées (sauf si elles servent à créer un dictionnaire à chaque mot trouvé, mais ça reste long et laborieux).</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Mis à jour le 2025-07-11 11:49:04">Mis à jour le 2025-07-11&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/word_worker_wu/index.md" title="Ouvrir le Markdown" class="link-to-markdown">Ouvrir le Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Partager via X" data-sharer="twitter" data-url="https://driikolu.fr/posts/word_worker_wu/" data-title="BreizhCTF 2022 - Word Worker" data-via="driikolu"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via Facebook" data-sharer="facebook" data-url="https://driikolu.fr/posts/word_worker_wu/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via 微博" data-sharer="weibo" data-url="https://driikolu.fr/posts/word_worker_wu/" data-title="BreizhCTF 2022 - Word Worker"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Retour</a></span>&nbsp;|&nbsp;<span><a href="/">Accueil</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/fatty-wu/" class="post-nav-item" rel="prev" title="HackTheBox - Fatty Write-Up"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>HackTheBox - Fatty Write-Up</a><a href="/posts/payload-plz/" class="post-nav-item" rel="next" title="Payload Plz - Analyse Du Challenge Yes We Hack">Payload Plz - Analyse Du Challenge Yes We Hack<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contenus"><h2 class="toc-title">Contenus&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Propulsé par <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.147.9"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Thème - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.20"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://x.com/driikolu"target="_blank" rel="external nofollow noopener noreferrer">Driikolu</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Retour en Haut"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Ce site Web fonctionne mieux quand JavaScript est activé.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copier dans le presse-papiers","editLockTitle":"Verrouiller le bloc de code modifiable","editUnLockTitle":"Déverrouiller le bloc de code modifiable","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"J'ai compris !","link":"En apprendre plus","message":"Ce site Web utilise des Cookies pour améliorer votre expérience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"Aucun résultat trouvé","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.20"};</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

